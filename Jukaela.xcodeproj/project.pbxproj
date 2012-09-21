@@ -18,6 +18,8 @@
 		297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297B3B4C15F94A340093B5EC /* QuartzCore.framework */; };
 		297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */; };
 		297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */; };
+		29D9F59A160D09DE00E80710 /* pull-to-refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */; };
+		29D9F59B160D09DE00E80710 /* release-to-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F599160D09DE00E80710 /* release-to-refresh.png */; };
 		29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB2A15F7C126002221FF /* LoginWindow.xib */; };
 		29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3215F7CFEB002221FF /* Jukaela.icns */; };
 		29EBBB3615F7D4EB002221FF /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */; };
@@ -57,6 +59,8 @@
 		297B3B5215F94A600093B5EC /* PullToRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshScrollView.h; sourceTree = "<group>"; };
 		297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshScrollView.m; sourceTree = "<group>"; };
 		297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshDelegate.h; sourceTree = "<group>"; };
+		29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-to-refresh-arrow.png"; sourceTree = "<group>"; };
+		29D9F599160D09DE00E80710 /* release-to-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release-to-refresh.png"; sourceTree = "<group>"; };
 		29EBBB2A15F7C126002221FF /* LoginWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginWindow.xib; sourceTree = "<group>"; };
 		29EBBB3215F7CFEB002221FF /* Jukaela.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Jukaela.icns; sourceTree = "<group>"; };
 		29EBBB3415F7D4EB002221FF /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */,
 				2970DCD215F78DF80038C54B /* GravatarHelper.h */,
 				2970DCD315F78DF80038C54B /* GravatarHelper.m */,
+				29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */,
+				29D9F599160D09DE00E80710 /* release-to-refresh.png */,
 			);
 			name = "Custom Classes";
 			sourceTree = "<group>";
@@ -303,6 +309,8 @@
 				29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */,
 				29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */,
 				29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */,
+				29D9F59A160D09DE00E80710 /* pull-to-refresh-arrow.png in Resources */,
+				29D9F59B160D09DE00E80710 /* release-to-refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "UserInformationWindowController.h"
+#import "PullToRefreshScrollView.h"
+#import "PullToRefreshDelegate.h"
 
 typedef enum {
     INSERT_POST = 0,
@@ -15,7 +17,7 @@ typedef enum {
     OTHER_CHANGE_TYPE
 } ChangeType;
 
-@interface FeedViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSSharingServiceDelegate>
+@interface FeedViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSSharingServiceDelegate, PullToRefreshDelegate>
 
 @property (strong, nonatomic) NSMutableArray *theFeed;
 
@@ -28,6 +30,8 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;
 
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
+
+@property (weak) IBOutlet PullToRefreshScrollView *ptrScrollView;
 
 -(IBAction)sendPost:(id)sender;
 -(IBAction)deletePost:(id)sender;

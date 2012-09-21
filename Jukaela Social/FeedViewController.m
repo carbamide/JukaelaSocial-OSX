@@ -37,6 +37,8 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    [[self ptrScrollView] setDelegate:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -616,4 +618,48 @@
 {
     return [[kAppDelegate window] frame];
 }
+
+- (void)ptrScrollViewDidTriggerRefresh:(id)sender
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
+    
+    NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%i\", \"last\" : \"%li\"}", 0, [[self theFeed] count] - 1];
+        
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        
+    NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestData];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {
+//            int oldNumberOfPosts = [[self theFeed] count];
+            
+            [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
+            
+//            int newNumberOfPosts = [[self theFeed] count];
+            
+//            if (newNumberOfPosts > oldNumberOfPosts) {
+//                NSString *tempString;
+//                
+//                if ((newNumberOfPosts - oldNumberOfPosts) == 1) {
+//                    tempString = @"Post";
+//                }
+//                else {
+//                    tempString = @"Posts";
+//                }
+//            }
+            [[self aTableView] reloadData];
+        }
+        else {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There was an error refresh your Jukaela Social Posts", nil];
+                                    
+            [alert runModal];
+        }
+    }];
+}
+
 @end

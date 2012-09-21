@@ -24,7 +24,6 @@ static BOOL kLargeSizeRequested = YES;
 	[super setBackgroundStyle:backgroundStyle];    
 }
 
-
 -(void)layoutViewsForLargeSize:(BOOL)largeSize animated:(BOOL)animated
 {
 	kLargeSizeRequested = largeSize;

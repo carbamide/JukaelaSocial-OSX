@@ -151,6 +151,7 @@
             [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
         });
     }
+    
     if (row == ([[self theFeed] count] - 1)) {
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
         

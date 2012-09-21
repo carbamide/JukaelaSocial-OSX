@@ -155,7 +155,7 @@
 												<bytes key="NSWhite">MC41AA</bytes>
 											</object>
 										</object>
-										<double key="NSRowHeight">94</double>
+										<double key="NSRowHeight">96</double>
 										<int key="NSTvFlags">-692060160</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
@@ -212,7 +212,7 @@
 						<reference key="NSVScroller" ref="164087569"/>
 						<reference key="NSHScroller" ref="87301213"/>
 						<reference key="NSContentView" ref="128311292"/>
-						<bytes key="NSScrollAmts">QSAAAEEgAABCyAAAQsgAAA</bytes>
+						<bytes key="NSScrollAmts">QSAAAEEgAABCzAAAQswAAA</bytes>
 						<double key="NSMinMagnification">0.25</double>
 						<double key="NSMaxMagnification">4</double>
 						<double key="NSMagnification">1</double>
@@ -295,6 +295,7 @@
 						<string key="NSFrame">{{188, 4}, {71, 32}}</string>
 						<reference key="NSSuperview" ref="995333375"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1016448447"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="913752001">
@@ -346,7 +347,7 @@
 										<string key="NSFrameSize">{238, 95}</string>
 										<reference key="NSSuperview" ref="469564427"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="994049501"/>
+										<reference key="NSNextKeyView" ref="659965783"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<object class="NSTextContainer" key="NSTextContainer" id="765746454">
 											<object class="NSLayoutManager" key="NSLayoutManager">
@@ -601,7 +602,7 @@ wGw</bytes>
 						<string key="NSFrame">{{13, 45}, {240, 97}}</string>
 						<reference key="NSSuperview" ref="995333375"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="469564427"/>
+						<reference key="NSNextKeyView" ref="994049501"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133138</int>
 						<reference key="NSVScroller" ref="659965783"/>
@@ -912,7 +913,7 @@ wGw</bytes>
 									<int key="NSvFlags">266</int>
 									<string key="NSFrame">{{73, 80}, {229, 17}}</string>
 									<reference key="NSSuperview" ref="98129210"/>
-									<reference key="NSNextKeyView" ref="350323494"/>
+									<reference key="NSNextKeyView" ref="654232592"/>
 									<string key="NSReuseIdentifierKey">_NS:78</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="700443845">
@@ -932,7 +933,7 @@ wGw</bytes>
 									<int key="NSvFlags">290</int>
 									<string key="NSFrame">{{73, 3}, {229, 75}}</string>
 									<reference key="NSSuperview" ref="98129210"/>
-									<reference key="NSNextKeyView" ref="164087569"/>
+									<reference key="NSNextKeyView" ref="350323494"/>
 									<string key="NSReuseIdentifierKey">_NS:3936</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="1011683805">
@@ -991,7 +992,7 @@ wGw</bytes>
 									<int key="NSvFlags">290</int>
 									<string key="NSFrame">{{-42, 9}, {160, 14}}</string>
 									<reference key="NSSuperview" ref="98129210"/>
-									<reference key="NSNextKeyView" ref="654232592"/>
+									<reference key="NSNextKeyView" ref="357349996"/>
 									<string key="NSReuseIdentifierKey">_NS:3936</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="423542353">
@@ -1011,6 +1012,7 @@ wGw</bytes>
 									<int key="NSvFlags">290</int>
 									<string key="NSFrame">{{142, 9}, {160, 14}}</string>
 									<reference key="NSSuperview" ref="98129210"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:3936</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="665920613">
@@ -2515,7 +2517,7 @@ wGw</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">514</int>
+			<int key="maxID">587</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

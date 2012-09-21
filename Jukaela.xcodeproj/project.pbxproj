@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2970DCCC15F78C8F0038C54B /* ItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCCB15F78C8F0038C54B /* ItemCellView.m */; };
+		2970DCD415F78DF80038C54B /* GravatarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD315F78DF80038C54B /* GravatarHelper.m */; };
+		2970DCD715F793C20038C54B /* NSDate+RailsDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */; };
+		2970DCDB15F794050038C54B /* SORelativeDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD915F794050038C54B /* SORelativeDateTransformer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2970DCDC15F794050038C54B /* SORelativeDateTransformer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2970DCDA15F794050038C54B /* SORelativeDateTransformer.bundle */; };
+		2970DCE615F79B710038C54B /* blueLetter.tif in Resources */ = {isa = PBXBuildFile; fileRef = 2970DCE515F79B710038C54B /* blueLetter.tif */; };
+		2970DCF115F7A3610038C54B /* NSString+BackslashEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCF015F7A3600038C54B /* NSString+BackslashEscape.m */; };
+		2970DCFB15F7BA520038C54B /* LoginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCFA15F7BA520038C54B /* LoginWindow.m */; };
+		297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297B3B4C15F94A340093B5EC /* QuartzCore.framework */; };
+		297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */; };
+		297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */; };
+		29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB2A15F7C126002221FF /* LoginWindow.xib */; };
+		29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3215F7CFEB002221FF /* Jukaela.icns */; };
+		29EBBB3615F7D4EB002221FF /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */; };
+		29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */; };
+		29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3915F7DA26002221FF /* Social.framework */; };
+		29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3B15F7DA3B002221FF /* Accounts.framework */; };
+		29F51A7D15F6A9F4009CE9C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F51A7C15F6A9F4009CE9C8 /* Cocoa.framework */; };
+		29F51A8715F6A9F4009CE9C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29F51A8515F6A9F4009CE9C8 /* InfoPlist.strings */; };
+		29F51A8915F6A9F4009CE9C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F51A8815F6A9F4009CE9C8 /* main.m */; };
+		29F51A8D15F6A9F4009CE9C8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 29F51A8B15F6A9F4009CE9C8 /* Credits.rtf */; };
+		29F51A9015F6A9F4009CE9C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F51A8F15F6A9F4009CE9C8 /* AppDelegate.m */; };
+		29F51A9315F6A9F5009CE9C8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */; };
+		29F51A9C15F6AA0B009CE9C8 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F51A9A15F6AA0B009CE9C8 /* FeedViewController.m */; };
+		29F51ABC15F7893A009CE9C8 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */; };
+		29F5FE9715F8E8350044BA7B /* UserInformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */; };
+		29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2970DCCA15F78C8F0038C54B /* ItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCellView.h; sourceTree = "<group>"; };
+		2970DCCB15F78C8F0038C54B /* ItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCellView.m; sourceTree = "<group>"; };
+		2970DCD215F78DF80038C54B /* GravatarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarHelper.h; sourceTree = "<group>"; };
+		2970DCD315F78DF80038C54B /* GravatarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarHelper.m; sourceTree = "<group>"; };
+		2970DCD515F793C20038C54B /* NSDate+RailsDateParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RailsDateParser.h"; sourceTree = "<group>"; };
+		2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RailsDateParser.m"; sourceTree = "<group>"; };
+		2970DCD815F794050038C54B /* SORelativeDateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORelativeDateTransformer.h; sourceTree = "<group>"; };
+		2970DCD915F794050038C54B /* SORelativeDateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORelativeDateTransformer.m; sourceTree = "<group>"; };
+		2970DCDA15F794050038C54B /* SORelativeDateTransformer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SORelativeDateTransformer.bundle; sourceTree = "<group>"; };
+		2970DCE515F79B710038C54B /* blueLetter.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = blueLetter.tif; sourceTree = "<group>"; };
+		2970DCEF15F7A3600038C54B /* NSString+BackslashEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BackslashEscape.h"; sourceTree = "<group>"; };
+		2970DCF015F7A3600038C54B /* NSString+BackslashEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BackslashEscape.m"; sourceTree = "<group>"; };
+		2970DCF915F7BA520038C54B /* LoginWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWindow.h; sourceTree = "<group>"; };
+		2970DCFA15F7BA520038C54B /* LoginWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWindow.m; sourceTree = "<group>"; };
+		297B3B4C15F94A340093B5EC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		297B3B4F15F94A600093B5EC /* PullToRefreshClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshClipView.h; sourceTree = "<group>"; };
+		297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshClipView.m; sourceTree = "<group>"; };
+		297B3B5215F94A600093B5EC /* PullToRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshScrollView.h; sourceTree = "<group>"; };
+		297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshScrollView.m; sourceTree = "<group>"; };
+		297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshDelegate.h; sourceTree = "<group>"; };
+		29EBBB2A15F7C126002221FF /* LoginWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginWindow.xib; sourceTree = "<group>"; };
+		29EBBB3215F7CFEB002221FF /* Jukaela.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Jukaela.icns; sourceTree = "<group>"; };
+		29EBBB3415F7D4EB002221FF /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
+		29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
+		29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		29EBBB3915F7DA26002221FF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		29EBBB3B15F7DA3B002221FF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		29F51A7815F6A9F4009CE9C8 /* Jukaela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jukaela.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29F51A7C15F6A9F4009CE9C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		29F51A7F15F6A9F4009CE9C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		29F51A8015F6A9F4009CE9C8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		29F51A8115F6A9F4009CE9C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		29F51A8415F6A9F4009CE9C8 /* Jukaela-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Jukaela-Info.plist"; sourceTree = "<group>"; };
+		29F51A8615F6A9F4009CE9C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		29F51A8815F6A9F4009CE9C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29F51A8A15F6A9F4009CE9C8 /* Jukaela-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jukaela-Prefix.pch"; sourceTree = "<group>"; };
+		29F51A8C15F6A9F4009CE9C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		29F51A8E15F6A9F4009CE9C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		29F51A8F15F6A9F4009CE9C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		29F51A9215F6A9F5009CE9C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		29F51A9915F6AA0B009CE9C8 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		29F51A9A15F6AA0B009CE9C8 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		29F51AA515F6ADAB009CE9C8 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
+		29F5FE9415F8E8350044BA7B /* UserInformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationWindowController.h; sourceTree = "<group>"; };
+		29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationWindowController.m; sourceTree = "<group>"; };
+		29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInformationWindow.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29F51A7515F6A9F4009CE9C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */,
+				29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */,
+				29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */,
+				29F51A7D15F6A9F4009CE9C8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2970DCF215F7A57B0038C54B /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */,
+				297B3B4F15F94A600093B5EC /* PullToRefreshClipView.h */,
+				297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */,
+				297B3B5215F94A600093B5EC /* PullToRefreshScrollView.h */,
+				297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */,
+				2970DCCA15F78C8F0038C54B /* ItemCellView.h */,
+				2970DCCB15F78C8F0038C54B /* ItemCellView.m */,
+				2970DCEF15F7A3600038C54B /* NSString+BackslashEscape.h */,
+				2970DCF015F7A3600038C54B /* NSString+BackslashEscape.m */,
+				2970DCD815F794050038C54B /* SORelativeDateTransformer.h */,
+				2970DCD915F794050038C54B /* SORelativeDateTransformer.m */,
+				2970DCDA15F794050038C54B /* SORelativeDateTransformer.bundle */,
+				2970DCD515F793C20038C54B /* NSDate+RailsDateParser.h */,
+				2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */,
+				2970DCD215F78DF80038C54B /* GravatarHelper.h */,
+				2970DCD315F78DF80038C54B /* GravatarHelper.m */,
+			);
+			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		29F51A6D15F6A9F4009CE9C8 = {
+			isa = PBXGroup;
+			children = (
+				29EBBB3215F7CFEB002221FF /* Jukaela.icns */,
+				29F51A8215F6A9F4009CE9C8 /* Jukaela Social */,
+				29F51A7B15F6A9F4009CE9C8 /* Frameworks */,
+				29F51A7915F6A9F4009CE9C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		29F51A7915F6A9F4009CE9C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29F51A7815F6A9F4009CE9C8 /* Jukaela.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29F51A7B15F6A9F4009CE9C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				297B3B4C15F94A340093B5EC /* QuartzCore.framework */,
+				29EBBB3B15F7DA3B002221FF /* Accounts.framework */,
+				29EBBB3915F7DA26002221FF /* Social.framework */,
+				29F51A7C15F6A9F4009CE9C8 /* Cocoa.framework */,
+				29F51A7E15F6A9F4009CE9C8 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29F51A7E15F6A9F4009CE9C8 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29F51A7F15F6A9F4009CE9C8 /* AppKit.framework */,
+				29F51A8015F6A9F4009CE9C8 /* CoreData.framework */,
+				29F51A8115F6A9F4009CE9C8 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		29F51A8215F6A9F4009CE9C8 /* Jukaela Social */ = {
+			isa = PBXGroup;
+			children = (
+				29F51AA015F6AB11009CE9C8 /* Singletons */,
+				29F51A9F15F6AB0C009CE9C8 /* Controllers */,
+				2970DCF215F7A57B0038C54B /* Custom Classes */,
+				29F51A9E15F6AB05009CE9C8 /* User Interface */,
+				29F51A8315F6A9F4009CE9C8 /* Supporting Files */,
+			);
+			path = "Jukaela Social";
+			sourceTree = "<group>";
+		};
+		29F51A8315F6A9F4009CE9C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2970DCE515F79B710038C54B /* blueLetter.tif */,
+				29F51A8415F6A9F4009CE9C8 /* Jukaela-Info.plist */,
+				29F51A8515F6A9F4009CE9C8 /* InfoPlist.strings */,
+				29F51A8815F6A9F4009CE9C8 /* main.m */,
+				29F51A8A15F6A9F4009CE9C8 /* Jukaela-Prefix.pch */,
+				29F51A8B15F6A9F4009CE9C8 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29F51A9E15F6AB05009CE9C8 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */,
+				29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */,
+				29EBBB2A15F7C126002221FF /* LoginWindow.xib */,
+				29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */,
+				29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		29F51A9F15F6AB0C009CE9C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29F5FE9215F8E4940044BA7B /* View Controllers */,
+				29F5FE9315F8E49A0044BA7B /* Window Controllers */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		29F51AA015F6AB11009CE9C8 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				29F51A8E15F6A9F4009CE9C8 /* AppDelegate.h */,
+				29F51A8F15F6A9F4009CE9C8 /* AppDelegate.m */,
+				29F51AA515F6ADAB009CE9C8 /* Constants.h */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
+		29F5FE9215F8E4940044BA7B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29F51A9915F6AA0B009CE9C8 /* FeedViewController.h */,
+				29F51A9A15F6AA0B009CE9C8 /* FeedViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		29F5FE9315F8E49A0044BA7B /* Window Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2970DCF915F7BA520038C54B /* LoginWindow.h */,
+				2970DCFA15F7BA520038C54B /* LoginWindow.m */,
+				29EBBB3415F7D4EB002221FF /* PreferencesWindow.h */,
+				29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */,
+				29F5FE9415F8E8350044BA7B /* UserInformationWindowController.h */,
+				29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */,
+			);
+			name = "Window Controllers";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29F51A7715F6A9F4009CE9C8 /* Jukaela */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29F51A9615F6A9F5009CE9C8 /* Build configuration list for PBXNativeTarget "Jukaela" */;
+			buildPhases = (
+				29F51A7415F6A9F4009CE9C8 /* Sources */,
+				29F51A7515F6A9F4009CE9C8 /* Frameworks */,
+				29F51A7615F6A9F4009CE9C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jukaela;
+			productName = "Jukaela Social";
+			productReference = 29F51A7815F6A9F4009CE9C8 /* Jukaela.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29F51A6F15F6A9F4009CE9C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jukaela Enterprises";
+			};
+			buildConfigurationList = 29F51A7215F6A9F4009CE9C8 /* Build configuration list for PBXProject "Jukaela" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 29F51A6D15F6A9F4009CE9C8;
+			productRefGroup = 29F51A7915F6A9F4009CE9C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29F51A7715F6A9F4009CE9C8 /* Jukaela */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29F51A7615F6A9F4009CE9C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29F51A8715F6A9F4009CE9C8 /* InfoPlist.strings in Resources */,
+				29F51A8D15F6A9F4009CE9C8 /* Credits.rtf in Resources */,
+				29F51A9315F6A9F5009CE9C8 /* MainMenu.xib in Resources */,
+				29F51ABC15F7893A009CE9C8 /* FeedViewController.xib in Resources */,
+				2970DCDC15F794050038C54B /* SORelativeDateTransformer.bundle in Resources */,
+				2970DCE615F79B710038C54B /* blueLetter.tif in Resources */,
+				29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */,
+				29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */,
+				29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */,
+				29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29F51A7415F6A9F4009CE9C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29F51A8915F6A9F4009CE9C8 /* main.m in Sources */,
+				29F51A9015F6A9F4009CE9C8 /* AppDelegate.m in Sources */,
+				29F51A9C15F6AA0B009CE9C8 /* FeedViewController.m in Sources */,
+				2970DCCC15F78C8F0038C54B /* ItemCellView.m in Sources */,
+				2970DCD415F78DF80038C54B /* GravatarHelper.m in Sources */,
+				2970DCD715F793C20038C54B /* NSDate+RailsDateParser.m in Sources */,
+				2970DCDB15F794050038C54B /* SORelativeDateTransformer.m in Sources */,
+				2970DCF115F7A3610038C54B /* NSString+BackslashEscape.m in Sources */,
+				2970DCFB15F7BA520038C54B /* LoginWindow.m in Sources */,
+				29EBBB3615F7D4EB002221FF /* PreferencesWindow.m in Sources */,
+				29F5FE9715F8E8350044BA7B /* UserInformationWindowController.m in Sources */,
+				297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */,
+				297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29F51A8515F6A9F4009CE9C8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29F51A8615F6A9F4009CE9C8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29F51A8B15F6A9F4009CE9C8 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29F51A8C15F6A9F4009CE9C8 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29F51A9215F6A9F5009CE9C8 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29F51A9415F6A9F5009CE9C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		29F51A9515F6A9F5009CE9C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		29F51A9715F6A9F5009CE9C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				INFOPLIST_FILE = "Jukaela Social/Jukaela-Info.plist";
+				PRODUCT_NAME = Jukaela;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		29F51A9815F6A9F5009CE9C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				INFOPLIST_FILE = "Jukaela Social/Jukaela-Info.plist";
+				PRODUCT_NAME = Jukaela;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29F51A7215F6A9F4009CE9C8 /* Build configuration list for PBXProject "Jukaela" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29F51A9415F6A9F5009CE9C8 /* Debug */,
+				29F51A9515F6A9F5009CE9C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29F51A9615F6A9F5009CE9C8 /* Build configuration list for PBXNativeTarget "Jukaela" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29F51A9715F6A9F5009CE9C8 /* Debug */,
+				29F51A9815F6A9F5009CE9C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29F51A6F15F6A9F4009CE9C8 /* Project object */;
+}

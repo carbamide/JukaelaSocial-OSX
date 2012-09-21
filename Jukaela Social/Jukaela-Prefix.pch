@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'Jukaela Social' target in the 'Jukaela Social' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#import "Constants.h"
+#endif

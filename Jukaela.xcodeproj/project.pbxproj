@@ -12,12 +12,13 @@
 		2970DCD715F793C20038C54B /* NSDate+RailsDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */; };
 		2970DCDB15F794050038C54B /* SORelativeDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD915F794050038C54B /* SORelativeDateTransformer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2970DCDC15F794050038C54B /* SORelativeDateTransformer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2970DCDA15F794050038C54B /* SORelativeDateTransformer.bundle */; };
-		2970DCE615F79B710038C54B /* blueLetter.tif in Resources */ = {isa = PBXBuildFile; fileRef = 2970DCE515F79B710038C54B /* blueLetter.tif */; };
 		2970DCF115F7A3610038C54B /* NSString+BackslashEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCF015F7A3600038C54B /* NSString+BackslashEscape.m */; };
 		2970DCFB15F7BA520038C54B /* LoginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCFA15F7BA520038C54B /* LoginWindow.m */; };
 		297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297B3B4C15F94A340093B5EC /* QuartzCore.framework */; };
 		297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */; };
 		297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */; };
+		299BB4F2160E796100898A7C /* loggedIn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 299BB4F1160E796100898A7C /* loggedIn.aiff */; };
+		29D6BEBD160E6F2900282B2B /* blueLetter.tif in Resources */ = {isa = PBXBuildFile; fileRef = 29D6BEBC160E6F2900282B2B /* blueLetter.tif */; };
 		29D715A5160E499C00E71C00 /* PicCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D715A4160E499C00E71C00 /* PicCellView.m */; };
 		29D715AD160E55A400E71C00 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D715AC160E55A400E71C00 /* QuickLook.framework */; };
 		29D715AF160E58FF00E71C00 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D715AE160E58FF00E71C00 /* Quartz.framework */; };
@@ -55,7 +56,6 @@
 		2970DCD815F794050038C54B /* SORelativeDateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORelativeDateTransformer.h; sourceTree = "<group>"; };
 		2970DCD915F794050038C54B /* SORelativeDateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORelativeDateTransformer.m; sourceTree = "<group>"; };
 		2970DCDA15F794050038C54B /* SORelativeDateTransformer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SORelativeDateTransformer.bundle; sourceTree = "<group>"; };
-		2970DCE515F79B710038C54B /* blueLetter.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = blueLetter.tif; sourceTree = "<group>"; };
 		2970DCEF15F7A3600038C54B /* NSString+BackslashEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BackslashEscape.h"; sourceTree = "<group>"; };
 		2970DCF015F7A3600038C54B /* NSString+BackslashEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BackslashEscape.m"; sourceTree = "<group>"; };
 		2970DCF915F7BA520038C54B /* LoginWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWindow.h; sourceTree = "<group>"; };
@@ -66,6 +66,8 @@
 		297B3B5215F94A600093B5EC /* PullToRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshScrollView.h; sourceTree = "<group>"; };
 		297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshScrollView.m; sourceTree = "<group>"; };
 		297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshDelegate.h; sourceTree = "<group>"; };
+		299BB4F1160E796100898A7C /* loggedIn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = loggedIn.aiff; sourceTree = "<group>"; };
+		29D6BEBC160E6F2900282B2B /* blueLetter.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = blueLetter.tif; sourceTree = "<group>"; };
 		29D715A3160E499C00E71C00 /* PicCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicCellView.h; sourceTree = "<group>"; };
 		29D715A4160E499C00E71C00 /* PicCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicCellView.m; sourceTree = "<group>"; };
 		29D715AC160E55A400E71C00 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -226,7 +228,8 @@
 		29F51A8315F6A9F4009CE9C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2970DCE515F79B710038C54B /* blueLetter.tif */,
+				299BB4F1160E796100898A7C /* loggedIn.aiff */,
+				29D6BEBC160E6F2900282B2B /* blueLetter.tif */,
 				29F51A8415F6A9F4009CE9C8 /* Jukaela-Info.plist */,
 				29F51A8515F6A9F4009CE9C8 /* InfoPlist.strings */,
 				29F51A8815F6A9F4009CE9C8 /* main.m */,
@@ -345,13 +348,14 @@
 				29F51A9315F6A9F5009CE9C8 /* MainMenu.xib in Resources */,
 				29F51ABC15F7893A009CE9C8 /* FeedViewController.xib in Resources */,
 				2970DCDC15F794050038C54B /* SORelativeDateTransformer.bundle in Resources */,
-				2970DCE615F79B710038C54B /* blueLetter.tif in Resources */,
 				29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */,
 				29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */,
 				29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */,
 				29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */,
 				29D9F59A160D09DE00E80710 /* pull-to-refresh-arrow.png in Resources */,
 				29D9F59B160D09DE00E80710 /* release-to-refresh.png in Resources */,
+				29D6BEBD160E6F2900282B2B /* blueLetter.tif in Resources */,
+				299BB4F2160E796100898A7C /* loggedIn.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

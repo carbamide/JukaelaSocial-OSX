@@ -68,6 +68,10 @@
         _loginDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
         
         if (_loginDict) {
+            NSSound *sound = [NSSound soundNamed:@"loggedIn"];
+
+            [sound play];
+            
             NSLog(@"logged in");
             
             [kAppDelegate setUserID:[NSString stringWithFormat:@"%@", _loginDict[@"id"]]];

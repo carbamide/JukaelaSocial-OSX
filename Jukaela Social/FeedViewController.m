@@ -57,17 +57,13 @@
 -(void)loadView
 {
     [super loadView];
-    
-    [[self aTableView] becomeFirstResponder];
-    
+        
     [self setDateFormatter:[[NSDateFormatter alloc] init]];
     [self setDateTransformer:[[SORelativeDateTransformer alloc] init]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
-
-    [self becomeFirstResponder];
     
     NSLog(@"inside loadView of FeedViewController");
 }
@@ -459,6 +455,8 @@
             
             [[self characterCountLabel] setStringValue:@"140"];
             
+            [self setTempImageData:nil];
+            
             [[self popover] close];
             
             [self resetBOOLs];
@@ -475,6 +473,8 @@
             
             [[self characterCountLabel] setStringValue:@"140"];
             
+            [self setTempImageData:nil];
+
             [[self popover] close];
             
             [self resetBOOLs];
@@ -491,6 +491,8 @@
             
             [[self characterCountLabel] setStringValue:@"140"];
             
+            [self setTempImageData:nil];
+
             [[self popover] close];
             
             [self resetBOOLs];

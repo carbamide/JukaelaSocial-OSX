@@ -190,9 +190,12 @@
 {
     if (![self preferencesWindow]) {
         _preferencesWindow = [[PreferencesWindow alloc] initWithWindowNibName:@"PreferencesWindow"];
+        
+        [[_preferencesWindow window] makeKeyAndOrderFront:self];
     }
-    
-    [[_preferencesWindow window] makeKeyAndOrderFront:self];
+    else {
+        [[_preferencesWindow window] orderFront:nil];
+    }
 }
 
 -(void)startProgressAnimation:(NSNotification *)aNotification
@@ -220,16 +223,14 @@
 
 - (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
 {
-    panel.delegate = self;
-    panel.dataSource = self;
+    [panel setDelegate:self];
+    [panel setDataSource:self];
 }
 
 - (void)endPreviewPanelControl:(QLPreviewPanel *)panel
 {
-    
+    return;
 }
-
-// Quick Look panel data source
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
@@ -241,20 +242,16 @@
     return [_selectedDownloads objectAtIndex:index];
 }
 
-// Quick Look panel delegate
-
 - (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
 {
     return NO;
 }
 
-// This delegate method provides the rect on screen from which the panel will zoom.
 - (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
 {
     return [self currentRowRect];
 }
 
-// This delegate method provides a transition image between the table view and the preview panel
 - (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect
 {
     return nil;

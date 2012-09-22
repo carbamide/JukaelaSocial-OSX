@@ -19,6 +19,8 @@
 		297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */; };
 		297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 297B3B5315F94A600093B5EC /* PullToRefreshScrollView.m */; };
 		29D715A5160E499C00E71C00 /* PicCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D715A4160E499C00E71C00 /* PicCellView.m */; };
+		29D715AD160E55A400E71C00 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D715AC160E55A400E71C00 /* QuickLook.framework */; };
+		29D715AF160E58FF00E71C00 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D715AE160E58FF00E71C00 /* Quartz.framework */; };
 		29D9F59A160D09DE00E80710 /* pull-to-refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */; };
 		29D9F59B160D09DE00E80710 /* release-to-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F599160D09DE00E80710 /* release-to-refresh.png */; };
 		29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB2A15F7C126002221FF /* LoginWindow.xib */; };
@@ -66,6 +68,8 @@
 		297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshDelegate.h; sourceTree = "<group>"; };
 		29D715A3160E499C00E71C00 /* PicCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicCellView.h; sourceTree = "<group>"; };
 		29D715A4160E499C00E71C00 /* PicCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicCellView.m; sourceTree = "<group>"; };
+		29D715AC160E55A400E71C00 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		29D715AE160E58FF00E71C00 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-to-refresh-arrow.png"; sourceTree = "<group>"; };
 		29D9F599160D09DE00E80710 /* release-to-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release-to-refresh.png"; sourceTree = "<group>"; };
 		29EBBB2A15F7C126002221FF /* LoginWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginWindow.xib; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29D715AF160E58FF00E71C00 /* Quartz.framework in Frameworks */,
+				29D715AD160E55A400E71C00 /* QuickLook.framework in Frameworks */,
 				297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */,
 				29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */,
 				29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */,
@@ -184,6 +190,8 @@
 		29F51A7B15F6A9F4009CE9C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29D715AE160E58FF00E71C00 /* Quartz.framework */,
+				29D715AC160E55A400E71C00 /* QuickLook.framework */,
 				297B3B4C15F94A340093B5EC /* QuartzCore.framework */,
 				29EBBB3B15F7DA3B002221FF /* Accounts.framework */,
 				29EBBB3915F7DA26002221FF /* Social.framework */,

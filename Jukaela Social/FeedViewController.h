@@ -29,9 +29,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSTextField *characterCountLabel;
 @property (nonatomic) ChangeType currentChangeType;
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;
-
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
-
 @property (weak) IBOutlet PullToRefreshScrollView *ptrScrollView;
 
 -(IBAction)sendPost:(id)sender;

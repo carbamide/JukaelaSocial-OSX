@@ -65,6 +65,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
+
+    [self becomeFirstResponder];
     
     NSLog(@"inside loadView of FeedViewController");
 }
@@ -850,6 +853,25 @@
     
 }
 
+-(void)showImage:(NSNotification *)aNotification
+{        
+    NSInteger indexPathOfTappedRow = [(NSNumber *)[aNotification userInfo][@"indexPath"] intValue];
+    
+    if ([self theFeed][indexPathOfTappedRow][@"image_url"] && [self theFeed][indexPathOfTappedRow][@"image_url"] != [NSNull null]) {
+        NSURL *url = [NSURL URLWithString:[self theFeed][indexPathOfTappedRow][@"image_url"]];
+                        
+        [kAppDelegate setSelectedDownloads:@[url]];
+        
+        [kAppDelegate setCurrentRowRect:[[kAppDelegate window] frame]];
+
+        if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
+            [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+        } else {
+            [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+        }
+    }
+}
+
 - (BOOL)textView:(NSTextView *)aTextView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString
 {
     NSString *text = [[self aTextView] string];
@@ -959,5 +981,6 @@
     
     return FALSE;
 }
+
 
 @end

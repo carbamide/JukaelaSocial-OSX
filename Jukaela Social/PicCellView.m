@@ -51,4 +51,11 @@ static BOOL kLargeSizeRequested = YES;
 	}
 }
 
+-(IBAction)showImage:(id)sender
+{
+    NSInteger indexPath = [(NSTableView *)[[self superview] superview] rowForView:self];
+        
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"show_image" object:nil userInfo:@{@"indexPath" : [NSNumber numberWithInt:indexPath]}];
+}
+
 @end

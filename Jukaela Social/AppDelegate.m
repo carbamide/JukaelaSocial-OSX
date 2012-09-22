@@ -212,4 +212,51 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh_tables" object:nil];
 }
 
+
+- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel;
+{
+    return YES;
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    panel.delegate = self;
+    panel.dataSource = self;
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    
+}
+
+// Quick Look panel data source
+
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
+{
+    return [_selectedDownloads count];
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index
+{
+    return [_selectedDownloads objectAtIndex:index];
+}
+
+// Quick Look panel delegate
+
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
+{
+    return NO;
+}
+
+// This delegate method provides the rect on screen from which the panel will zoom.
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
+{
+    return [self currentRowRect];
+}
+
+// This delegate method provides a transition image between the table view and the preview panel
+- (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect
+{
+    return nil;
+}
 @end

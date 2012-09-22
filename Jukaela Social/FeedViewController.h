@@ -10,6 +10,7 @@
 #import "UserInformationWindowController.h"
 #import "PullToRefreshScrollView.h"
 #import "PullToRefreshDelegate.h"
+#import "TMImgurUploader.h"
 
 typedef enum {
     INSERT_POST = 0,
@@ -17,7 +18,7 @@ typedef enum {
     OTHER_CHANGE_TYPE
 } ChangeType;
 
-@interface FeedViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSSharingServiceDelegate, PullToRefreshDelegate>
+@interface FeedViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSSharingServiceDelegate, PullToRefreshDelegate, NSOpenSavePanelDelegate>
 
 @property (strong, nonatomic) NSMutableArray *theFeed;
 
@@ -39,6 +40,7 @@ typedef enum {
 -(IBAction)replyToPost:(id)sender;
 -(IBAction)closePopover:(id)sender;
 -(IBAction)showUser:(id)sender;
+-(IBAction)openImage:(id)sender;
 
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView;
 -(void)getFeed:(NSInteger)row;

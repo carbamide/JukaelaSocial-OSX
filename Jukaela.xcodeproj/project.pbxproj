@@ -26,6 +26,10 @@
 		29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */; };
 		29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3915F7DA26002221FF /* Social.framework */; };
 		29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3B15F7DA3B002221FF /* Accounts.framework */; };
+		29F4CEDF160E401300174AF6 /* TMNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		29F4CEE0160E401300174AF6 /* TMHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDA160E401300174AF6 /* TMHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		29F4CEE1160E401300174AF6 /* TMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDC160E401300174AF6 /* TMHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		29F4CEE2160E401300174AF6 /* TMImgurUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDE160E401300174AF6 /* TMImgurUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29F51A7D15F6A9F4009CE9C8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29F51A7C15F6A9F4009CE9C8 /* Cocoa.framework */; };
 		29F51A8715F6A9F4009CE9C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29F51A8515F6A9F4009CE9C8 /* InfoPlist.strings */; };
 		29F51A8915F6A9F4009CE9C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F51A8815F6A9F4009CE9C8 /* main.m */; };
@@ -68,6 +72,14 @@
 		29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		29EBBB3915F7DA26002221FF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		29EBBB3B15F7DA3B002221FF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		29F4CED7160E401300174AF6 /* TMNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		29F4CED9160E401300174AF6 /* TMHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHTTPClient.h; sourceTree = "<group>"; };
+		29F4CEDA160E401300174AF6 /* TMHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMHTTPClient.m; sourceTree = "<group>"; };
+		29F4CEDB160E401300174AF6 /* TMHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHTTPRequest.h; sourceTree = "<group>"; };
+		29F4CEDC160E401300174AF6 /* TMHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMHTTPRequest.m; sourceTree = "<group>"; };
+		29F4CEDD160E401300174AF6 /* TMImgurUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMImgurUploader.h; sourceTree = "<group>"; };
+		29F4CEDE160E401300174AF6 /* TMImgurUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMImgurUploader.m; sourceTree = "<group>"; };
 		29F51A7815F6A9F4009CE9C8 /* Jukaela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jukaela.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F51A7C15F6A9F4009CE9C8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		29F51A7F15F6A9F4009CE9C8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -108,6 +120,7 @@
 		2970DCF215F7A57B0038C54B /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				29F4CEE4160E401700174AF6 /* TM Stuff */,
 				297B3B5615F94B650093B5EC /* PullToRefreshDelegate.h */,
 				297B3B4F15F94A600093B5EC /* PullToRefreshClipView.h */,
 				297B3B5015F94A600093B5EC /* PullToRefreshClipView.m */,
@@ -128,6 +141,21 @@
 				29D9F599160D09DE00E80710 /* release-to-refresh.png */,
 			);
 			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		29F4CEE4160E401700174AF6 /* TM Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				29F4CED7160E401300174AF6 /* TMNetworkActivityIndicatorManager.h */,
+				29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */,
+				29F4CED9160E401300174AF6 /* TMHTTPClient.h */,
+				29F4CEDA160E401300174AF6 /* TMHTTPClient.m */,
+				29F4CEDB160E401300174AF6 /* TMHTTPRequest.h */,
+				29F4CEDC160E401300174AF6 /* TMHTTPRequest.m */,
+				29F4CEDD160E401300174AF6 /* TMImgurUploader.h */,
+				29F4CEDE160E401300174AF6 /* TMImgurUploader.m */,
+			);
+			name = "TM Stuff";
 			sourceTree = "<group>";
 		};
 		29F51A6D15F6A9F4009CE9C8 = {
@@ -334,6 +362,10 @@
 				29F5FE9715F8E8350044BA7B /* UserInformationWindowController.m in Sources */,
 				297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */,
 				297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */,
+				29F4CEDF160E401300174AF6 /* TMNetworkActivityIndicatorManager.m in Sources */,
+				29F4CEE0160E401300174AF6 /* TMHTTPClient.m in Sources */,
+				29F4CEE1160E401300174AF6 /* TMHTTPRequest.m in Sources */,
+				29F4CEE2160E401300174AF6 /* TMImgurUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

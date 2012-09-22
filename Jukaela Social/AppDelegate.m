@@ -10,6 +10,7 @@
 #include "FeedViewController.h"
 #import "LoginWindow.h"
 #import "PreferencesWindow.h"
+#import "TMImgurUploader.h"
 
 #define kFontSizeToolbarItemID      @"FontSize"
 #define kFontStyleToolbarItemID     @"FontStyle"
@@ -26,6 +27,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[TMImgurUploader sharedInstance] setAPIKey:kImgurAPIKey];
+
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"post_to_twitter" : [NSNumber numberWithBool:NO], @"post_to_facebook" : [NSNumber numberWithBool:NO], @"confirm_posting" : [NSNumber numberWithBool:NO]}];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postToJukaela:) name:@"post_to_jukaela" object:nil];

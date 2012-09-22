@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet NSToolbarItem *buttonWithView;
 @property (strong, nonatomic) NSProgressIndicator *progressIndicator;
 @property (strong, nonatomic) NSMutableDictionary *testDictionary;
+@property (strong, nonatomic) NSCache *externalImageCache;
 
 -(IBAction)postToJukaela:(id)sender;
 -(IBAction)logout:(id)sender;

@@ -44,5 +44,7 @@ typedef enum {
 
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView;
 -(void)getFeed:(NSInteger)row;
+-(NSString *)applicationSupportPath;
+-(void)saveImage:(NSImage *)image withFileName:(NSString *)emailAddress;
 
 @end

@@ -57,7 +57,7 @@
 -(void)loadView
 {
     [super loadView];
-        
+    
     [self setDateFormatter:[[NSDateFormatter alloc] init]];
     [self setDateTransformer:[[SORelativeDateTransformer alloc] init]];
     
@@ -376,12 +376,44 @@
             else {
                 [self setUrlString:result[@"upload"][@"links"][@"original"]];
                 
+                
                 [self jukaelaNetworkAction:_stringToSend];
             }
         }];
     }
     else {
-        [self jukaelaNetworkAction:_stringToSend];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"confirm_posting"] == YES) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Confirm" defaultButton:@"Do it!" alternateButton:@"Just to Jukaela!" otherButton:@"Cancel" informativeTextWithFormat:@"Confirm sending to other services?"];
+            
+            NSInteger result = [alert runModal];
+            
+            if (result == NSAlertDefaultReturn) {
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
+                    [self postToTwitter:[[self aTextView] string]];
+                }
+                
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
+                    [self sendFacebookPost:[[self aTextView] string]];
+                }
+                
+                [self jukaelaNetworkAction:_stringToSend];
+            }
+            else if (result == NSAlertAlternateReturn) {
+                [self setTwitterSuccess:YES];
+                [self setFacebookSuccess:YES];
+                
+                [self jukaelaNetworkAction:_stringToSend];
+            }
+            else if (result == NSAlertOtherReturn) {
+                [self setTwitterSuccess:YES];
+                [self setFacebookSuccess:YES];
+                [self setJukaelaSuccess:YES];
+                
+                [self finishUp];
+                
+                return;
+            }
+        }
     }
     
 }
@@ -417,14 +449,6 @@
             [self setCurrentChangeType:INSERT_POST];
             
             [self getFeed:0];
-            
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
-                [self postToTwitter:[[self aTextView] string]];
-            }
-            
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
-                [self sendFacebookPost:[[self aTextView] string]];
-            }
             
             [self setJukaelaSuccess:YES];
             
@@ -474,7 +498,7 @@
             [[self characterCountLabel] setStringValue:@"140"];
             
             [self setTempImageData:nil];
-
+            
             [[self popover] close];
             
             [self resetBOOLs];
@@ -492,7 +516,7 @@
             [[self characterCountLabel] setStringValue:@"140"];
             
             [self setTempImageData:nil];
-
+            
             [[self popover] close];
             
             [self resetBOOLs];
@@ -856,16 +880,16 @@
 }
 
 -(void)showImage:(NSNotification *)aNotification
-{        
+{
     NSInteger indexPathOfTappedRow = [(NSNumber *)[aNotification userInfo][@"indexPath"] intValue];
     
     if ([self theFeed][indexPathOfTappedRow][@"image_url"] && [self theFeed][indexPathOfTappedRow][@"image_url"] != [NSNull null]) {
         NSURL *url = [NSURL URLWithString:[self theFeed][indexPathOfTappedRow][@"image_url"]];
-                        
+        
         [kAppDelegate setSelectedDownloads:@[url]];
         
         [kAppDelegate setCurrentRowRect:[[kAppDelegate window] frame]];
-
+        
         if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
             [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
         } else {

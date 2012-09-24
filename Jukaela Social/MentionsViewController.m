@@ -21,6 +21,13 @@
 
 @implementation MentionsViewController
 
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [[self ptrScrollView] setDelegate:self];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -253,6 +260,11 @@
         
         [data writeToFile:path atomically: NO];
     }
+}
+
+- (void)ptrScrollViewDidTriggerRefresh:(id)sender
+{
+    [self getMentionsFeed];
 }
 
 @end

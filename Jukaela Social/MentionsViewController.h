@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PullToRefreshScrollView.h"
 
-@interface MentionsViewController : NSViewController
+@interface MentionsViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, PullToRefreshDelegate>
 
 @property (strong, nonatomic) NSMutableArray *mentions;
 

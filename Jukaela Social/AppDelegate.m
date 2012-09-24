@@ -35,8 +35,6 @@
     [aWindow setTitleBarHeight:40];
     
     [[aWindow titleBarView] addSubview:[self titleView]];
-
-
     
     [[TMImgurUploader sharedInstance] setAPIKey:kImgurAPIKey];
 
@@ -61,116 +59,6 @@
     [NSApp showWindow:[_loginWindow window]];
     
     [[_loginWindow window] makeKeyAndOrderFront:self];
-}
-
--(void)awakeFromNib
-{
-    [_toolbar setAllowsUserCustomization:YES];
-    [_toolbar setAutosavesConfiguration:YES];
-    [_toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-}
-
-- (NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)identifier
-                                       label:(NSString *)label
-                                 paleteLabel:(NSString *)paletteLabel
-                                     toolTip:(NSString *)toolTip
-                                      target:(id)target
-                                 itemContent:(id)imageOrView
-                                      action:(SEL)action
-                                        menu:(NSMenu *)menu
-{
-    NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:identifier];
-    
-    [item setLabel:label];
-    [item setPaletteLabel:paletteLabel];
-    [item setToolTip:toolTip];
-    [item setTarget:target];
-    [item setAction:action];
-    
-    if([imageOrView isKindOfClass:[NSImage class]]) {
-        [item setImage:imageOrView];
-    }
-    else if ([imageOrView isKindOfClass:[NSView class]]) {
-        [item setView:imageOrView];
-    }
-    else {
-        assert(!"Invalid itemContent: object");
-    }
-
-    if (menu) {
-        NSMenuItem *mItem = [[NSMenuItem alloc] init];
-        
-        [mItem setSubmenu:menu];
-        [mItem setTitle:label];
-        [item setMenuFormRepresentation:mItem];
-    }
-    
-    return item;
-}
-
-- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
-{
-    return YES;
-}
-
-- (void)toolbarWillAddItem:(NSNotification *)notif
-{
-    NSLog(@"Adding toolbar items");
-}
-
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
-{
-    NSToolbarItem *toolbarItem = nil;
-    
-    if ([itemIdentifier isEqualToString:@"PostToJukaela"]) {
-        
-        toolbarItem = [self toolbarItemWithIdentifier:kBlueLetterToolbarItemID
-                                                label:@"Post"
-                                          paleteLabel:@"Post"
-                                              toolTip:@"Post to Jukaela Social"
-                                               target:self
-                                          itemContent:[NSImage imageNamed:@"blueLetter.tif"]
-                                               action:@selector(postToJukaela:)
-                                                 menu:nil];
-    }
-    else if ([itemIdentifier isEqualToString:NSToolbarFlexibleSpaceItemIdentifier]) {
-        toolbarItem = [self toolbarItemWithIdentifier:NSToolbarFlexibleSpaceItemIdentifier
-                                                label:nil
-                                          paleteLabel:@"Flexible Space"
-                                              toolTip:nil 
-                                               target:nil
-                                          itemContent:nil
-                                               action:nil
-                                                 menu:nil];
-        
-    }
-    else if ([itemIdentifier isEqualToString:@"ActivityIndicator"]) {
-        _progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, 20, 20)];
-        
-        [_progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
-        [_progressIndicator setIndeterminate:YES];
-        [_progressIndicator setHidden:YES];
-        
-        toolbarItem = [self toolbarItemWithIdentifier:@"AcitivtyIndicator"
-                                                label:@"Activity"
-                                          paleteLabel:@"Activity"
-                                              toolTip:@"Doing stuff!"
-                                               target:nil
-                                          itemContent:_progressIndicator
-                                               action:nil menu:nil];
-    }
-    
-    return toolbarItem;
-}
-
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
-{
-    return @[@"PostToJukaela", NSToolbarFlexibleSpaceItemIdentifier, @"ActivityIndicator"];
-}
-
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
-{
-    return @[kFontStyleToolbarItemID, kFontSizeToolbarItemID, @"PostToJukaela", NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarPrintItemIdentifier, @"ActivityIndicator"];
 }
 
 -(IBAction)postToJukaela:(id)sender
@@ -211,23 +99,10 @@
     }
 }
 
--(void)startProgressAnimation:(NSNotification *)aNotification
-{
-    [[self progressIndicator] setHidden:NO];
-    [[self progressIndicator] startAnimation:self];
-}
-
--(void)stopProgressAnimation:(NSNotification *)aNotification
-{
-    [[self progressIndicator] setHidden:YES];
-    [[self progressIndicator] stopAnimation:self];
-}
-
 -(IBAction)refreshFeed:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh_tables" object:nil];
 }
-
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel;
 {
@@ -303,6 +178,11 @@
     else if ([sender selectedSegment] == 2) {
         NSLog(@"Three!");
     }
+}
+
+-(IBAction)showWindow:(id)sender
+{
+    [[self window] makeKeyAndOrderFront:nil];
 }
 
 @end

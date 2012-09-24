@@ -439,7 +439,7 @@
 										<reference key="NSSupport" ref="267944725"/>
 										<string key="NSCellIdentifier">_NS:9</string>
 										<reference key="NSControlView" ref="613619635"/>
-										<int key="NSButtonFlags">-2033958912</int>
+										<int key="NSButtonFlags">-2042347520</int>
 										<int key="NSButtonFlags2">134</int>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
@@ -2352,14 +2352,14 @@
 				<boolean value="NO" key="157.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="157.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array key="158.IBNSViewMetadataConstraints">
-					<reference ref="108130564"/>
 					<reference ref="824920520"/>
+					<reference ref="108130564"/>
 				</array>
 				<boolean value="NO" key="158.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="158.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array key="159.IBNSViewMetadataConstraints">
-					<reference ref="1014993986"/>
 					<reference ref="1055930742"/>
+					<reference ref="1014993986"/>
 				</array>
 				<boolean value="NO" key="159.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="159.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2375,8 +2375,8 @@
 				<boolean value="NO" key="161.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="161.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array key="162.IBNSViewMetadataConstraints">
-					<reference ref="12058873"/>
 					<reference ref="653374957"/>
+					<reference ref="12058873"/>
 				</array>
 				<boolean value="NO" key="162.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="162.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

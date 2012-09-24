@@ -13,15 +13,13 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
 @property (strong, nonatomic) NSString *userID;
-@property (strong, nonatomic) IBOutlet NSToolbar *toolbar;
-@property (strong, nonatomic) IBOutlet NSToolbarItem *buttonWithView;
-@property (strong, nonatomic) NSProgressIndicator *progressIndicator;
 @property (strong, nonatomic) NSMutableDictionary *testDictionary;
 @property (strong, nonatomic) NSCache *externalImageCache;
 @property (strong, nonatomic) NSArray *selectedDownloads;
 @property (nonatomic) NSRect currentRowRect;
+
+@property (assign) IBOutlet NSWindow *window;
 @property (strong, nonatomic) IBOutlet ANSegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet NSView *titleView;
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
@@ -32,5 +30,6 @@
 -(IBAction)refreshFeed:(id)sender;
 
 -(IBAction)changeViews:(ANSegmentedControl *)sender;
+-(IBAction)showWindow:(id)sender;
 
 @end

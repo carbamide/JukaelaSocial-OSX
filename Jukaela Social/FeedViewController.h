@@ -11,6 +11,7 @@
 #import "PullToRefreshScrollView.h"
 #import "PullToRefreshDelegate.h"
 #import "TMImgurUploader.h"
+#import "ANSegmentedControl.h"
 
 typedef enum {
     INSERT_POST = 0,

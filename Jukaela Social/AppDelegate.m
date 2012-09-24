@@ -11,6 +11,7 @@
 #import "LoginWindow.h"
 #import "PreferencesWindow.h"
 #import "TMImgurUploader.h"
+#import "MentionsViewController.h"
 
 #define kFontSizeToolbarItemID      @"FontSize"
 #define kFontStyleToolbarItemID     @"FontStyle"
@@ -21,12 +22,22 @@
 @property (strong, nonatomic) NSArray *tempFeed;
 @property (strong, nonatomic) LoginWindow *loginWindow;
 @property (strong, nonatomic) PreferencesWindow *preferencesWindow;
+@property (strong, nonatomic) NSViewController *currentViewController;
+@property (strong, nonatomic) MentionsViewController *mentionsViewController;
 
 @end
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    INAppStoreWindow *aWindow = (INAppStoreWindow *)[self window];
+    
+    [aWindow setTitleBarHeight:40];
+    
+    [[aWindow titleBarView] addSubview:[self titleView]];
+
+
+    
     [[TMImgurUploader sharedInstance] setAPIKey:kImgurAPIKey];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"post_to_twitter" : [NSNumber numberWithBool:NO], @"post_to_facebook" : [NSNumber numberWithBool:NO], @"confirm_posting" : [NSNumber numberWithBool:NO]}];
@@ -36,7 +47,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProgressAnimation:) name:@"stop_animation" object:nil];
 
     [self setFeedViewController:[[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil]];
-        
+    
+    [self setCurrentViewController:[self feedViewController]];
+    
     [[[self window] contentView] addSubview:[[self feedViewController] view]];
     
     if (![self loginWindow]) {
@@ -160,9 +173,9 @@
     return @[kFontStyleToolbarItemID, kFontSizeToolbarItemID, @"PostToJukaela", NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarPrintItemIdentifier, @"ActivityIndicator"];
 }
 
--(void)postToJukaela:(id)sender
+-(IBAction)postToJukaela:(id)sender
 {    
-    [[self feedViewController] showPopover:[[[self buttonWithView] view] frame] ofView:[[self buttonWithView] view]];
+    [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
 }
 
 -(IBAction)logout:(id)sender
@@ -256,4 +269,40 @@
 {
     return nil;
 }
+
+-(IBAction)changeViews:(ANSegmentedControl *)sender
+{
+    if ([sender selectedSegment] == 0) {
+        if (![self feedViewController]) {
+            [self setFeedViewController:[[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil]];
+        }
+        
+        if (![NSStringFromClass([[self currentViewController] class]) isEqualToString:NSStringFromClass([[self feedViewController] class])]) {
+            [[[self currentViewController] view] removeFromSuperview];
+            
+            [[[self window] contentView] addSubview:[[self feedViewController] view]];
+            
+            [self setCurrentViewController:[self feedViewController]];
+        }
+        NSLog(@"FeedViewController!");
+    }
+    else if ([sender selectedSegment] == 1) {
+        if (![self mentionsViewController]) {
+            [self setMentionsViewController:[[MentionsViewController alloc] initWithNibName:@"MentionsViewController" bundle:nil]];
+        }
+        
+        if (![NSStringFromClass([[self currentViewController] class]) isEqualToString:NSStringFromClass([[self mentionsViewController] class])]) {
+            [[[self currentViewController] view] removeFromSuperview];
+            
+            [[[self window] contentView] addSubview:[[self mentionsViewController] view]];
+            
+            [self setCurrentViewController:[self mentionsViewController]];
+        }
+        NSLog(@"MentionsViewController!");
+    }
+    else if ([sender selectedSegment] == 2) {
+        NSLog(@"Three!");
+    }
+}
+
 @end

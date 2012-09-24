@@ -57,9 +57,13 @@
 -(void)loadView
 {
     [super loadView];
-    
+        
     [self setDateFormatter:[[NSDateFormatter alloc] init]];
     [self setDateTransformer:[[SORelativeDateTransformer alloc] init]];
+    
+    CGRect rect = [[[kAppDelegate window] contentView] frame];
+        
+    [[self view] setFrame:rect];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
@@ -159,7 +163,6 @@
                 });
             });
         }
-        
         
         NSDate *tempDate = [NSDate dateWithISO8601String:[self theFeed][row][@"created_at"] withFormatter:[self dateFormatter]];
         
@@ -376,9 +379,36 @@
             else {
                 [self setUrlString:result[@"upload"][@"links"][@"original"]];
                 
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Confirm" defaultButton:@"Do it!" alternateButton:@"Just to Jukaela!" otherButton:@"Cancel" informativeTextWithFormat:@"Confirm sending to other services?"];
                 
-                [self jukaelaNetworkAction:_stringToSend];
-            }
+                NSInteger result = [alert runModal];
+                
+                if (result == NSAlertDefaultReturn) {
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
+                        [self postToTwitter:[[self aTextView] string]];
+                    }
+                    
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
+                        [self sendFacebookPost:[[self aTextView] string]];
+                    }
+                    
+                    [self jukaelaNetworkAction:_stringToSend];
+                }
+                else if (result == NSAlertAlternateReturn) {
+                    [self setTwitterSuccess:YES];
+                    [self setFacebookSuccess:YES];
+                    
+                    [self jukaelaNetworkAction:_stringToSend];
+                }
+                else if (result == NSAlertOtherReturn) {
+                    [self setTwitterSuccess:YES];
+                    [self setFacebookSuccess:YES];
+                    [self setJukaelaSuccess:YES];
+                    
+                    [self finishUp];
+                    
+                    return;
+                }            }
         }];
     }
     else {
@@ -934,23 +964,9 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (data) {
-            //            int oldNumberOfPosts = [[self theFeed] count];
-            
+        if (data) {            
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-            
-            //            int newNumberOfPosts = [[self theFeed] count];
-            
-            //            if (newNumberOfPosts > oldNumberOfPosts) {
-            //                NSString *tempString;
-            //
-            //                if ((newNumberOfPosts - oldNumberOfPosts) == 1) {
-            //                    tempString = @"Post";
-            //                }
-            //                else {
-            //                    tempString = @"Posts";
-            //                }
-            //            }
+
             [[self aTableView] reloadData];
         }
         else {

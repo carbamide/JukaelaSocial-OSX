@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+#import "ANSegmentedControl.h"
+#import "INAppStoreWindow.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 
@@ -20,10 +22,15 @@
 @property (strong, nonatomic) NSCache *externalImageCache;
 @property (strong, nonatomic) NSArray *selectedDownloads;
 @property (nonatomic) NSRect currentRowRect;
+@property (strong, nonatomic) IBOutlet ANSegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet NSView *titleView;
+@property (strong, nonatomic) IBOutlet NSButton *postButton;
 
 -(IBAction)postToJukaela:(id)sender;
 -(IBAction)logout:(id)sender;
 -(IBAction)showPreferences:(id)sender;
 -(IBAction)refreshFeed:(id)sender;
+
+-(IBAction)changeViews:(ANSegmentedControl *)sender;
 
 @end

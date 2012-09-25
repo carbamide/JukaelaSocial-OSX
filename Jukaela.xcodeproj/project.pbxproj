@@ -216,7 +216,6 @@
 		29F51A6D15F6A9F4009CE9C8 = {
 			isa = PBXGroup;
 			children = (
-				29E9B42F160E970500CDACDA /* ImageCaptureCore.framework */,
 				29EBBB3215F7CFEB002221FF /* Jukaela.icns */,
 				29F51A8215F6A9F4009CE9C8 /* Jukaela Social */,
 				29F51A7B15F6A9F4009CE9C8 /* Frameworks */,
@@ -235,6 +234,7 @@
 		29F51A7B15F6A9F4009CE9C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29E9B42F160E970500CDACDA /* ImageCaptureCore.framework */,
 				29D715AE160E58FF00E71C00 /* Quartz.framework */,
 				29D715AC160E55A400E71C00 /* QuickLook.framework */,
 				297B3B4C15F94A340093B5EC /* QuartzCore.framework */,

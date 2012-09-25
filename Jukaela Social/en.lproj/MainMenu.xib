@@ -435,7 +435,6 @@
 					<string key="NSFrameSize">{320, 480}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{320, 502}</string>
@@ -458,7 +457,6 @@
 						<string key="NSFrame">{{282, 5}, {32, 28}}</string>
 						<reference key="NSSuperview" ref="848166540"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="300100013">
@@ -554,6 +552,35 @@
 					<int key="NSPeriodicInterval">25</int>
 				</object>
 				<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+			</object>
+			<object class="NSMenu" id="61482598">
+				<string key="NSTitle"/>
+				<array class="NSMutableArray" key="NSMenuItems">
+					<object class="NSMenuItem" id="33666494">
+						<reference key="NSMenu" ref="61482598"/>
+						<string key="NSTitle">Post Only To Facebook...</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="568122845">
+						<reference key="NSMenu" ref="61482598"/>
+						<string key="NSTitle">Post Only To Twitter...</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="219224569">
+						<reference key="NSMenu" ref="61482598"/>
+						<string key="NSTitle">Post Only To Jukaela...</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+				</array>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -781,6 +808,38 @@
 						<reference key="destination" ref="294063479"/>
 					</object>
 					<int key="connectionID">658</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">postOnlyToFacebook:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="33666494"/>
+					</object>
+					<int key="connectionID">664</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">postOnlyToTwitter:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="568122845"/>
+					</object>
+					<int key="connectionID">667</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">postOnlyToJukaela:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="219224569"/>
+					</object>
+					<int key="connectionID">668</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menu</string>
+						<reference key="source" ref="494440911"/>
+						<reference key="destination" ref="61482598"/>
+					</object>
+					<int key="connectionID">663</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1261,6 +1320,31 @@
 						<reference key="object" ref="710292316"/>
 						<reference key="parent" ref="835318025"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">659</int>
+						<reference key="object" ref="61482598"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="33666494"/>
+							<reference ref="568122845"/>
+							<reference ref="219224569"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">661</int>
+						<reference key="object" ref="568122845"/>
+						<reference key="parent" ref="61482598"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">662</int>
+						<reference key="object" ref="219224569"/>
+						<reference key="parent" ref="61482598"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">660</int>
+						<reference key="object" ref="33666494"/>
+						<reference key="parent" ref="61482598"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1336,6 +1420,10 @@
 				<string key="651.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="656.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="657.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="659.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="660.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="661.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="662.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="78.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1345,7 +1433,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">658</int>
+			<int key="maxID">668</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1363,6 +1451,9 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="changeViews:">ANSegmentedControl</string>
 						<string key="logout:">id</string>
+						<string key="postOnlyToFacebook:">id</string>
+						<string key="postOnlyToJukaela:">id</string>
+						<string key="postOnlyToTwitter:">id</string>
 						<string key="postToJukaela:">id</string>
 						<string key="refreshFeed:">id</string>
 						<string key="showPreferences:">id</string>
@@ -1375,6 +1466,18 @@
 						</object>
 						<object class="IBActionInfo" key="logout:">
 							<string key="name">logout:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="postOnlyToFacebook:">
+							<string key="name">postOnlyToFacebook:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="postOnlyToJukaela:">
+							<string key="name">postOnlyToJukaela:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="postOnlyToTwitter:">
+							<string key="name">postOnlyToTwitter:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="postToJukaela:">
@@ -1395,19 +1498,13 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="buttonWithView">NSToolbarItem</string>
 						<string key="feedViewController">FeedViewController</string>
 						<string key="postButton">NSButton</string>
 						<string key="segmentedControl">ANSegmentedControl</string>
 						<string key="titleView">NSView</string>
-						<string key="toolbar">NSToolbar</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="buttonWithView">
-							<string key="name">buttonWithView</string>
-							<string key="candidateClassName">NSToolbarItem</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="feedViewController">
 							<string key="name">feedViewController</string>
 							<string key="candidateClassName">FeedViewController</string>
@@ -1423,10 +1520,6 @@
 						<object class="IBToOneOutletInfo" key="titleView">
 							<string key="name">titleView</string>
 							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="toolbar">
-							<string key="name">toolbar</string>
-							<string key="candidateClassName">NSToolbar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>

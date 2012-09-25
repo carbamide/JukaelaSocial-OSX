@@ -23,6 +23,9 @@
 @property (strong, nonatomic) IBOutlet ANSegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet NSView *titleView;
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
+@property (nonatomic) BOOL onlyToFacebook;
+@property (nonatomic) BOOL onlyToTwitter;
+@property (nonatomic) BOOL onlyToJukaela;
 
 -(IBAction)postToJukaela:(id)sender;
 -(IBAction)logout:(id)sender;
@@ -31,5 +34,9 @@
 
 -(IBAction)changeViews:(ANSegmentedControl *)sender;
 -(IBAction)showWindow:(id)sender;
+
+-(IBAction)postOnlyToFacebook:(id)sender;
+-(IBAction)postOnlyToTwitter:(id)sender;
+-(IBAction)postOnlyToJukaela:(id)sender;
 
 @end

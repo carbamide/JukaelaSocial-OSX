@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2959BF4B1611F099007D6148 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2959BF4A1611F099007D6148 /* Helpers.m */; };
 		2970DCCC15F78C8F0038C54B /* ItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCCB15F78C8F0038C54B /* ItemCellView.m */; };
 		2970DCD415F78DF80038C54B /* GravatarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD315F78DF80038C54B /* GravatarHelper.m */; };
 		2970DCD715F793C20038C54B /* NSDate+RailsDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */; };
@@ -57,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2959BF491611F099007D6148 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		2959BF4A1611F099007D6148 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		2970DCCA15F78C8F0038C54B /* ItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCellView.h; sourceTree = "<group>"; };
 		2970DCCB15F78C8F0038C54B /* ItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCellView.m; sourceTree = "<group>"; };
 		2970DCD215F78DF80038C54B /* GravatarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarHelper.h; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				2970DCD315F78DF80038C54B /* GravatarHelper.m */,
 				29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */,
 				29D9F599160D09DE00E80710 /* release-to-refresh.png */,
+				2959BF491611F099007D6148 /* Helpers.h */,
+				2959BF4A1611F099007D6148 /* Helpers.m */,
 			);
 			name = "Custom Classes";
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				29D67AAF160F3C9800EE503D /* NSShadow+MCAdditions.m in Sources */,
 				29908EB8161088030088792B /* INAppStoreWindow.m in Sources */,
 				29908EBC16108CA80088792B /* MentionsViewController.m in Sources */,
+				2959BF4B1611F099007D6148 /* Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

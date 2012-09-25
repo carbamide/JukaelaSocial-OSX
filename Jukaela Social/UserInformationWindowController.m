@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "GravatarHelper.h"
 #import "UserInformationWindowController.h"
+#import "Helpers.h"
 
 @interface UserInformationWindowController ()
 @property (strong, nonatomic) NSArray *followers;
@@ -62,7 +63,7 @@
         [[self profileLabel] setStringValue:@"No Profile Specified"];
     }
     
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]]]];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]]]];
     
     if (image) {
         [[self userImageView] setImage:image];
@@ -77,7 +78,7 @@
                 [[self userImageView] setImage:image];
             });
             
-            [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]];
+            [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]];
         });
     }
     [self performSelector:@selector(setupArraysDispatch) withObject:nil afterDelay:0];
@@ -112,7 +113,7 @@
 -(void)saveImage:(NSImage *)image withFileName:(NSString *)emailAddress
 {
     if (image != nil) {
-        NSString *path = [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithString:[NSString stringWithFormat:@"%@.png", emailAddress]]];
+        NSString *path = [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithString:[NSString stringWithFormat:@"%@.png", emailAddress]]];
         
         NSBitmapImageRep *imgRep = [[image representations] objectAtIndex:0];
         

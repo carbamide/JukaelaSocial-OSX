@@ -13,6 +13,7 @@
 #import "SORelativeDateTransformer.h"
 #import "NSDate+RailsDateParser.h"
 #import "GravatarHelper.h"
+#import "Helpers.h"
 
 @interface MentionsViewController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -129,7 +130,7 @@
         
         [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
         
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
         
         if (image) {
             [[cellView imageView] setImage:image];
@@ -144,7 +145,7 @@
                     [[cellView imageView] setImage:image];
                 });
                 
-                [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
+                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
             });
         }
         
@@ -218,7 +219,7 @@
         
         [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
         
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
         
         if (image) {
             [[cellView imageView] setImage:image];
@@ -233,33 +234,11 @@
                     [[cellView imageView] setImage:image];
                 });
                 
-                [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
+                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
             });
         }
     }
     return cellView;
-}
-
--(NSString *)applicationSupportPath
-{
-    NSArray *tempArray = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = tempArray[0];
-    
-    return documentsDirectory;
-}
-
--(void)saveImage:(NSImage *)image withFileName:(NSString *)emailAddress
-{
-    if (image != nil) {
-        NSString *path = [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithString:[NSString stringWithFormat:@"%@.png", emailAddress]]];
-        
-        NSBitmapImageRep *imgRep = [[image representations] objectAtIndex:0];
-        
-        NSData *data = [imgRep representationUsingType: NSPNGFileType properties: nil];
-        
-        [data writeToFile:path atomically: NO];
-    }
 }
 
 - (void)ptrScrollViewDidTriggerRefresh:(id)sender

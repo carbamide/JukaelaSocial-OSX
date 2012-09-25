@@ -41,8 +41,6 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"post_to_twitter" : [NSNumber numberWithBool:NO], @"post_to_facebook" : [NSNumber numberWithBool:NO], @"confirm_posting" : [NSNumber numberWithBool:NO]}];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postToJukaela:) name:@"post_to_jukaela" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startProgressAnimation:) name:@"start_animation" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProgressAnimation:) name:@"stop_animation" object:nil];
 
     [self setFeedViewController:[[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil]];
     
@@ -183,6 +181,27 @@
 -(IBAction)showWindow:(id)sender
 {
     [[self window] makeKeyAndOrderFront:nil];
+}
+
+-(IBAction)postOnlyToFacebook:(id)sender
+{
+    [self setOnlyToFacebook:YES];
+    
+    [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
+}
+
+-(IBAction)postOnlyToTwitter:(id)sender
+{
+    [self setOnlyToTwitter:YES];
+    
+    [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
+}
+
+-(IBAction)postOnlyToJukaela:(id)sender
+{
+    [self setOnlyToJukaela:YES];
+    
+    [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
 }
 
 @end

@@ -19,6 +19,7 @@
 #import "NSString+BackslashEscape.h"
 #import "SORelativeDateTransformer.h"
 #import "PicCellView.h"
+#import "Helpers.h"
 
 @interface FeedViewController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -57,12 +58,12 @@
 -(void)loadView
 {
     [super loadView];
-        
+    
     [self setDateFormatter:[[NSDateFormatter alloc] init]];
     [self setDateTransformer:[[SORelativeDateTransformer alloc] init]];
     
     CGRect rect = [[[kAppDelegate window] contentView] frame];
-        
+    
     [[self view] setFrame:rect];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
@@ -74,8 +75,6 @@
 
 -(void)getFeed:(NSInteger)row
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"start_animation" object:nil];
-    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -108,8 +107,6 @@
             }
             
             [self setCurrentChangeType:-1];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animation" object:nil];
         }
         else {
             NSLog(@"Error loading feed");
@@ -168,7 +165,7 @@
         
         [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
         
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
         
         if (image) {
             [[cellView imageView] setImage:image];
@@ -183,7 +180,7 @@
                     [[cellView imageView] setImage:image];
                 });
                 
-                [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
+                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
             });
         }
         
@@ -257,7 +254,7 @@
         
         [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
         
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
         
         if (image) {
             [[cellView imageView] setImage:image];
@@ -272,7 +269,7 @@
                     [[cellView imageView] setImage:image];
                 });
                 
-                [self saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
+                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
             });
         }
         
@@ -331,28 +328,6 @@
     return cellView;
 }
 
--(NSString *)applicationSupportPath
-{
-    NSArray *tempArray = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = tempArray[0];
-    
-    return documentsDirectory;
-}
-
--(void)saveImage:(NSImage *)image withFileName:(NSString *)emailAddress
-{
-    if (image != nil) {
-        NSString *path = [[self applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithString:[NSString stringWithFormat:@"%@.png", emailAddress]]];
-        
-        NSBitmapImageRep *imgRep = [[image representations] objectAtIndex:0];
-        
-        NSData *data = [imgRep representationUsingType: NSPNGFileType properties: nil];
-        
-        [data writeToFile:path atomically: NO];
-    }
-}
-
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView
 {
     [[self popover] showRelativeToRect:rect ofView:aView preferredEdge:NSMaxYEdge];
@@ -364,6 +339,23 @@
     
     [[self postProgressIndicator] setHidden:NO];
     [[self postProgressIndicator] startAnimation:self];
+    
+    if ([kAppDelegate onlyToTwitter]) {
+        [self setFacebookSuccess:YES];
+        [self setJukaelaSuccess:YES];
+        
+        [self postToTwitter:[[self aTextView] string]];
+        
+        return;
+    }
+    else if ([kAppDelegate onlyToFacebook]) {
+        [self setTwitterSuccess:YES];
+        [self setJukaelaSuccess:YES];
+        
+        [self sendFacebookPost:[[self aTextView] string]];
+        
+        return;
+    }
     
     _stringToSend = [[self aTextView] string];
     
@@ -379,11 +371,49 @@
             else {
                 [self setUrlString:result[@"upload"][@"links"][@"original"]];
                 
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Confirm" defaultButton:@"Do it!" alternateButton:@"Just to Jukaela!" otherButton:@"Cancel" informativeTextWithFormat:@"Confirm sending to other services?"];
-                
-                NSInteger result = [alert runModal];
-                
-                if (result == NSAlertDefaultReturn) {
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"confirm_posting"] == YES && ![kAppDelegate onlyToTwitter] && ![kAppDelegate onlyToFacebook] && ![kAppDelegate onlyToJukaela]) {
+                    
+                    NSAlert *alert = [NSAlert alertWithMessageText:@"Confirm" defaultButton:@"Do it!" alternateButton:@"Just to Jukaela!" otherButton:@"Cancel" informativeTextWithFormat:@"Confirm sending to other services?"];
+                    
+                    NSInteger result = [alert runModal];
+                    
+                    if (result == NSAlertDefaultReturn) {
+                        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
+                            [self postToTwitter:[[self aTextView] string]];
+                        }
+                        
+                        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
+                            [self sendFacebookPost:[[self aTextView] string]];
+                        }
+                        
+                        [self jukaelaNetworkAction:_stringToSend];
+                    }
+                    else if (result == NSAlertAlternateReturn) {
+                        [self setTwitterSuccess:YES];
+                        [self setFacebookSuccess:YES];
+                        
+                        [self jukaelaNetworkAction:_stringToSend];
+                    }
+                    else if (result == NSAlertOtherReturn) {
+                        [self setTwitterSuccess:YES];
+                        [self setFacebookSuccess:YES];
+                        [self setJukaelaSuccess:YES];
+                        
+                        [self finishUp];
+                        
+                        return;
+                    }
+                }
+                else {
+                    if ([kAppDelegate onlyToJukaela]) {
+                        [self setTwitterSuccess:YES];
+                        [self setFacebookSuccess:YES];
+                        
+                        [self jukaelaNetworkAction:_stringToSend];
+                        
+                        return;
+                    }
+                    
                     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
                         [self postToTwitter:[[self aTextView] string]];
                     }
@@ -394,25 +424,11 @@
                     
                     [self jukaelaNetworkAction:_stringToSend];
                 }
-                else if (result == NSAlertAlternateReturn) {
-                    [self setTwitterSuccess:YES];
-                    [self setFacebookSuccess:YES];
-                    
-                    [self jukaelaNetworkAction:_stringToSend];
-                }
-                else if (result == NSAlertOtherReturn) {
-                    [self setTwitterSuccess:YES];
-                    [self setFacebookSuccess:YES];
-                    [self setJukaelaSuccess:YES];
-                    
-                    [self finishUp];
-                    
-                    return;
-                }            }
+            }
         }];
     }
     else {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"confirm_posting"] == YES) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"confirm_posting"] == YES && ![kAppDelegate onlyToTwitter] && ![kAppDelegate onlyToFacebook] && ![kAppDelegate onlyToJukaela]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Confirm" defaultButton:@"Do it!" alternateButton:@"Just to Jukaela!" otherButton:@"Cancel" informativeTextWithFormat:@"Confirm sending to other services?"];
             
             NSInteger result = [alert runModal];
@@ -443,6 +459,26 @@
                 
                 return;
             }
+        }
+        else {
+            if ([kAppDelegate onlyToJukaela]) {
+                [self setTwitterSuccess:YES];
+                [self setFacebookSuccess:YES];
+                
+                [self jukaelaNetworkAction:_stringToSend];
+
+                return;
+            }
+            
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES && ![kAppDelegate onlyToJukaela]) {
+                [self postToTwitter:[[self aTextView] string]];
+            }
+            
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES && ![kAppDelegate onlyToJukaela]) {
+                [self sendFacebookPost:[[self aTextView] string]];
+            }
+            
+            [self jukaelaNetworkAction:_stringToSend];
         }
     }
     
@@ -500,65 +536,44 @@
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
         if ([self jukaelaSuccess] && [self facebookSuccess] && [self twitterSuccess]) {
-            [[self postProgressIndicator] stopAnimation:self];
-            [[self postProgressIndicator] setHidden:YES];
-            
-            [[self sendButton] setHidden:NO];
-            
-            [[self aTextView] setString:@""];
-            
-            [[self characterCountLabel] setStringValue:@"140"];
-            
-            [self setTempImageData:nil];
-            
-            [[self popover] close];
-            
-            [self resetBOOLs];
+            [self finishUpAction];
         }
     }
     else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == NO) {
         if ([self jukaelaSuccess] && [self twitterSuccess]) {
-            [[self postProgressIndicator] stopAnimation:self];
-            [[self postProgressIndicator] setHidden:YES];
-            
-            [[self sendButton] setHidden:NO];
-            
-            [[self aTextView] setString:@""];
-            
-            [[self characterCountLabel] setStringValue:@"140"];
-            
-            [self setTempImageData:nil];
-            
-            [[self popover] close];
-            
-            [self resetBOOLs];
+            [self finishUpAction];
         }
     }
     else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == NO) {
         if ([self jukaelaSuccess]) {
-            [[self postProgressIndicator] stopAnimation:self];
-            [[self postProgressIndicator] setHidden:YES];
-            
-            [[self sendButton] setHidden:NO];
-            
-            [[self aTextView] setString:@""];
-            
-            [[self characterCountLabel] setStringValue:@"140"];
-            
-            [self setTempImageData:nil];
-            
-            [[self popover] close];
-            
-            [self resetBOOLs];
+            [self finishUpAction];
         }
     }
 }
 
--(void)resetBOOLs
+-(void)finishUpAction
 {
+    [[self postProgressIndicator] stopAnimation:self];
+    [[self postProgressIndicator] setHidden:YES];
+    
+    [[self sendButton] setHidden:NO];
+    
+    [[self aTextView] setString:@""];
+    
+    [[self characterCountLabel] setStringValue:@"140"];
+    
+    [self setUrlString:nil];
+    [self setTempImageData:nil];
+    
+    [[self popover] close];
+    
     [self setJukaelaSuccess:NO];
     [self setTwitterSuccess:NO];
     [self setFacebookSuccess:NO];
+    
+    [kAppDelegate setOnlyToJukaela:NO];
+    [kAppDelegate setOnlyToTwitter:NO];
+    [kAppDelegate setOnlyToFacebook:NO];
 }
 
 -(IBAction)deletePost:(id)sender
@@ -582,8 +597,6 @@
 
 -(IBAction)repostPost:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"start_animation" object:nil];
-    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/microposts/%@/repost.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"id"]]];
     
     NSData *tempData = [[[self theFeed][[[self aTableView] clickedRow]][@"content"] stringWithSlashEscapes] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -603,8 +616,6 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animation" object:nil];
-            
             [self setCurrentChangeType:INSERT_POST];
             
             [self getFeed:0];
@@ -693,7 +704,6 @@
                         
                         [alert runModal];
                     }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animating" object:nil];
                 }];
             }
             else {
@@ -737,7 +747,6 @@
                         
                         [alert runModal];
                     }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animating" object:nil];
                 }];
             }
         }
@@ -811,7 +820,6 @@
                         
                         [alert runModal];
                     }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animating" object:nil];
                 }];
             }
             else {
@@ -859,7 +867,6 @@
                         
                         [alert runModal];
                     }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"stop_animating" object:nil];
                 }];
             }
         }
@@ -964,9 +971,9 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (data) {            
+        if (data) {
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-
+            
             [[self aTableView] reloadData];
         }
         else {
@@ -987,7 +994,6 @@
         [openPanel beginWithCompletionHandler:^(NSInteger result){
             if (result == NSFileHandlingPanelOKButton) {
                 NSURL *tempURL = [[openPanel URLs] objectAtIndex:0];
-                
                 
                 [self setTempImageData:[NSData dataWithContentsOfURL:tempURL]];
             }

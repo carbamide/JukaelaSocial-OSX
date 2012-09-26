@@ -22,6 +22,9 @@
 		29908EBC16108CA80088792B /* MentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29908EBB16108CA80088792B /* MentionsViewController.m */; };
 		29908EBE16108CB90088792B /* MentionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29908EBD16108CB90088792B /* MentionsViewController.xib */; };
 		299BB4F2160E796100898A7C /* loggedIn.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 299BB4F1160E796100898A7C /* loggedIn.aiff */; };
+		29A0D75616132C0B0006A88C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A0D75516132C0B0006A88C /* Sparkle.framework */; };
+		29A0D75916132C520006A88C /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 29A0D75516132C0B0006A88C /* Sparkle.framework */; };
+		29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 29A0D75A16132D1E0006A88C /* dsa_pub.pem */; };
 		29D67AAC160F3C9800EE503D /* ANSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D67AA5160F3C9800EE503D /* ANSegmentedCell.m */; };
 		29D67AAD160F3C9800EE503D /* ANSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D67AA7160F3C9800EE503D /* ANSegmentedControl.m */; };
 		29D67AAE160F3C9800EE503D /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D67AA9160F3C9800EE503D /* NSBezierPath+MCAdditions.m */; };
@@ -57,6 +60,19 @@
 		29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		29A0D75816132C390006A88C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				29A0D75916132C520006A88C /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2959BF491611F099007D6148 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		2959BF4A1611F099007D6148 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
@@ -85,6 +101,8 @@
 		29908EBB16108CA80088792B /* MentionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionsViewController.m; sourceTree = "<group>"; };
 		29908EBD16108CB90088792B /* MentionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MentionsViewController.xib; sourceTree = "<group>"; };
 		299BB4F1160E796100898A7C /* loggedIn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = loggedIn.aiff; sourceTree = "<group>"; };
+		29A0D75516132C0B0006A88C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		29A0D75A16132D1E0006A88C /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		29D67AA4160F3C9800EE503D /* ANSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedCell.h; sourceTree = "<group>"; };
 		29D67AA5160F3C9800EE503D /* ANSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSegmentedCell.m; sourceTree = "<group>"; };
 		29D67AA6160F3C9800EE503D /* ANSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedControl.h; sourceTree = "<group>"; };
@@ -152,6 +170,7 @@
 				29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */,
 				29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */,
 				29F51A7D15F6A9F4009CE9C8 /* Cocoa.framework in Frameworks */,
+				29A0D75616132C0B0006A88C /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +253,7 @@
 		29F51A7B15F6A9F4009CE9C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29A0D75516132C0B0006A88C /* Sparkle.framework */,
 				29E9B42F160E970500CDACDA /* ImageCaptureCore.framework */,
 				29D715AE160E58FF00E71C00 /* Quartz.framework */,
 				29D715AC160E55A400E71C00 /* QuickLook.framework */,
@@ -271,6 +291,7 @@
 		29F51A8315F6A9F4009CE9C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29A0D75A16132D1E0006A88C /* dsa_pub.pem */,
 				29D67AB5160F3DCC00EE503D /* FilterNone.png */,
 				29D67AB6160F3DCC00EE503D /* FilterStarred.png */,
 				29D67AB7160F3DCC00EE503D /* FilterUnread.png */,
@@ -351,6 +372,7 @@
 				29F51A7415F6A9F4009CE9C8 /* Sources */,
 				29F51A7515F6A9F4009CE9C8 /* Frameworks */,
 				29F51A7615F6A9F4009CE9C8 /* Resources */,
+				29A0D75816132C390006A88C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -409,6 +431,7 @@
 				29D67AB9160F3DCC00EE503D /* FilterStarred.png in Resources */,
 				29D67ABA160F3DCC00EE503D /* FilterUnread.png in Resources */,
 				29908EBE16108CB90088792B /* MentionsViewController.xib in Resources */,
+				29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +555,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
@@ -545,6 +572,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;

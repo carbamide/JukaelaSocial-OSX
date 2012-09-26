@@ -30,6 +30,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+
     INAppStoreWindow *aWindow = (INAppStoreWindow *)[self window];
     
     [aWindow setTitleBarHeight:40];
@@ -57,6 +59,15 @@
     [NSApp showWindow:[_loginWindow window]];
     
     [[_loginWindow window] makeKeyAndOrderFront:self];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    NSArray *tempArray = [[NSUserNotificationCenter defaultUserNotificationCenter] scheduledNotifications];
+    
+    for (NSUserNotification *notification in tempArray) {
+        [[NSUserNotificationCenter defaultUserNotificationCenter] removeScheduledNotification:notification];
+    }
 }
 
 -(IBAction)postToJukaela:(id)sender

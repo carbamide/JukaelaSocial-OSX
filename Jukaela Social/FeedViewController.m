@@ -95,11 +95,15 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
-            NSInteger oldCount = [[self theFeed] count];
+            NSArray *oldArray = [self theFeed];
             
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
                         
-            NSInteger newCount = [[self theFeed] count];
+            
+            NSMutableArray *intermediate = [NSMutableArray arrayWithArray:oldArray];
+            [intermediate removeObjectsInArray:[self theFeed]];
+            
+            NSUInteger difference = [intermediate count];
             
             if ([self currentChangeType] == INSERT_POST) {
                 [[self aTableView] beginUpdates];
@@ -113,12 +117,18 @@
             }
             else {
                 [[self aTableView] reloadData];
-                
-                if (newCount > oldCount) {
+                                
+                if (difference > 0) {
                     NSUserNotification *notification = [[NSUserNotification alloc] init];
                     [notification setTitle:@"New Posts"];
-                    [notification setInformativeText:@"There are new posts in your feed"];
-                    [notification setDeliveryDate:[NSDate dateWithTimeInterval:20 sinceDate:[NSDate date]]];
+                    
+                    if (difference == 1) {
+                        [notification setInformativeText:@"There is 1 new post in your feed"];
+                    }
+                    else {
+                        [notification setInformativeText:[NSString stringWithFormat:@"There are %li new posts in your feed", difference]];
+                    }
+                    [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
                     [notification setSoundName:NSUserNotificationDefaultSoundName];
                     
                     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];

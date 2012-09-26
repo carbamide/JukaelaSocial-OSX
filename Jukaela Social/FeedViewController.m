@@ -33,6 +33,7 @@
 @property (nonatomic) BOOL twitterSuccess;
 @property (strong, nonatomic) NSData *tempImageData;
 @property (strong, nonatomic) NSString *urlString;
+@property (strong, nonatomic) NSTimer *refreshTimer;
 
 @end
 
@@ -71,6 +72,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
     
     NSLog(@"inside loadView of FeedViewController");
+    
+    [self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getFeed:) userInfo:nil repeats:YES]];
+    
+    [[self refreshTimer] fire];
 }
 
 -(void)getFeed:(NSInteger)row
@@ -90,7 +95,11 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
+            NSInteger oldCount = [[self theFeed] count];
+            
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
+                        
+            NSInteger newCount = [[self theFeed] count];
             
             if ([self currentChangeType] == INSERT_POST) {
                 [[self aTableView] beginUpdates];
@@ -104,6 +113,17 @@
             }
             else {
                 [[self aTableView] reloadData];
+                
+                if (newCount > oldCount) {
+                    NSUserNotification *notification = [[NSUserNotification alloc] init];
+                    [notification setTitle:@"New Posts"];
+                    [notification setInformativeText:@"There are new posts in your feed"];
+                    [notification setDeliveryDate:[NSDate dateWithTimeInterval:20 sinceDate:[NSDate date]]];
+                    [notification setSoundName:NSUserNotificationDefaultSoundName];
+                    
+                    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+                    [center scheduleNotification:notification];
+                }
             }
             
             [self setCurrentChangeType:-1];
@@ -122,6 +142,10 @@
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     id cellView = nil;
+    
+    if (![self theFeed]) {
+        return nil;
+    }
     
     if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
         cellView = (PicCellView *)[tableView makeViewWithIdentifier:@"PicCellView" owner:self];

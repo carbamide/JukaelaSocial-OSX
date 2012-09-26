@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-#import "ANSegmentedControl.h"
 #import "INAppStoreWindow.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
@@ -20,7 +19,7 @@
 @property (nonatomic) NSRect currentRowRect;
 
 @property (assign) IBOutlet NSWindow *window;
-@property (strong, nonatomic) IBOutlet ANSegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet NSView *titleView;
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
 @property (nonatomic) BOOL onlyToFacebook;
@@ -32,7 +31,7 @@
 -(IBAction)showPreferences:(id)sender;
 -(IBAction)refreshFeed:(id)sender;
 
--(IBAction)changeViews:(ANSegmentedControl *)sender;
+-(IBAction)changeViews:(NSSegmentedControl *)sender;
 -(IBAction)showWindow:(id)sender;
 
 -(IBAction)postOnlyToFacebook:(id)sender;

@@ -11,7 +11,6 @@
 #import "PullToRefreshScrollView.h"
 #import "PullToRefreshDelegate.h"
 #import "TMImgurUploader.h"
-#import "ANSegmentedControl.h"
 
 typedef enum {
     INSERT_POST = 0,
@@ -26,7 +25,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSTableView *aTableView;
 @property (strong, nonatomic) IBOutlet NSTextView *aTextView;
 @property (strong, nonatomic) IBOutlet NSButton *sendButton;
-@property (assign) IBOutlet NSPopover *popover;
+@property (strong, nonatomic) IBOutlet NSPopover *popover;
 @property (strong, nonatomic) IBOutlet NSTextField *characterCountLabel;
 @property (nonatomic) ChangeType currentChangeType;
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;

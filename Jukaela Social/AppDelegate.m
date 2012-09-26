@@ -154,7 +154,7 @@
     return nil;
 }
 
--(IBAction)changeViews:(ANSegmentedControl *)sender
+-(IBAction)changeViews:(NSSegmentedControl *)sender
 {
     if ([sender selectedSegment] == 0) {
         if (![self feedViewController]) {

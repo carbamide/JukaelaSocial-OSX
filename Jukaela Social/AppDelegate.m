@@ -12,6 +12,7 @@
 #import "PreferencesWindow.h"
 #import "TMImgurUploader.h"
 #import "MentionsViewController.h"
+#import "UsersViewController.h"
 
 #define kFontSizeToolbarItemID      @"FontSize"
 #define kFontStyleToolbarItemID     @"FontStyle"
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) PreferencesWindow *preferencesWindow;
 @property (strong, nonatomic) NSViewController *currentViewController;
 @property (strong, nonatomic) MentionsViewController *mentionsViewController;
+@property (strong, nonatomic) UsersViewController *usersViewController;
 
 @end
 @implementation AppDelegate
@@ -185,7 +187,18 @@
         NSLog(@"MentionsViewController!");
     }
     else if ([sender selectedSegment] == 2) {
-        NSLog(@"Three!");
+        if (![self usersViewController]) {
+            [self setUsersViewController:[[UsersViewController alloc] initWithNibName:@"UsersViewController" bundle:nil]];
+        }
+        
+        if (![NSStringFromClass([[self currentViewController] class]) isEqualToString:NSStringFromClass([[self usersViewController] class])]) {
+            [[[self currentViewController] view] removeFromSuperview];
+            
+            [[[self window] contentView] addSubview:[[self usersViewController] view]];
+            
+            [self setCurrentViewController:[self usersViewController]];
+        }
+        NSLog(@"UsersViewController!");
     }
 }
 

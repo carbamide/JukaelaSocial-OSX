@@ -36,6 +36,9 @@
 		29D715AF160E58FF00E71C00 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D715AE160E58FF00E71C00 /* Quartz.framework */; };
 		29D9F59A160D09DE00E80710 /* pull-to-refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */; };
 		29D9F59B160D09DE00E80710 /* release-to-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D9F599160D09DE00E80710 /* release-to-refresh.png */; };
+		29E9872D1614BFAF00DA0732 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E9872C1614BFAF00DA0732 /* UsersViewController.m */; };
+		29E987301614BFCF00DA0732 /* UsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9872F1614BFCF00DA0732 /* UsersViewController.xib */; };
+		29E987331614C03900DA0732 /* UsersCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E987321614C03900DA0732 /* UsersCellView.m */; };
 		29EBBB2B15F7C126002221FF /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB2A15F7C126002221FF /* LoginWindow.xib */; };
 		29EBBB3315F7CFEB002221FF /* Jukaela.icns in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3215F7CFEB002221FF /* Jukaela.icns */; };
 		29EBBB3615F7D4EB002221FF /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */; };
@@ -115,6 +118,11 @@
 		29D715AE160E58FF00E71C00 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		29D9F598160D09DE00E80710 /* pull-to-refresh-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-to-refresh-arrow.png"; sourceTree = "<group>"; };
 		29D9F599160D09DE00E80710 /* release-to-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release-to-refresh.png"; sourceTree = "<group>"; };
+		29E9872B1614BFAF00DA0732 /* UsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
+		29E9872C1614BFAF00DA0732 /* UsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
+		29E9872F1614BFCF00DA0732 /* UsersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersViewController.xib; sourceTree = "<group>"; };
+		29E987311614C03900DA0732 /* UsersCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersCellView.h; sourceTree = "<group>"; };
+		29E987321614C03900DA0732 /* UsersCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersCellView.m; sourceTree = "<group>"; };
 		29E9B42F160E970500CDACDA /* ImageCaptureCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageCaptureCore.framework; path = System/Library/Frameworks/ImageCaptureCore.framework; sourceTree = SDKROOT; };
 		29EBBB2A15F7C126002221FF /* LoginWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginWindow.xib; sourceTree = "<group>"; };
 		29EBBB3215F7CFEB002221FF /* Jukaela.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Jukaela.icns; sourceTree = "<group>"; };
@@ -203,6 +211,8 @@
 				2970DCCB15F78C8F0038C54B /* ItemCellView.m */,
 				29D715A3160E499C00E71C00 /* PicCellView.h */,
 				29D715A4160E499C00E71C00 /* PicCellView.m */,
+				29E987311614C03900DA0732 /* UsersCellView.h */,
+				29E987321614C03900DA0732 /* UsersCellView.m */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -354,6 +364,7 @@
 				29EBBB2A15F7C126002221FF /* LoginWindow.xib */,
 				29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */,
 				29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */,
+				29E9872F1614BFCF00DA0732 /* UsersViewController.xib */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -387,6 +398,8 @@
 				29F51A9A15F6AA0B009CE9C8 /* FeedViewController.m */,
 				29908EBA16108CA80088792B /* MentionsViewController.h */,
 				29908EBB16108CA80088792B /* MentionsViewController.m */,
+				29E9872B1614BFAF00DA0732 /* UsersViewController.h */,
+				29E9872C1614BFAF00DA0732 /* UsersViewController.m */,
 				2989310A16137DB10022DE7F /* JImageView.h */,
 				2989310B16137DB10022DE7F /* JImageView.m */,
 				2917CF9A161389D4003ED634 /* JButton.h */,
@@ -478,6 +491,7 @@
 				29D67ABA160F3DCC00EE503D /* FilterUnread.png in Resources */,
 				29908EBE16108CB90088792B /* MentionsViewController.xib in Resources */,
 				29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */,
+				29E987301614BFCF00DA0732 /* UsersViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +525,8 @@
 				2959BF4B1611F099007D6148 /* Helpers.m in Sources */,
 				2989310C16137DB10022DE7F /* JImageView.m in Sources */,
 				2917CF9C161389D4003ED634 /* JButton.m in Sources */,
+				29E9872D1614BFAF00DA0732 /* UsersViewController.m in Sources */,
+				29E987331614C03900DA0732 /* UsersCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

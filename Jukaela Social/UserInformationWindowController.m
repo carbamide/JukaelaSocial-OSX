@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) NSArray *imFollowing;
 @property (strong, nonatomic) NSArray *relationships;
+@property (strong, nonatomic) NSNumber *unfollowID;
 @end
 
 @implementation UserInformationWindowController
@@ -87,6 +88,13 @@
 -(void)setupArraysDispatch
 {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
+        if ([[kAppDelegate userID] isEqualToString:[NSString stringWithFormat:@"%@", [self userDict][@"id"]]]) {
+            [[self followOrUnfollow] setHidden:YES];
+        }
+        else {
+            [[self followOrUnfollow] setHidden:NO];
+        }
+        
         [self getFollowers];
         [self getFollowing];
         [self getPosts];
@@ -179,6 +187,8 @@
         if (data) {
             [self setImFollowing:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil][@"user"]];
             [self setRelationships:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil][@"relationships"]];
+            
+            [self setupButton];
         }
         else {
             NSLog(@"Error retrieving who I'm following count");
@@ -208,4 +218,112 @@
     }];
 }
 
+-(void)setupButton
+{
+    BOOL following = NO;
+            
+    NSString *followOrUnfollowString = @"Now following ";
+    
+    for (NSDictionary *dict in [self imFollowing]) {
+        if ([dict[@"id"] isEqualToNumber:[self userDict][@"id"]]) {
+            followOrUnfollowString = @"Unfollowed ";
+            following = YES;
+        }
+    }
+    
+    for (NSDictionary *dict in [self relationships]) {
+        if ([dict[@"followed_id"] isEqualToNumber:[self userDict][@"id"]]) {
+            _unfollowID = dict[@"id"];
+        }
+    }
+    if (following == YES) {
+        NSLog(@"You're already following!");
+        
+        [[self followOrUnfollow] setTitle:@"Unfollow"];
+    }
+    else {
+        NSLog(@"You're not following yet!");
+        
+        [[self followOrUnfollow] setTitle:@"Follow"];
+    }
+}
+
+-(IBAction)followOrUnfollow:(id)sender
+{
+    NSButton *tempButton = sender;
+    
+    if ([[tempButton title] isEqualToString:@"Checking follow status..."]) {
+        return;
+    }
+    else if ([[tempButton title] isEqualToString:@"Unfollow"]) {
+        [self setImFollowing:nil];
+        [self setRelationships:nil];
+                
+        [self performSelector:@selector(followingAndRelationshipsDispatch) withObject:nil afterDelay:0];
+                
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/relationships/%@.json", kSocialURL, _unfollowID]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        
+        [request setHTTPMethod:@"DELETE"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
+        
+        NSString *requestString = [NSString stringWithFormat:@"{\"commit\" : \"Unfollow\", \"id\" : \"%@\"}", [self userDict][@"id"]];
+        
+        NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
+        
+        [request setHTTPBody:requestData];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Boo!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"Unfollowed %@", [[self nameLabel] stringValue]], nil];
+            
+            [alert runModal];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh_your_tables" object:nil];
+        }];
+    }
+    else if ([[tempButton title] isEqualToString:@"Follow"]) {
+        [self setImFollowing:nil];
+        [self setRelationships:nil];
+                
+        [self performSelector:@selector(followingAndRelationshipsDispatch) withObject:nil afterDelay:0];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/relationships.json", kSocialURL]];
+        
+        NSString *requestString = [NSString stringWithFormat:@"{\"relationship\" : {\"followed_id\" : \"%@\"}, \"commit\" : \"Follow\"}", [self userDict][@"id"]];
+        
+        NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:requestData];
+        [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            if (data) {                
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Yay!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"Followed %@", [[self nameLabel] stringValue]], nil];
+                
+                [alert runModal];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh_your_tables" object:nil];
+            }
+            else {
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There has been an error! Oh no!", nil];
+                
+                [alert runModal];
+            }
+        }];
+
+    }
+}
+
+-(void)followingAndRelationshipsDispatch
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [self getimFollowing];
+    });
+}
 @end

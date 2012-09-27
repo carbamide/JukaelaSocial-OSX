@@ -16,5 +16,8 @@
 @property (strong, nonatomic) IBOutlet NSImageView *userImageView;
 @property (strong, nonatomic) NSDictionary *userDict;
 @property (strong, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet NSButton *followOrUnfollow;
+
+-(IBAction)followOrUnfollow:(id)sender;
 
 @end

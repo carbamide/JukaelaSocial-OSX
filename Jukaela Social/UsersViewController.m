@@ -39,6 +39,8 @@
 {
     [super loadView];
     
+    NSLog(@"inside loadView of UsersViewController");
+
     CGRect rect = [[[kAppDelegate window] contentView] frame];
     
     [[self view] setFrame:rect];
@@ -59,9 +61,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {            
             [self setUsersArray:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-            
-            NSLog(@"%@", [self usersArray]);
-            
+                        
             [[self aTableView] reloadData];
         }
         else {
@@ -80,7 +80,9 @@
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     UsersCellView *cellView = (UsersCellView *)[tableView makeViewWithIdentifier:@"UsersCellView" owner:self];
-
+    
+    NSLog(@"%@", [self usersArray][row][@"name"]);
+    
     [[cellView textField] setStringValue:[self usersArray][row][@"name"]];
     
     if ([self usersArray][row][@"username"] && [self usersArray][row][@"username"] != [NSNull null]) {
@@ -109,6 +111,11 @@
         });
     }
     
+    if (!cellView) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There has been an error loading the list of users.", nil];
+        
+        [alert runModal];
+    }    
     return cellView;
 }
 

@@ -58,4 +58,10 @@ static BOOL kLargeSizeRequested = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"show_image" object:nil userInfo:@{@"indexPath" : [NSNumber numberWithInt:indexPath]}];
 }
 
+-(void)drawRect:(NSRect)dirtyRect
+{
+    NSGradient *aGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:0.85 green:0.85 blue:0.85 alpha:1.0]];
+    [aGradient drawInRect:[self bounds] angle:270];
+}
+
 @end

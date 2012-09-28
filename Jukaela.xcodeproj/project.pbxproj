@@ -59,6 +59,7 @@
 		29F51ABC15F7893A009CE9C8 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */; };
 		29F5FE9715F8E8350044BA7B /* UserInformationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */; };
 		29F5FE9A15F8E8410044BA7B /* UserInformationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */; };
+		29FDDE021614DCBA0013BEC6 /* underPageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 29FDDE011614DCBA0013BEC6 /* underPageBackground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -159,6 +160,7 @@
 		29F5FE9415F8E8350044BA7B /* UserInformationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformationWindowController.h; sourceTree = "<group>"; };
 		29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformationWindowController.m; sourceTree = "<group>"; };
 		29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInformationWindow.xib; sourceTree = "<group>"; };
+		29FDDE011614DCBA0013BEC6 /* underPageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underPageBackground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 		29A0D1EA1613C1830082C9F8 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				29FDDE011614DCBA0013BEC6 /* underPageBackground.png */,
 				29D67AB5160F3DCC00EE503D /* FilterNone.png */,
 				29D67AB6160F3DCC00EE503D /* FilterStarred.png */,
 				29D67AB7160F3DCC00EE503D /* FilterUnread.png */,
@@ -492,6 +495,7 @@
 				29908EBE16108CB90088792B /* MentionsViewController.xib in Resources */,
 				29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */,
 				29E987301614BFCF00DA0732 /* UsersViewController.xib in Resources */,
+				29FDDE021614DCBA0013BEC6 /* underPageBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

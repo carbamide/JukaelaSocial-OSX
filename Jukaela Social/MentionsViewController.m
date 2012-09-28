@@ -50,7 +50,7 @@
     [self setDateFormatter:[[NSDateFormatter alloc] init]];
     [self setDateTransformer:[[SORelativeDateTransformer alloc] init]];
 
-    [self getMentionsFeed];    
+    [self getMentionsFeed];
 }
 
 -(void)getMentionsFeed
@@ -246,4 +246,38 @@
     [self getMentionsFeed];
 }
 
+-(IBAction)showUser:(id)sender
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self mentions][[[self aTableView] clickedRow]][@"sender_user_id"]]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {
+            NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
+            
+            if (![self userInfoWindowController]) {
+                [self setUserInfoWindowController:[[UserInformationWindowController alloc] initWithWindowNibName:@"UserInformationWindow"]];
+            }
+            
+            [[self userInfoWindowController] setUserDict:tempDict];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_labels" object:nil];
+            
+            [[self userInfoWindowController] showWindow:self];
+        }
+        else {
+            NSLog(@"There was an error retrieving the user information");
+        }
+    }];
+}
+
+-(IBAction)deselectRow:(id)sender
+{
+    [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
+}
 @end

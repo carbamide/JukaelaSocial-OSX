@@ -39,6 +39,7 @@ typedef enum {
 -(IBAction)closePopover:(id)sender;
 -(IBAction)showUser:(id)sender;
 -(IBAction)openImage:(id)sender;
+-(IBAction)deselectRow:(id)sender;
 
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView;
 -(void)getFeed:(NSInteger)row;

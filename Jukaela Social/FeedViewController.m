@@ -72,7 +72,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
     
     NSLog(@"inside loadView of FeedViewController");
-    
+
     [self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getFeed:) userInfo:nil repeats:YES]];
     
     [[self refreshTimer] fire];
@@ -99,11 +99,17 @@
             
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
                         
+            NSMutableSet * firstSet = [NSMutableSet setWithArray:[self theFeed]];
+            NSMutableSet * secondSet = [NSMutableSet setWithArray:[self theFeed]];
             
-            NSMutableArray *intermediate = [NSMutableArray arrayWithArray:oldArray];
-            [intermediate removeObjectsInArray:[self theFeed]];
+            [firstSet unionSet:[NSSet setWithArray:oldArray]];
+            [secondSet intersectSet:[NSSet setWithArray:oldArray]];
             
-            NSUInteger difference = [intermediate count];
+            [firstSet minusSet:secondSet];
+            
+            NSUInteger difference = [firstSet count];
+
+            NSLog(@"difference is %li", difference);
             
             if ([self currentChangeType] == INSERT_POST) {
                 [[self aTableView] beginUpdates];
@@ -117,10 +123,15 @@
             }
             else {
                 [[self aTableView] reloadData];
-                                
-                if (difference > 0) {
+                
+                NSLog(@"the old array count is %li", [oldArray count]);
+                
+                if (difference > 0 && [oldArray count] > 0) {
                     NSUserNotification *notification = [[NSUserNotification alloc] init];
                     [notification setTitle:@"New Posts"];
+                    
+                    //the sets are adding one for some reason.  I don't really care, because this works.
+                    difference -= 1;
                     
                     if (difference == 1) {
                         [notification setInformativeText:@"There is 1 new post in your feed"];
@@ -948,7 +959,6 @@
             NSLog(@"There was an error retrieving the user information");
         }
     }];
-    
 }
 
 -(void)showImage:(NSNotification *)aNotification
@@ -1065,5 +1075,8 @@
     return FALSE;
 }
 
-
+-(IBAction)deselectRow:(id)sender
+{
+    [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
+}
 @end

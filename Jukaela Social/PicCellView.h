@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet NSTextField *dateTextField;
 @property (strong, nonatomic) IBOutlet NSTextField *repostedByTextField;
 @property (strong, nonatomic) IBOutlet NSButton *externalImage;
+@property (strong, nonatomic) IBOutlet NSButton *imageButton;
 
 -(IBAction)showImage:(id)sender;
 

@@ -221,12 +221,9 @@
 -(void)setupButton
 {
     BOOL following = NO;
-            
-    NSString *followOrUnfollowString = @"Now following ";
-    
+                
     for (NSDictionary *dict in [self imFollowing]) {
         if ([dict[@"id"] isEqualToNumber:[self userDict][@"id"]]) {
-            followOrUnfollowString = @"Unfollowed ";
             following = YES;
         }
     }
@@ -236,6 +233,7 @@
             _unfollowID = dict[@"id"];
         }
     }
+    
     if (following == YES) {
         NSLog(@"You're already following!");
         

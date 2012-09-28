@@ -40,7 +40,7 @@
     [super loadView];
     
     NSLog(@"inside loadView of UsersViewController");
-
+    
     CGRect rect = [[[kAppDelegate window] contentView] frame];
     
     [[self view] setFrame:rect];
@@ -59,9 +59,9 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (data) {            
+        if (data) {
             [self setUsersArray:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-                        
+            
             [[self aTableView] reloadData];
         }
         else {
@@ -95,7 +95,7 @@
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self usersArray][row][@"email"]]]]];
     
     if (image) {
-        [[cellView imageView] setImage:image];
+        [[cellView imageButton] setImage:image];
     }
     else {
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
@@ -104,7 +104,7 @@
             NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self usersArray][row][@"email"]]]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[cellView imageView] setImage:image];
+                [[cellView imageButton] setImage:image];
             });
             
             [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self usersArray][row][@"email"]]];
@@ -115,7 +115,7 @@
         NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There has been an error loading the list of users.", nil];
         
         [alert runModal];
-    }    
+    }
     return cellView;
 }
 
@@ -128,7 +128,17 @@
 {
     [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self usersArray][[[self aTableView] clickedRow]][@"id"]]];
+    NSURL *url = nil;
+    
+    if ([[sender class] isSubclassOfClass:[NSButton class]]) {
+        NSInteger indexPath = [(NSTableView *)[[[sender superview] superview] superview] rowForView:[sender superview]];
+        
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self usersArray][indexPath][@"id"]]];
+    }
+    else {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self usersArray][[[self aTableView] clickedRow]][@"id"]]];
+    }
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     

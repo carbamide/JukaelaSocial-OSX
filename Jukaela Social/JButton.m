@@ -58,10 +58,10 @@
     
     [super drawRect:dirtyRect];
     
-    NSColor *strokeColor = [NSColor colorFromHexRGB:@"000000"];
+    NSColor *strokeColor = [NSColor darkGrayColor];
     
     [strokeColor set];
-    [NSBezierPath setDefaultLineWidth:2];
+    [NSBezierPath setDefaultLineWidth:1];
     [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect(dirtyRect, 2, 2) xRadius:8 yRadius:8] stroke];
 }
 

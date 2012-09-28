@@ -10,6 +10,7 @@
 #import <Quartz/Quartz.h>
 #import "INAppStoreWindow.h"
 #import "FeedViewController.h"
+#import "UserInformationWindowController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet NSView *titleView;
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
 @property (strong, nonatomic) FeedViewController *feedViewController;
+@property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
 
 @property (nonatomic) BOOL onlyToFacebook;
 @property (nonatomic) BOOL onlyToTwitter;

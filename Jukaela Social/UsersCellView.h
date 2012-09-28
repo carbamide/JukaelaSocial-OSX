@@ -11,5 +11,6 @@
 -(void)layoutViewsForLargeSize:(BOOL)largeSize animated:(BOOL)animated;
 
 @property (strong, nonatomic) IBOutlet NSTextField *detailTextField;
+@property (strong, nonatomic) IBOutlet NSButton *imageButton;
 
 @end

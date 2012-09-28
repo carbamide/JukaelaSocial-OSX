@@ -70,7 +70,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
-    
+
     NSLog(@"inside loadView of FeedViewController");
 
     [self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getFeed:) userInfo:nil repeats:YES]];
@@ -108,8 +108,6 @@
             [firstSet minusSet:secondSet];
             
             NSUInteger difference = [firstSet count];
-
-            NSLog(@"difference is %li", difference);
             
             if ([self currentChangeType] == INSERT_POST) {
                 [[self aTableView] beginUpdates];
@@ -123,9 +121,7 @@
             }
             else {
                 [[self aTableView] reloadData];
-                
-                NSLog(@"the old array count is %li", [oldArray count]);
-                
+                                
                 if (difference > 0 && [oldArray count] > 0) {
                     NSUserNotification *notification = [[NSUserNotification alloc] init];
                     [notification setTitle:@"New Posts"];
@@ -139,6 +135,7 @@
                     else {
                         [notification setInformativeText:[NSString stringWithFormat:@"There are %li new posts in your feed", difference]];
                     }
+                    
                     [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
                     [notification setSoundName:NSUserNotificationDefaultSoundName];
                     
@@ -213,7 +210,7 @@
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
         
         if (image) {
-            [[cellView imageView] setImage:image];
+            [[cellView imageButton] setImage:image];
         }
         else {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
@@ -222,7 +219,7 @@
                 NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self theFeed][row][@"email"]]]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageView] setImage:image];
+                    [[cellView imageButton] setImage:image];
                 });
                 
                 [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
@@ -302,7 +299,7 @@
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
         
         if (image) {
-            [[cellView imageView] setImage:image];
+            [[cellView imageButton] setImage:image];
         }
         else {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
@@ -311,7 +308,7 @@
                 NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self theFeed][row][@"email"]]]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageView] setImage:image];
+                    [[cellView imageButton] setImage:image];
                 });
                 
                 [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
@@ -928,13 +925,25 @@
 {
     NSURL *url = nil;
     
-    if ([self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] && [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] != [NSNull null]) {
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"]]];
+    if ([[sender class] isSubclassOfClass:[NSButton class]]) {
+        NSInteger indexPath = [(NSTableView *)[[[sender superview] superview] superview] rowForView:[sender superview]];
+        
+        if ([self theFeed][indexPath][@"original_poster_id"] && [self theFeed][indexPath][@"original_poster_id"] != [NSNull null]) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][indexPath][@"original_poster_id"]]];
+        }
+        else {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][indexPath][@"user_id"]]];
+        }
     }
     else {
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"user_id"]]];
+        if ([self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] && [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] != [NSNull null]) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"]]];
+        }
+        else {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"user_id"]]];
+        }
     }
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     [request setHTTPMethod:@"GET"];
@@ -1079,4 +1088,5 @@
 {
     [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
 }
+
 @end

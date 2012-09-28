@@ -11,14 +11,12 @@
 
 typedef void (^uploadBlock)(NSDictionary *result, NSError * error);
 
-
 @interface TMImgurUploader : NSObject
 
-@property(copy) NSString		*APIKey;
+@property (copy) NSString *APIKey;
 
-+(TMImgurUploader*)sharedInstance;
++(TMImgurUploader *)sharedInstance;
 
-
--(TMHTTPRequest*)uploadImage:(NSImage*)image finishedBlock:(uploadBlock)completionBlock;
+-(TMHTTPRequest *)uploadImage:(NSImage *)image finishedBlock:(uploadBlock)completionBlock;
 
 @end

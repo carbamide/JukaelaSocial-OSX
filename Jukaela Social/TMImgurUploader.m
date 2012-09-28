@@ -11,28 +11,31 @@
 
 @implementation TMImgurUploader
 
-+(TMImgurUploader*)sharedInstance
++(TMImgurUploader *)sharedInstance
 {
 	static dispatch_once_t pred = 0;
+    
     __strong static id _sharedObject = nil;
+    
     dispatch_once(&pred, ^{
-        _sharedObject = [[self alloc] init]; // or some other init method
+        _sharedObject = [[self alloc] init];
     });
+    
     return _sharedObject;
 }
 
--(TMHTTPRequest*)uploadImage:(NSImage*)image finishedBlock:(uploadBlock)completionBlock
+-(TMHTTPRequest *)uploadImage:(NSImage *)image finishedBlock:(uploadBlock)completionBlock
 {
     NSBitmapImageRep *imgRep = [[image representations] objectAtIndex: 0];
     
     NSData *encodedImage = [imgRep representationUsingType: NSJPEGFileType properties: nil];
     
-	NSMutableDictionary	* params = [NSMutableDictionary dictionaryWithCapacity:3];
+	NSMutableDictionary	*params = [NSMutableDictionary dictionaryWithCapacity:3];
 
 	[params setObject:self.APIKey
 			   forKey:@"key"];
 
-	TMHTTPClient * imgurclient = [[TMHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.imgur.com/2/"]];
+	TMHTTPClient *imgurclient = [[TMHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.imgur.com/2/"]];
 
 	NSMutableURLRequest *request = [imgurclient multipartFormRequestWithMethod:@"POST"
 																		  path:@"upload.json"

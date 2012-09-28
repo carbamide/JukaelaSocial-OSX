@@ -133,7 +133,7 @@
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
         
         if (image) {
-            [[cellView imageView] setImage:image];
+            [[cellView imageButton] setImage:image];
         }
         else {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
@@ -142,7 +142,7 @@
                 NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self mentions][row][@"sender_email"]]]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageView] setImage:image];
+                    [[cellView imageButton] setImage:image];
                 });
                 
                 [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
@@ -222,7 +222,7 @@
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]]]];
         
         if (image) {
-            [[cellView imageView] setImage:image];
+            [[cellView imageButton] setImage:image];
         }
         else {
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
@@ -231,7 +231,7 @@
                 NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self mentions][row][@"sender_email"]]]];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageView] setImage:image];
+                    [[cellView imageButton] setImage:image];
                 });
                 
                 [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self mentions][row][@"sender_email"]]];
@@ -248,8 +248,17 @@
 
 -(IBAction)showUser:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self mentions][[[self aTableView] clickedRow]][@"sender_user_id"]]];
+    NSURL *url = nil;
     
+    if ([[sender class] isSubclassOfClass:[NSButton class]]) {
+        NSInteger indexPath = [(NSTableView *)[[[sender superview] superview] superview] rowForView:[sender superview]];
+        
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self mentions][indexPath][@"sender_user_id"]]];
+    }
+    else {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self mentions][[[self aTableView] clickedRow]][@"sender_user_id"]]];
+    }
+        
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     [request setHTTPMethod:@"GET"];

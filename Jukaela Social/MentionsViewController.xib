@@ -231,40 +231,40 @@
 				<reference key="NSNextKeyView" ref="842371961"/>
 				<string key="NSClassName">NSView</string>
 			</object>
-			<object class="NSMenu" id="478534894">
+			<object class="NSMenu" id="22795350">
 				<string key="NSTitle"/>
 				<array class="NSMutableArray" key="NSMenuItems">
-					<object class="NSMenuItem" id="398015529">
-						<reference key="NSMenu" ref="478534894"/>
+					<object class="NSMenuItem" id="1070701731">
+						<reference key="NSMenu" ref="22795350"/>
 						<string key="NSTitle">Reply</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSOnImage" id="545665498">
+						<object class="NSCustomResource" key="NSOnImage" id="949607074">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuCheckmark</string>
 						</object>
-						<object class="NSCustomResource" key="NSMixedImage" id="400121606">
+						<object class="NSCustomResource" key="NSMixedImage" id="483076433">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
 					</object>
-					<object class="NSMenuItem" id="669643058">
-						<reference key="NSMenu" ref="478534894"/>
+					<object class="NSMenuItem" id="851887090">
+						<reference key="NSMenu" ref="22795350"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsSeparator">YES</bool>
 						<string key="NSTitle"/>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="545665498"/>
-						<reference key="NSMixedImage" ref="400121606"/>
+						<reference key="NSOnImage" ref="949607074"/>
+						<reference key="NSMixedImage" ref="483076433"/>
 					</object>
-					<object class="NSMenuItem" id="572869021">
-						<reference key="NSMenu" ref="478534894"/>
+					<object class="NSMenuItem" id="444011204">
+						<reference key="NSMenu" ref="22795350"/>
 						<string key="NSTitle">Show User...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="545665498"/>
-						<reference key="NSMixedImage" ref="400121606"/>
+						<reference key="NSOnImage" ref="949607074"/>
+						<reference key="NSMixedImage" ref="483076433"/>
 					</object>
 				</array>
 			</object>
@@ -299,7 +299,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">showUser:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="572869021"/>
+						<reference key="destination" ref="444011204"/>
 					</object>
 					<int key="connectionID">522</int>
 				</object>
@@ -310,6 +310,14 @@
 						<reference key="destination" ref="159668213"/>
 					</object>
 					<int key="connectionID">523</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">replyToPost:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1070701731"/>
+					</object>
+					<int key="connectionID">524</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -331,7 +339,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">menu</string>
 						<reference key="source" ref="159668213"/>
-						<reference key="destination" ref="478534894"/>
+						<reference key="destination" ref="22795350"/>
 					</object>
 					<int key="connectionID">521</int>
 				</object>
@@ -2289,28 +2297,28 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">514</int>
-						<reference key="object" ref="478534894"/>
+						<reference key="object" ref="22795350"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="572869021"/>
-							<reference ref="669643058"/>
-							<reference ref="398015529"/>
+							<reference ref="444011204"/>
+							<reference ref="851887090"/>
+							<reference ref="1070701731"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">515</int>
-						<reference key="object" ref="572869021"/>
-						<reference key="parent" ref="478534894"/>
+						<reference key="object" ref="444011204"/>
+						<reference key="parent" ref="22795350"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">516</int>
-						<reference key="object" ref="669643058"/>
-						<reference key="parent" ref="478534894"/>
+						<reference key="object" ref="851887090"/>
+						<reference key="parent" ref="22795350"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">520</int>
-						<reference key="object" ref="398015529"/>
-						<reference key="parent" ref="478534894"/>
+						<reference key="object" ref="1070701731"/>
+						<reference key="parent" ref="22795350"/>
 					</object>
 				</array>
 			</object>
@@ -2527,7 +2535,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">523</int>
+			<int key="maxID">524</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2584,11 +2592,16 @@
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="deselectRow:">id</string>
+						<string key="replyToPost:">id</string>
 						<string key="showUser:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="deselectRow:">
 							<string key="name">deselectRow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="replyToPost:">
+							<string key="name">replyToPost:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showUser:">

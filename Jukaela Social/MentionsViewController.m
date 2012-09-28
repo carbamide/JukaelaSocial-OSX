@@ -280,4 +280,14 @@
 {
     [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
 }
+
+-(IBAction)replyToPost:(id)sender
+{
+    ItemCellView *tempCell = [[self aTableView] viewAtColumn:0 row:[[self aTableView] clickedRow] makeIfNecessary:NO];
+    
+    [[[kAppDelegate feedViewController] aTextView] setString:[@"@" stringByAppendingString:[[[tempCell usernameTextField] stringValue] stringByAppendingString:@" "]]];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"post_to_jukaela" object:nil];
+}
+
 @end

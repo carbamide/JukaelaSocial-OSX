@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
 #import "INAppStoreWindow.h"
+#import "FeedViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet NSView *titleView;
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
+@property (strong, nonatomic) FeedViewController *feedViewController;
+
 @property (nonatomic) BOOL onlyToFacebook;
 @property (nonatomic) BOOL onlyToTwitter;
 @property (nonatomic) BOOL onlyToJukaela;

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#include "FeedViewController.h"
 #import "LoginWindow.h"
 #import "PreferencesWindow.h"
 #import "TMImgurUploader.h"
@@ -19,7 +18,6 @@
 #define kBlueLetterToolbarItemID    @"BlueLetter"
 
 @interface AppDelegate()
-@property (nonatomic,strong) IBOutlet FeedViewController *feedViewController;
 @property (strong, nonatomic) NSArray *tempFeed;
 @property (strong, nonatomic) LoginWindow *loginWindow;
 @property (strong, nonatomic) PreferencesWindow *preferencesWindow;

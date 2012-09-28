@@ -20,5 +20,6 @@
 
 -(IBAction)showUser:(id)sender;
 -(IBAction)deselectRow:(id)sender;
+-(IBAction)replyToPost:(id)sender;
 
 @end

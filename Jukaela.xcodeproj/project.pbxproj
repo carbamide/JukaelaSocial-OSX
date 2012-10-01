@@ -109,6 +109,7 @@
 		299BB4F1160E796100898A7C /* loggedIn.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = loggedIn.aiff; sourceTree = "<group>"; };
 		29A0D75516132C0B0006A88C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		29A0D75A16132D1E0006A88C /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		29B34B5016192F1D00EF73A9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		29D67AB5160F3DCC00EE503D /* FilterNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterNone.png; sourceTree = "<group>"; };
 		29D67AB6160F3DCC00EE503D /* FilterStarred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterStarred.png; sourceTree = "<group>"; };
 		29D67AB7160F3DCC00EE503D /* FilterUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterUnread.png; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 		29F51A6D15F6A9F4009CE9C8 = {
 			isa = PBXGroup;
 			children = (
+				29B34B5016192F1D00EF73A9 /* libicucore.dylib */,
 				29EBBB3215F7CFEB002221FF /* Jukaela.icns */,
 				29F51A8215F6A9F4009CE9C8 /* Jukaela Social */,
 				29F51A7B15F6A9F4009CE9C8 /* Frameworks */,
@@ -623,7 +625,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				INFOPLIST_FILE = "Jukaela Social/Jukaela-Info.plist";
@@ -640,7 +642,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Jukaela Social/Jukaela-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				INFOPLIST_FILE = "Jukaela Social/Jukaela-Info.plist";

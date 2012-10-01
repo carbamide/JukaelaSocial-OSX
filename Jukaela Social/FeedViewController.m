@@ -70,9 +70,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
-
+    
     NSLog(@"inside loadView of FeedViewController");
-
+    
     [self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getFeed:) userInfo:nil repeats:YES]];
     
     [[self refreshTimer] fire];
@@ -98,7 +98,7 @@
             NSArray *oldArray = [self theFeed];
             
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-                        
+            
             NSMutableSet * firstSet = [NSMutableSet setWithArray:[self theFeed]];
             NSMutableSet * secondSet = [NSMutableSet setWithArray:[self theFeed]];
             
@@ -107,7 +107,7 @@
             
             [firstSet minusSet:secondSet];
             
-            NSUInteger difference = [firstSet count];
+            NSInteger difference = [firstSet count];
             
             if ([self currentChangeType] == INSERT_POST) {
                 [[self aTableView] beginUpdates];
@@ -121,18 +121,22 @@
             }
             else {
                 [[self aTableView] reloadData];
-                                
+                
+                //the sets are adding one for some reason.  I don't really care, because this works.
+                difference -= 1;
+                
+                if (difference < 0) {
+                    difference = 0;
+                }
+                
                 if (difference > 0 && [oldArray count] > 0) {
                     NSUserNotification *notification = [[NSUserNotification alloc] init];
                     [notification setTitle:@"New Posts"];
                     
-                    //the sets are adding one for some reason.  I don't really care, because this works.
-                    difference -= 1;
-                    
                     if (difference == 1) {
                         [notification setInformativeText:@"There is 1 new post in your feed"];
                     }
-                    else {
+                    else if (difference > 1) {
                         [notification setInformativeText:[NSString stringWithFormat:@"There are %li new posts in your feed", difference]];
                     }
                     
@@ -168,204 +172,115 @@
     if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
         cellView = (PicCellView *)[tableView makeViewWithIdentifier:@"PicCellView" owner:self];
         
-        [[cellView textField] setStringValue:[self theFeed][row][@"name"]];
-        [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
-        [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
         
-        if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
-            [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self theFeed][row][@"repost_name"]]];
-        }
-        else {
-            [[cellView repostedByTextField] setStringValue:@""];
-        }
-        
-        if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+        dispatch_async(queue, ^{
+            if ([[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]) {
+                [[cellView externalImage] setImage:[[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]];
+            }
+            else {
+                [[cellView externalImage] setImage:nil];
+            }
+            NSMutableString *tempString = [NSMutableString stringWithString:[self theFeed][row][@"image_url"]];
             
-            dispatch_async(queue, ^{
-                if ([[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]) {
-                    [[cellView externalImage] setImage:[[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]];
-                }
-                else {
-                    [[cellView externalImage] setImage:nil];
-                }
-                NSMutableString *tempString = [NSMutableString stringWithString:[self theFeed][row][@"image_url"]];
-                
-                [tempString insertString:@"s" atIndex:24];
-                
-                NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:tempString]]];
-                
-                [[kAppDelegate externalImageCache] setObject:image forKey:[NSNumber numberWithInt:row]];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView externalImage] setImage:image];
-                });
+            [tempString insertString:@"s" atIndex:24];
+            
+            NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:tempString]]];
+            
+            [[kAppDelegate externalImageCache] setObject:image forKey:[NSNumber numberWithInt:row]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[cellView externalImage] setImage:image];
             });
-        }
-        
-        NSDate *tempDate = [NSDate dateWithISO8601String:[self theFeed][row][@"created_at"] withFormatter:[self dateFormatter]];
-        
-        [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
-        
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
-        
-        if (image) {
-            [[cellView imageButton] setImage:image];
-        }
-        else {
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-            
-            dispatch_async(queue, ^{
-                NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self theFeed][row][@"email"]]]];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageButton] setImage:image];
-                });
-                
-                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
-            });
-        }
-        
-        if (row == ([[self theFeed] count] - 1)) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
-            
-            NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%li\", \"last\" : \"%li\"}", [[self theFeed] count], [[self theFeed] count] + 20];
-            
-            NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
-            
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-            
-            [request setHTTPMethod:@"POST"];
-            [request setHTTPBody:requestData];
-            [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
-            [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
-            
-            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                if (data) {
-                    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
-                    
-                    NSInteger oldTableViewCount = [[self theFeed] count];
-                    
-                    [[self theFeed] addObjectsFromArray:tempArray];
-                    
-                    @try {
-                        [[self aTableView] beginUpdates];
-                        
-                        int tempArrayCount = [tempArray count];
-                        
-                        for (int i = 0; i < tempArrayCount; i++) {
-                            NSInteger rowInt = oldTableViewCount + i;
-                            
-                            [[self aTableView] insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:rowInt] withAnimation:NSTableViewAnimationEffectFade];
-                        }
-                        [[self aTableView] endUpdates];
-                    }
-                    @catch (NSException *exception) {
-                        if (exception) {
-                            NSLog(@"%@", exception);
-                        }
-                        
-                        [[self aTableView] reloadData];
-                    }
-                    @finally {
-                        NSLog(@"Inside finally");
-                    }
-                }
-                else {
-                    NSLog(@"Error");
-                }
-            }];
-            
-        }
+        });
     }
     else {
         cellView = (PicCellView *)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+    }
+    
+    [[cellView textField] setStringValue:[self theFeed][row][@"name"]];
+    [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
+    [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
+    
+    if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
+        [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self theFeed][row][@"repost_name"]]];
+    }
+    else {
+        [[cellView repostedByTextField] setStringValue:@""];
+    }
+    
+    NSDate *tempDate = [NSDate dateWithISO8601String:[self theFeed][row][@"created_at"] withFormatter:[self dateFormatter]];
+    
+    [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
+    
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
+    
+    if (image) {
+        [[cellView imageButton] setImage:image];
+    }
+    else {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
         
-        [[cellView textField] setStringValue:[self theFeed][row][@"name"]];
-        [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
-        [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
-        
-        if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
-            [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self theFeed][row][@"repost_name"]]];
-        }
-        else {
-            [[cellView repostedByTextField] setStringValue:@""];
-        }
-        
-        NSDate *tempDate = [NSDate dateWithISO8601String:[self theFeed][row][@"created_at"] withFormatter:[self dateFormatter]];
-        
-        [[cellView dateTextField] setStringValue:[[self dateTransformer] transformedValue:tempDate]];
-        
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
-        
-        if (image) {
-            [[cellView imageButton] setImage:image];
-        }
-        else {
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+        dispatch_async(queue, ^{
+            NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self theFeed][row][@"email"]]]];
             
-            dispatch_async(queue, ^{
-                NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self theFeed][row][@"email"]]]];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[cellView imageButton] setImage:image];
-                });
-                
-                [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[cellView imageButton] setImage:image];
             });
-        }
+            
+            [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]];
+        });
+    }
+    
+    if (row == ([[self theFeed] count] - 1)) {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
         
-        if (row == ([[self theFeed] count] - 1)) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home.json", kSocialURL]];
-            
-            NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%li\", \"last\" : \"%li\"}", [[self theFeed] count], [[self theFeed] count] + 20];
-            
-            NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
-            
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-            
-            [request setHTTPMethod:@"POST"];
-            [request setHTTPBody:requestData];
-            [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
-            [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
-            
-            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                if (data) {
-                    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%li\", \"last\" : \"%li\"}", [[self theFeed] count], [[self theFeed] count] + 20];
+        
+        NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:requestData];
+        [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            if (data) {
+                NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
+                
+                NSInteger oldTableViewCount = [[self theFeed] count];
+                
+                [[self theFeed] addObjectsFromArray:tempArray];
+                
+                @try {
+                    [[self aTableView] beginUpdates];
                     
-                    NSInteger oldTableViewCount = [[self theFeed] count];
+                    int tempArrayCount = [tempArray count];
                     
-                    [[self theFeed] addObjectsFromArray:tempArray];
-                    
-                    @try {
-                        [[self aTableView] beginUpdates];
+                    for (int i = 0; i < tempArrayCount; i++) {
+                        NSInteger rowInt = oldTableViewCount + i;
                         
-                        int tempArrayCount = [tempArray count];
-                        
-                        for (int i = 0; i < tempArrayCount; i++) {
-                            NSInteger rowInt = oldTableViewCount + i;
-                            
-                            [[self aTableView] insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:rowInt] withAnimation:NSTableViewAnimationEffectFade];
-                        }
-                        [[self aTableView] endUpdates];
+                        [[self aTableView] insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:rowInt] withAnimation:NSTableViewAnimationEffectFade];
                     }
-                    @catch (NSException *exception) {
-                        if (exception) {
-                            NSLog(@"%@", exception);
-                        }
-                        
-                        [[self aTableView] reloadData];
-                    }
-                    @finally {
-                        NSLog(@"Inside finally");
-                    }
+                    [[self aTableView] endUpdates];
                 }
-                else {
-                    NSLog(@"Error");
+                @catch (NSException *exception) {
+                    if (exception) {
+                        NSLog(@"%@", exception);
+                    }
+                    
+                    [[self aTableView] reloadData];
                 }
-            }];
-            
-        }
+                @finally {
+                    NSLog(@"Inside finally");
+                }
+            }
+            else {
+                NSLog(@"Error");
+            }
+        }];
     }
     
     return cellView;
@@ -509,7 +424,7 @@
                 [self setFacebookSuccess:YES];
                 
                 [self jukaelaNetworkAction:_stringToSend];
-
+                
                 return;
             }
             
@@ -601,15 +516,17 @@
     
     [[self sendButton] setHidden:NO];
     
-    [[self aTextView] setString:@""];
-    
-    [[self characterCountLabel] setStringValue:@"140"];
-    
     [self setUrlString:nil];
     [self setTempImageData:nil];
     
-    [[self popover] close];
-    
+    if ([self popover]) {
+        [self performSelectorOnMainThread:@selector(closePopover:) withObject:nil waitUntilDone:YES];
+    }
+    else {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Some sort of craziness is going on with the popover.", nil];
+        
+        [alert runModal];
+    }
     [self setJukaelaSuccess:NO];
     [self setTwitterSuccess:NO];
     [self setFacebookSuccess:NO];
@@ -943,7 +860,7 @@
             url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"user_id"]]];
         }
     }
-
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     [request setHTTPMethod:@"GET"];

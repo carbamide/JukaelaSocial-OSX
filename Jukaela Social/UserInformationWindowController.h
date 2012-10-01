@@ -20,4 +20,6 @@
 
 -(IBAction)followOrUnfollow:(id)sender;
 
+-(IBAction)segmentedControlAction:(id)sender;
+
 @end

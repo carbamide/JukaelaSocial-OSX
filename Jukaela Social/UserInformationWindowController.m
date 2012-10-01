@@ -324,4 +324,26 @@
         [self getimFollowing];
     });
 }
+
+-(IBAction)segmentedControlAction:(id)sender
+{
+    NSSegmentedControl *tempControl = sender;
+    
+    if ([tempControl selectedSegment] == 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Followers!", nil];
+        
+        [alert runModal];
+    }
+    else if ([tempControl selectedSegment] == 1) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Following!", nil];
+        
+        [alert runModal];
+    }
+    else if ([tempControl selectedSegment] == 2) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Posts!", nil];
+        
+        [alert runModal];
+    }
+}
+
 @end

@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UsersListWindowController.h"
+#import "PostsWindowController.h"
 
 @interface UserInformationWindowController : NSWindowController
 
@@ -17,6 +19,8 @@
 @property (strong, nonatomic) NSDictionary *userDict;
 @property (strong, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet NSButton *followOrUnfollow;
+@property (strong, nonatomic) UsersListWindowController *usersListWindowController;
+@property (strong, nonatomic) PostsWindowController *postsWindowController;
 
 -(IBAction)followOrUnfollow:(id)sender;
 

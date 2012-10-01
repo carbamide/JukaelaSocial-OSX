@@ -27,6 +27,10 @@
 		29A0D75616132C0B0006A88C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A0D75516132C0B0006A88C /* Sparkle.framework */; };
 		29A0D75916132C520006A88C /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 29A0D75516132C0B0006A88C /* Sparkle.framework */; };
 		29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 29A0D75A16132D1E0006A88C /* dsa_pub.pem */; };
+		29C8B7AC161A0C9E00D941AF /* UsersListWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C8B7AB161A0C9E00D941AF /* UsersListWindowController.m */; };
+		29C8B7AF161A0CAB00D941AF /* UsersListWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C8B7AE161A0CAB00D941AF /* UsersListWindow.xib */; };
+		29C8B7B3161A1E7100D941AF /* PostsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C8B7B1161A1E7100D941AF /* PostsWindowController.m */; };
+		29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C8B7B2161A1E7100D941AF /* PostsWindow.xib */; };
 		29D67AB8160F3DCC00EE503D /* FilterNone.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB5160F3DCC00EE503D /* FilterNone.png */; };
 		29D67AB9160F3DCC00EE503D /* FilterStarred.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB6160F3DCC00EE503D /* FilterStarred.png */; };
 		29D67ABA160F3DCC00EE503D /* FilterUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB7160F3DCC00EE503D /* FilterUnread.png */; };
@@ -110,6 +114,12 @@
 		29A0D75516132C0B0006A88C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		29A0D75A16132D1E0006A88C /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		29B34B5016192F1D00EF73A9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		29C8B7AA161A0C9E00D941AF /* UsersListWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersListWindowController.h; sourceTree = "<group>"; };
+		29C8B7AB161A0C9E00D941AF /* UsersListWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersListWindowController.m; sourceTree = "<group>"; };
+		29C8B7AE161A0CAB00D941AF /* UsersListWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersListWindow.xib; sourceTree = "<group>"; };
+		29C8B7B0161A1E7100D941AF /* PostsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsWindowController.h; sourceTree = "<group>"; };
+		29C8B7B1161A1E7100D941AF /* PostsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsWindowController.m; sourceTree = "<group>"; };
+		29C8B7B2161A1E7100D941AF /* PostsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostsWindow.xib; sourceTree = "<group>"; };
 		29D67AB5160F3DCC00EE503D /* FilterNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterNone.png; sourceTree = "<group>"; };
 		29D67AB6160F3DCC00EE503D /* FilterStarred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterStarred.png; sourceTree = "<group>"; };
 		29D67AB7160F3DCC00EE503D /* FilterUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterUnread.png; sourceTree = "<group>"; };
@@ -185,6 +195,10 @@
 		2970DCF215F7A57B0038C54B /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2917CF9A161389D4003ED634 /* JButton.h */,
+				2917CF9B161389D4003ED634 /* JButton.m */,
+				2989310A16137DB10022DE7F /* JImageView.h */,
+				2989310B16137DB10022DE7F /* JImageView.m */,
 				29A0D1EC1613C1B20082C9F8 /* App Store Window */,
 				29F4CEE4160E401700174AF6 /* TM Stuff */,
 				29A0D1E61613C1530082C9F8 /* PullToRefresh */,
@@ -363,12 +377,14 @@
 		29F51A9E15F6AB05009CE9C8 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */,
 				29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */,
-				29908EBD16108CB90088792B /* MentionsViewController.xib */,
 				29EBBB2A15F7C126002221FF /* LoginWindow.xib */,
+				29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */,
+				29908EBD16108CB90088792B /* MentionsViewController.xib */,
+				29C8B7B2161A1E7100D941AF /* PostsWindow.xib */,
 				29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */,
 				29F5FE9915F8E8410044BA7B /* UserInformationWindow.xib */,
+				29C8B7AE161A0CAB00D941AF /* UsersListWindow.xib */,
 				29E9872F1614BFCF00DA0732 /* UsersViewController.xib */,
 			);
 			name = "User Interface";
@@ -405,10 +421,6 @@
 				29908EBB16108CA80088792B /* MentionsViewController.m */,
 				29E9872B1614BFAF00DA0732 /* UsersViewController.h */,
 				29E9872C1614BFAF00DA0732 /* UsersViewController.m */,
-				2989310A16137DB10022DE7F /* JImageView.h */,
-				2989310B16137DB10022DE7F /* JImageView.m */,
-				2917CF9A161389D4003ED634 /* JButton.h */,
-				2917CF9B161389D4003ED634 /* JButton.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -418,10 +430,14 @@
 			children = (
 				2970DCF915F7BA520038C54B /* LoginWindow.h */,
 				2970DCFA15F7BA520038C54B /* LoginWindow.m */,
+				29C8B7B0161A1E7100D941AF /* PostsWindowController.h */,
+				29C8B7B1161A1E7100D941AF /* PostsWindowController.m */,
 				29EBBB3415F7D4EB002221FF /* PreferencesWindow.h */,
 				29EBBB3515F7D4EB002221FF /* PreferencesWindow.m */,
 				29F5FE9415F8E8350044BA7B /* UserInformationWindowController.h */,
 				29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */,
+				29C8B7AA161A0C9E00D941AF /* UsersListWindowController.h */,
+				29C8B7AB161A0C9E00D941AF /* UsersListWindowController.m */,
 			);
 			name = "Window Controllers";
 			sourceTree = "<group>";
@@ -498,6 +514,8 @@
 				29A0D75B16132D1E0006A88C /* dsa_pub.pem in Resources */,
 				29E987301614BFCF00DA0732 /* UsersViewController.xib in Resources */,
 				29FDDE021614DCBA0013BEC6 /* underPageBackground.png in Resources */,
+				29C8B7AF161A0CAB00D941AF /* UsersListWindow.xib in Resources */,
+				29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +551,8 @@
 				2917CF9C161389D4003ED634 /* JButton.m in Sources */,
 				29E9872D1614BFAF00DA0732 /* UsersViewController.m in Sources */,
 				29E987331614C03900DA0732 /* UsersCellView.m in Sources */,
+				29C8B7AC161A0C9E00D941AF /* UsersListWindowController.m in Sources */,
+				29C8B7B3161A1E7100D941AF /* PostsWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

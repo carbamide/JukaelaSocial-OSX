@@ -105,7 +105,7 @@
 -(void)setLabelsOfSegmentedControl
 {
     [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Followers", [[self followers] count]] forSegment:0];
-    [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Following", [[self following] count]] forSegment:1];
+    [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Following", [[self following][@"user"] count]] forSegment:1];
     [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Posts", [[self posts] count]] forSegment:2];
 }
 
@@ -144,6 +144,9 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
             [self setPosts:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
+            
+            NSLog(@"inside userinformationwindowcontroller, posts contains %li", [[self posts] count]);
+            
         }
         else {
             NSLog(@"Error retrieving posts count");
@@ -165,6 +168,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
             [self setFollowing:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
+            NSLog(@"%@", [self following]);
         }
         else {
             NSLog(@"Error retrieving following count");
@@ -221,7 +225,7 @@
 -(void)setupButton
 {
     BOOL following = NO;
-                
+    
     for (NSDictionary *dict in [self imFollowing]) {
         if ([dict[@"id"] isEqualToNumber:[self userDict][@"id"]]) {
             following = YES;
@@ -256,9 +260,9 @@
     else if ([[tempButton title] isEqualToString:@"Unfollow"]) {
         [self setImFollowing:nil];
         [self setRelationships:nil];
-                
+        
         [self performSelector:@selector(followingAndRelationshipsDispatch) withObject:nil afterDelay:0];
-                
+        
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/relationships/%@.json", kSocialURL, _unfollowID]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -284,7 +288,7 @@
     else if ([[tempButton title] isEqualToString:@"Follow"]) {
         [self setImFollowing:nil];
         [self setRelationships:nil];
-                
+        
         [self performSelector:@selector(followingAndRelationshipsDispatch) withObject:nil afterDelay:0];
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/relationships.json", kSocialURL]];
@@ -301,7 +305,7 @@
         [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
         
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            if (data) {                
+            if (data) {
                 NSAlert *alert = [NSAlert alertWithMessageText:@"Yay!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:[NSString stringWithFormat:@"Followed %@", [[self nameLabel] stringValue]], nil];
                 
                 [alert runModal];
@@ -314,7 +318,7 @@
                 [alert runModal];
             }
         }];
-
+        
     }
 }
 
@@ -330,19 +334,52 @@
     NSSegmentedControl *tempControl = sender;
     
     if ([tempControl selectedSegment] == 0) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Followers!", nil];
-        
-        [alert runModal];
+        if ([[self followers] count] > 0) {
+            [self setUsersListWindowController:[[UsersListWindowController alloc] initWithWindowNibName:@"UsersListWindow"]];
+            
+            [[self usersListWindowController] setUsersArray:[self followers]];
+            
+            [[[self usersListWindowController] window] setTitle:@"Followers"];
+            
+            [[self usersListWindowController] showWindow:self];
+        }
+        else {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"No Followers!", nil];
+            
+            [alert runModal];
+        }
     }
     else if ([tempControl selectedSegment] == 1) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Following!", nil];
-        
-        [alert runModal];
+        if ([[self following][@"user"] count] > 0) {
+            [self setUsersListWindowController:[[UsersListWindowController alloc] initWithWindowNibName:@"UsersListWindow"]];
+            
+            [[self usersListWindowController] setUsersArray:[self following][@"user"]];
+            
+            [[[self usersListWindowController] window] setTitle:@"Following"];
+            
+            [[self usersListWindowController] showWindow:self];
+        }
+        else {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Not following anyone!", nil];
+            
+            [alert runModal];
+        }
     }
     else if ([tempControl selectedSegment] == 2) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Posts!", nil];
-        
-        [alert runModal];
+        if ([[self posts] count] > 0) {
+            [self setPostsWindowController:[[PostsWindowController alloc] initWithWindowNibName:@"PostsWindow"]];
+            
+            [[self postsWindowController] setTheFeed:[self posts]];
+            
+            [[[self postsWindowController] window] setTitle:[NSString stringWithFormat:@"%@'s Posts", [self userDict][@"name"]]];
+            
+            [[self postsWindowController] showWindow:self];
+        }
+        else {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"No Posts!", nil];
+            
+            [alert runModal];
+        }
     }
 }
 

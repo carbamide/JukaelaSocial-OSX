@@ -55,9 +55,7 @@
         
         [_loginWindow setFeedViewController:_feedViewController];
     }
-    
-    [NSApp showWindow:[_loginWindow window]];
-    
+        
     [[_loginWindow window] makeKeyAndOrderFront:self];
 }
 

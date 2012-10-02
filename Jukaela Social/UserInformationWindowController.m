@@ -66,12 +66,22 @@
     
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]]]];
     
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+
     if (image) {
         [[self userImageView] setImage:image];
-    }
-    else {
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
         
+        dispatch_async(queue, ^{
+            NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self userDict][@"email"]]]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[self userImageView] setImage:image];
+            });
+            
+            [Helpers saveImage:image withFileName:[NSString stringWithFormat:@"%@", [self userDict][@"email"]]];
+        });
+    }
+    else {        
         dispatch_async(queue, ^{
             NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[GravatarHelper getGravatarURL:[self userDict][@"email"]]]];
             

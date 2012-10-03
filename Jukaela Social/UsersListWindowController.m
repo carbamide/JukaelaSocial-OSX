@@ -139,4 +139,13 @@
     }];
 }
 
+-(IBAction)sendPostToUser:(id)sender
+{
+    [kAppDelegate postToJukaela:nil];
+    
+    [[kAppDelegate window] makeKeyAndOrderFront:self];
+    
+    [[[kAppDelegate feedViewController] aTextView] setString:[@"@" stringByAppendingString:[[self usersArray][[[self aTableView] clickedRow]][@"username"] stringByAppendingString:@" "]]];
+}
+
 @end

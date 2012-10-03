@@ -8,10 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class UserInformationWindowController;
+
 @interface PostsWindowController : NSWindowController
 
 @property (strong, nonatomic) NSArray *theFeed;
 
 @property (strong, nonatomic) IBOutlet NSTableView *aTableView;
+@property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
+
+-(IBAction)showUser:(id)sender;
 
 @end

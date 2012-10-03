@@ -84,7 +84,9 @@
             [[kAppDelegate window] makeKeyAndOrderFront:self];
         }
         else {
-            NSLog(@"Something is wrong with the return login dict");
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The server is not responding.", nil];
+            
+            [alert runModal];
         }
         
     }];

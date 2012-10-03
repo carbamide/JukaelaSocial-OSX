@@ -41,6 +41,9 @@ typedef enum {
 -(IBAction)openImage:(id)sender;
 -(IBAction)deselectRow:(id)sender;
 
+-(IBAction)shareToFacebook:(id)sender;
+-(IBAction)shareToTwitter:(id)sender;
+
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView;
 -(void)getFeed:(NSInteger)row;
 

@@ -14,6 +14,7 @@
 #import "Helpers.h"
 #import "GravatarHelper.h"
 #import "AppDelegate.h"
+#import "UserInformationWindowController.h"
 
 @interface PostsWindowController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -129,4 +130,54 @@
     return cellView;
 }
 
+-(IBAction)showUser:(id)sender
+{
+    [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
+    
+    NSURL *url = nil;
+
+    if ([[sender class] isSubclassOfClass:[NSButton class]]) {
+        NSInteger indexPath = [(NSTableView *)[[[sender superview] superview] superview] rowForView:[sender superview]];
+        
+        if ([self theFeed][indexPath][@"original_poster_id"] && [self theFeed][indexPath][@"original_poster_id"] != [NSNull null]) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][indexPath][@"original_poster_id"]]];
+        }
+        else {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][indexPath][@"user_id"]]];
+        }
+    }
+    else {
+        if ([self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] && [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"] != [NSNull null]) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"original_poster_id"]]];
+        }
+        else {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@.json", kSocialURL, [self theFeed][[[self aTableView] clickedRow]][@"user_id"]]];
+        }
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {
+            NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
+            
+            if (![self userInfoWindowController]) {
+                [self setUserInfoWindowController:[[UserInformationWindowController alloc] initWithWindowNibName:@"UserInformationWindow"]];
+            }
+            
+            [[self userInfoWindowController] setUserDict:tempDict];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reload_labels" object:nil];
+            
+            [[self userInfoWindowController] showWindow:self];
+        }
+        else {
+            NSLog(@"There was an error retrieving the user information");
+        }
+    }];
+}
 @end

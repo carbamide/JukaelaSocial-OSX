@@ -23,5 +23,6 @@
 @property (strong, nonatomic) IBOutlet NSTableView *aTableView;
 
 -(IBAction)showUser:(id)sender;
+-(IBAction)sendPostToUser:(id)sender;
 
 @end

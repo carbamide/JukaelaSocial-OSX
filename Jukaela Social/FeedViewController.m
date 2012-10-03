@@ -84,7 +84,14 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%i\", \"last\" : \"%i\"}", 0, 20];
+    NSInteger last = 20;
+    
+    if ([[self theFeed] count] > 20) {
+        //More finagling around with the NSUserNotifications
+        last = [[self theFeed] count];
+    }
+    
+    NSString *requestString = [NSString stringWithFormat:@"{\"first\" : \"%i\", \"last\" : \"%li\"}", 0, last];
     
     NSData *requestData = [NSData dataWithBytes:[requestString UTF8String] length:[requestString length]];
     
@@ -597,10 +604,8 @@
 }
 
 -(IBAction)replyToPost:(id)sender
-{
-    ItemCellView *tempCell = [[self aTableView] viewAtColumn:0 row:[[self aTableView] clickedRow] makeIfNecessary:NO];
-    
-    [[self aTextView] setString:[@"@" stringByAppendingString:[[[tempCell usernameTextField] stringValue] stringByAppendingString:@" "]]];
+{    
+    [[self aTextView] setString:[@"@" stringByAppendingString:[[self theFeed][[[self aTableView] clickedRow]][@"username"] stringByAppendingString:@" "]]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"post_to_jukaela" object:nil];
 }
@@ -1014,6 +1019,16 @@
 -(IBAction)deselectRow:(id)sender
 {
     [[self aTableView] deselectRow:[[self aTableView] clickedRow]];
+}
+
+-(IBAction)shareToFacebook:(id)sender
+{    
+    [self sendFacebookPost:[self theFeed][[[self aTableView] clickedRow]][@"content"]];
+}
+
+-(IBAction)shareToTwitter:(id)sender
+{
+    [self postToTwitter:[self theFeed][[[self aTableView] clickedRow]][@"content"]];
 }
 
 @end

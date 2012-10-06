@@ -31,7 +31,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
-
+    
     INAppStoreWindow *aWindow = (INAppStoreWindow *)[self window];
     
     [aWindow setTitleBarHeight:40];
@@ -39,11 +39,11 @@
     [[aWindow titleBarView] addSubview:[self titleView]];
     
     [[TMImgurUploader sharedInstance] setAPIKey:kImgurAPIKey];
-
+    
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"post_to_twitter" : [NSNumber numberWithBool:NO], @"post_to_facebook" : [NSNumber numberWithBool:NO], @"confirm_posting" : [NSNumber numberWithBool:NO]}];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postToJukaela:) name:@"post_to_jukaela" object:nil];
-
+    
     [self setFeedViewController:[[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil]];
     
     [self setCurrentViewController:[self feedViewController]];
@@ -55,7 +55,7 @@
         
         [_loginWindow setFeedViewController:_feedViewController];
     }
-        
+    
     [[_loginWindow window] makeKeyAndOrderFront:self];
 }
 
@@ -69,18 +69,18 @@
 }
 
 -(IBAction)postToJukaela:(id)sender
-{    
+{
     [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
 }
 
 -(IBAction)logout:(id)sender
-{    
+{
     if (![self loginWindow]) {
         _loginWindow = [[LoginWindow alloc] initWithWindowNibName:@"LoginWindow"];
         
         [_loginWindow setFeedViewController:_feedViewController];
     }
-        
+    
     [[_loginWindow window] makeKeyAndOrderFront:self];
     
     [[_loginWindow usernameTextField] setStringValue:@""];
@@ -223,5 +223,27 @@
     
     [[self feedViewController] showPopover:[[self postButton] frame] ofView:[self titleView]];
 }
+
+-(IBAction)editProfile:(id)sender
+{
+    if (![self editProfileWindowController]) {
+        [self setEditProfileWindowController:[[EditProfileWindowController alloc] initWithWindowNibName:@"EditProfileWindowController"]];
+        
+        [[[self editProfileWindowController] window] makeKeyAndOrderFront:self];
+    }    
+    else {
+        [[[self editProfileWindowController] window] orderFront:nil];
+    }
+}
+
+-(IBAction)submitFeedback:(id)sender
+{
+    NSString *encodedSubject = [NSString stringWithFormat:@"SUBJECT=%@", [@"Jukaela Social for Mac Feedback" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *encodedTo = [@"support@jukaela.com" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?%@", encodedTo, encodedSubject];
+    
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];}
 
 @end

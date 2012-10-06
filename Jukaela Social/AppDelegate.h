@@ -11,6 +11,7 @@
 #import "INAppStoreWindow.h"
 #import "FeedViewController.h"
 #import "UserInformationWindowController.h"
+#import "EditProfileWindowController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSToolbarDelegate, QLPreviewPanelDataSource, QLPreviewPanelDelegate>
 
@@ -26,7 +27,7 @@
 @property (strong, nonatomic) IBOutlet NSButton *postButton;
 @property (strong, nonatomic) FeedViewController *feedViewController;
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
-
+@property (strong, nonatomic) EditProfileWindowController *editProfileWindowController;
 @property (nonatomic) BOOL onlyToFacebook;
 @property (nonatomic) BOOL onlyToTwitter;
 @property (nonatomic) BOOL onlyToJukaela;
@@ -42,5 +43,9 @@
 -(IBAction)postOnlyToFacebook:(id)sender;
 -(IBAction)postOnlyToTwitter:(id)sender;
 -(IBAction)postOnlyToJukaela:(id)sender;
+
+-(IBAction)editProfile:(id)sender;
+
+-(IBAction)submitFeedback:(id)sender;
 
 @end

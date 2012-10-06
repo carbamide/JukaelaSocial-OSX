@@ -33,6 +33,8 @@
 		29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C8B7B2161A1E7100D941AF /* PostsWindow.xib */; };
 		29CDE7FB161FC21800353629 /* SelfItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CDE7FA161FC21800353629 /* SelfItemCellView.m */; };
 		29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CDE7FE161FC22A00353629 /* SelfPicCellView.m */; };
+		29CDE807161FCCB700353629 /* EditProfileWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CDE805161FCCB700353629 /* EditProfileWindowController.m */; };
+		29CDE808161FCCB700353629 /* EditProfileWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CDE806161FCCB700353629 /* EditProfileWindowController.xib */; };
 		29D67AB8160F3DCC00EE503D /* FilterNone.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB5160F3DCC00EE503D /* FilterNone.png */; };
 		29D67AB9160F3DCC00EE503D /* FilterStarred.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB6160F3DCC00EE503D /* FilterStarred.png */; };
 		29D67ABA160F3DCC00EE503D /* FilterUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB7160F3DCC00EE503D /* FilterUnread.png */; };
@@ -125,6 +127,9 @@
 		29CDE7FA161FC21800353629 /* SelfItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfItemCellView.m; sourceTree = "<group>"; };
 		29CDE7FD161FC22A00353629 /* SelfPicCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfPicCellView.h; sourceTree = "<group>"; };
 		29CDE7FE161FC22A00353629 /* SelfPicCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfPicCellView.m; sourceTree = "<group>"; };
+		29CDE804161FCCB700353629 /* EditProfileWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileWindowController.h; sourceTree = "<group>"; };
+		29CDE805161FCCB700353629 /* EditProfileWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileWindowController.m; sourceTree = "<group>"; };
+		29CDE806161FCCB700353629 /* EditProfileWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileWindowController.xib; sourceTree = "<group>"; };
 		29D67AB5160F3DCC00EE503D /* FilterNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterNone.png; sourceTree = "<group>"; };
 		29D67AB6160F3DCC00EE503D /* FilterStarred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterStarred.png; sourceTree = "<group>"; };
 		29D67AB7160F3DCC00EE503D /* FilterUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterUnread.png; sourceTree = "<group>"; };
@@ -382,6 +387,7 @@
 		29F51A9E15F6AB05009CE9C8 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				29CDE806161FCCB700353629 /* EditProfileWindowController.xib */,
 				29F51ABB15F7893A009CE9C8 /* FeedViewController.xib */,
 				29EBBB2A15F7C126002221FF /* LoginWindow.xib */,
 				29F51A9115F6A9F5009CE9C8 /* MainMenu.xib */,
@@ -443,6 +449,8 @@
 				29F5FE9515F8E8350044BA7B /* UserInformationWindowController.m */,
 				29C8B7AA161A0C9E00D941AF /* UsersListWindowController.h */,
 				29C8B7AB161A0C9E00D941AF /* UsersListWindowController.m */,
+				29CDE804161FCCB700353629 /* EditProfileWindowController.h */,
+				29CDE805161FCCB700353629 /* EditProfileWindowController.m */,
 			);
 			name = "Window Controllers";
 			sourceTree = "<group>";
@@ -521,6 +529,7 @@
 				29FDDE021614DCBA0013BEC6 /* underPageBackground.png in Resources */,
 				29C8B7AF161A0CAB00D941AF /* UsersListWindow.xib in Resources */,
 				29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */,
+				29CDE808161FCCB700353629 /* EditProfileWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +568,7 @@
 				29C8B7B3161A1E7100D941AF /* PostsWindowController.m in Sources */,
 				29CDE7FB161FC21800353629 /* SelfItemCellView.m in Sources */,
 				29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */,
+				29CDE807161FCCB700353629 /* EditProfileWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

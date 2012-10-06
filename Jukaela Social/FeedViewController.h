@@ -25,6 +25,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSTableView *aTableView;
 @property (strong, nonatomic) IBOutlet NSTextView *aTextView;
 @property (strong, nonatomic) IBOutlet NSButton *sendButton;
+@property (strong, nonatomic) IBOutlet NSButton *picButton;
 @property (strong, nonatomic) IBOutlet NSPopover *popover;
 @property (strong, nonatomic) IBOutlet NSTextField *characterCountLabel;
 @property (nonatomic) ChangeType currentChangeType;

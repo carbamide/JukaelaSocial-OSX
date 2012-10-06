@@ -12,5 +12,6 @@
 
 +(NSString *)applicationSupportPath;
 +(void)saveImage:(NSImage *)image withFileName:(NSString *)emailAddress;
++(NSArray *)arrayOfURLsFromString:(NSString *)httpLine error:(NSError *)error;
 
 @end

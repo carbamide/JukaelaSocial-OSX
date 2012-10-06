@@ -20,6 +20,34 @@
 #import "SORelativeDateTransformer.h"
 #import "PicCellView.h"
 #import "Helpers.h"
+#import "SelfPicCellView.h"
+#import "SelfItemCellView.h"
+
+@interface NSAttributedString (HyperLink)
++(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL;
+@end
+
+@implementation NSAttributedString (Hyperlink)
++(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL
+{
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString: inString];
+    NSRange range = NSMakeRange(0, [attrString length]);
+ 	
+    [attrString beginEditing];
+    [attrString addAttribute:NSLinkAttributeName value:[aURL absoluteString] range:range];
+ 	
+    // make the text appear in blue
+    [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:range];
+ 	
+    // next make the text appear with an underline
+    [attrString addAttribute:
+ 	 NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:range];
+ 	
+    [attrString endEditing];
+ 	
+    return attrString;
+}
+@end
 
 @interface FeedViewController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -177,7 +205,12 @@
     }
     
     if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
-        cellView = (PicCellView *)[tableView makeViewWithIdentifier:@"PicCellView" owner:self];
+        if ([[NSString stringWithFormat:@"%@", [self theFeed][row][@"user_id"]] isEqualToString:[kAppDelegate userID]]) {
+            cellView = (SelfPicCellView *)[tableView makeViewWithIdentifier:@"SelfPicCellView" owner:self];
+        }
+        else {
+            cellView = (PicCellView *)[tableView makeViewWithIdentifier:@"PicCellView" owner:self];
+        }
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
         
@@ -202,11 +235,18 @@
         });
     }
     else {
-        cellView = (PicCellView *)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        if ([[NSString stringWithFormat:@"%@", [self theFeed][row][@"user_id"]] isEqualToString:[kAppDelegate userID]]) {
+            cellView = (SelfItemCellView *)[tableView makeViewWithIdentifier:@"SelfItemCellView" owner:self];
+        }
+        else {
+            cellView = (ItemCellView *)[tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+        }
     }
     
     [[cellView textField] setStringValue:[self theFeed][row][@"name"]];
+    
     [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
+    
     [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
     
     if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
@@ -223,7 +263,7 @@
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@.png", [[Helpers applicationSupportPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", [self theFeed][row][@"email"]]]]];
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-
+    
     if (image) {
         [[cellView imageButton] setImage:image];
         
@@ -604,7 +644,7 @@
 }
 
 -(IBAction)replyToPost:(id)sender
-{    
+{
     [[self aTextView] setString:[@"@" stringByAppendingString:[[self theFeed][[[self aTableView] clickedRow]][@"username"] stringByAppendingString:@" "]]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"post_to_jukaela" object:nil];
@@ -742,6 +782,14 @@
     
     NSDictionary *options = @{ACFacebookAppIdKey:@"493749340639998", ACFacebookAudienceKey: ACFacebookAudienceEveryone, ACFacebookPermissionsKey: @[@"publish_stream", @"publish_actions"]};
     
+    NSArray *urlArray = [Helpers arrayOfURLsFromString:stringToSend error:nil];
+    
+    BOOL urls = NO;
+    
+    if ([urlArray count] > 0) {
+        urls = YES;
+    }
+    
     [_accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
         if(granted) {
             NSArray *accounts = [self.accountStore accountsWithAccountType:accountTypeFacebook];
@@ -803,6 +851,12 @@
                 NSDictionary *parameters = @{@"access_token":[[[self facebookAccount] credential] oauthToken], @"message" : stringToSend};
                 
                 NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
+                
+                if (urls) {
+                    feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/links"];
+                    
+                    parameters = @{@"access_token" : [[[self facebookAccount] credential] oauthToken], @"message" : stringToSend, @"link" : urlArray[0]};
+                }
                 
                 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodPOST URL:feedURL parameters:parameters];
                 
@@ -1022,7 +1076,7 @@
 }
 
 -(IBAction)shareToFacebook:(id)sender
-{    
+{
     [self sendFacebookPost:[self theFeed][[[self aTableView] clickedRow]][@"content"]];
 }
 

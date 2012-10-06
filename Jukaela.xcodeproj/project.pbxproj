@@ -31,6 +31,8 @@
 		29C8B7AF161A0CAB00D941AF /* UsersListWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C8B7AE161A0CAB00D941AF /* UsersListWindow.xib */; };
 		29C8B7B3161A1E7100D941AF /* PostsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C8B7B1161A1E7100D941AF /* PostsWindowController.m */; };
 		29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C8B7B2161A1E7100D941AF /* PostsWindow.xib */; };
+		29CDE7FB161FC21800353629 /* SelfItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CDE7FA161FC21800353629 /* SelfItemCellView.m */; };
+		29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CDE7FE161FC22A00353629 /* SelfPicCellView.m */; };
 		29D67AB8160F3DCC00EE503D /* FilterNone.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB5160F3DCC00EE503D /* FilterNone.png */; };
 		29D67AB9160F3DCC00EE503D /* FilterStarred.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB6160F3DCC00EE503D /* FilterStarred.png */; };
 		29D67ABA160F3DCC00EE503D /* FilterUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = 29D67AB7160F3DCC00EE503D /* FilterUnread.png */; };
@@ -49,7 +51,6 @@
 		29EBBB3815F7D4FC002221FF /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */; };
 		29EBBB3A15F7DA26002221FF /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3915F7DA26002221FF /* Social.framework */; };
 		29EBBB3C15F7DA3B002221FF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29EBBB3B15F7DA3B002221FF /* Accounts.framework */; };
-		29F4CEDF160E401300174AF6 /* TMNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29F4CEE0160E401300174AF6 /* TMHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDA160E401300174AF6 /* TMHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29F4CEE1160E401300174AF6 /* TMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDC160E401300174AF6 /* TMHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29F4CEE2160E401300174AF6 /* TMImgurUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4CEDE160E401300174AF6 /* TMImgurUploader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -120,6 +121,10 @@
 		29C8B7B0161A1E7100D941AF /* PostsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsWindowController.h; sourceTree = "<group>"; };
 		29C8B7B1161A1E7100D941AF /* PostsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsWindowController.m; sourceTree = "<group>"; };
 		29C8B7B2161A1E7100D941AF /* PostsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostsWindow.xib; sourceTree = "<group>"; };
+		29CDE7F9161FC21800353629 /* SelfItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfItemCellView.h; sourceTree = "<group>"; };
+		29CDE7FA161FC21800353629 /* SelfItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfItemCellView.m; sourceTree = "<group>"; };
+		29CDE7FD161FC22A00353629 /* SelfPicCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfPicCellView.h; sourceTree = "<group>"; };
+		29CDE7FE161FC22A00353629 /* SelfPicCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfPicCellView.m; sourceTree = "<group>"; };
 		29D67AB5160F3DCC00EE503D /* FilterNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterNone.png; sourceTree = "<group>"; };
 		29D67AB6160F3DCC00EE503D /* FilterStarred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterStarred.png; sourceTree = "<group>"; };
 		29D67AB7160F3DCC00EE503D /* FilterUnread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterUnread.png; sourceTree = "<group>"; };
@@ -143,8 +148,6 @@
 		29EBBB3715F7D4FC002221FF /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		29EBBB3915F7DA26002221FF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		29EBBB3B15F7DA3B002221FF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		29F4CED7160E401300174AF6 /* TMNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
 		29F4CED9160E401300174AF6 /* TMHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHTTPClient.h; sourceTree = "<group>"; };
 		29F4CEDA160E401300174AF6 /* TMHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMHTTPClient.m; sourceTree = "<group>"; };
 		29F4CEDB160E401300174AF6 /* TMHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMHTTPRequest.h; sourceTree = "<group>"; };
@@ -230,6 +233,10 @@
 				29D715A4160E499C00E71C00 /* PicCellView.m */,
 				29E987311614C03900DA0732 /* UsersCellView.h */,
 				29E987321614C03900DA0732 /* UsersCellView.m */,
+				29CDE7F9161FC21800353629 /* SelfItemCellView.h */,
+				29CDE7FA161FC21800353629 /* SelfItemCellView.m */,
+				29CDE7FD161FC22A00353629 /* SelfPicCellView.h */,
+				29CDE7FE161FC22A00353629 /* SelfPicCellView.m */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -290,8 +297,6 @@
 		29F4CEE4160E401700174AF6 /* TM Stuff */ = {
 			isa = PBXGroup;
 			children = (
-				29F4CED7160E401300174AF6 /* TMNetworkActivityIndicatorManager.h */,
-				29F4CED8160E401300174AF6 /* TMNetworkActivityIndicatorManager.m */,
 				29F4CED9160E401300174AF6 /* TMHTTPClient.h */,
 				29F4CEDA160E401300174AF6 /* TMHTTPClient.m */,
 				29F4CEDB160E401300174AF6 /* TMHTTPRequest.h */,
@@ -539,7 +544,6 @@
 				29F5FE9715F8E8350044BA7B /* UserInformationWindowController.m in Sources */,
 				297B3B5415F94A600093B5EC /* PullToRefreshClipView.m in Sources */,
 				297B3B5515F94A600093B5EC /* PullToRefreshScrollView.m in Sources */,
-				29F4CEDF160E401300174AF6 /* TMNetworkActivityIndicatorManager.m in Sources */,
 				29F4CEE0160E401300174AF6 /* TMHTTPClient.m in Sources */,
 				29F4CEE1160E401300174AF6 /* TMHTTPRequest.m in Sources */,
 				29F4CEE2160E401300174AF6 /* TMImgurUploader.m in Sources */,
@@ -553,6 +557,8 @@
 				29E987331614C03900DA0732 /* UsersCellView.m in Sources */,
 				29C8B7AC161A0C9E00D941AF /* UsersListWindowController.m in Sources */,
 				29C8B7B3161A1E7100D941AF /* PostsWindowController.m in Sources */,
+				29CDE7FB161FC21800353629 /* SelfItemCellView.m in Sources */,
+				29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

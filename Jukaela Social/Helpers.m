@@ -32,4 +32,23 @@
     }
 }
 
++(NSArray *)arrayOfURLsFromString:(NSString *)httpLine error:(NSError *)error
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http?://([-\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?" options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSArray *arrayOfAllMatches = [regex matchesInString:httpLine options:0 range:NSMakeRange(0, [httpLine length])];
+    
+    NSMutableArray *arrayOfURLs = [[NSMutableArray alloc] init];
+    
+    for (NSTextCheckingResult *match in arrayOfAllMatches) {
+        NSString* substringForMatch = [httpLine substringWithRange:match.range];
+        NSLog(@"Extracted URL: %@",substringForMatch);
+        
+        [arrayOfURLs addObject:substringForMatch];
+    }
+    
+    // return non-mutable version of the array
+    return [NSArray arrayWithArray:arrayOfURLs];
+}
+
 @end

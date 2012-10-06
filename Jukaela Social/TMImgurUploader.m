@@ -35,7 +35,7 @@
 	[params setObject:self.APIKey
 			   forKey:@"key"];
 
-	TMHTTPClient *imgurclient = [[TMHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.imgur.com/2/"]];
+    TMHTTPClient *imgurclient = [[[TMHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.imgur.com/2/"]] autorelease];
 
 	NSMutableURLRequest *request = [imgurclient multipartFormRequestWithMethod:@"POST"
 																		  path:@"upload.json"

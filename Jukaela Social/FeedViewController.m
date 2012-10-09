@@ -215,8 +215,8 @@
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
         
         dispatch_async(queue, ^{
-            if ([[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]) {
-                [[cellView externalImage] setImage:[[kAppDelegate externalImageCache] objectForKey:[NSNumber numberWithInt:row]]];
+            if ([[kAppDelegate externalImageCache] objectForKey:[self theFeed][row][@"image_url"]]) {
+                [[cellView externalImage] setImage:[[kAppDelegate externalImageCache] objectForKey:[self theFeed][row][@"image_url"]]];
             }
             else {
                 [[cellView externalImage] setImage:nil];
@@ -227,11 +227,15 @@
             
             NSImage *image = [[NSImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:tempString]]];
             
-            [[kAppDelegate externalImageCache] setObject:image forKey:[NSNumber numberWithInt:row]];
+            if (image) {
+                [[kAppDelegate externalImageCache] setObject:image forKey:[self theFeed][row][@"image_url"]];
+            }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[cellView externalImage] setImage:image];
-            });
+            if (![[cellView externalImage] image]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[cellView externalImage] setImage:image];
+                });
+            }
         });
     }
     else {

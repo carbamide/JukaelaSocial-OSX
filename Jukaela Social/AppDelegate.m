@@ -32,6 +32,8 @@
 {
     [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
     
+    [self setExternalImageCache:[[NSCache alloc] init]];
+    
     INAppStoreWindow *aWindow = (INAppStoreWindow *)[self window];
     
     [aWindow setTitleBarHeight:40];

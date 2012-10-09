@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSArray *imFollowing;
 @property (strong, nonatomic) NSArray *relationships;
 @property (strong, nonatomic) NSNumber *unfollowID;
+@property (strong, nonatomic) NSNumber *postCount;
 @end
 
 @implementation UserInformationWindowController
@@ -107,16 +108,33 @@
         
         [self getFollowers];
         [self getFollowing];
-        [self getPosts];
+        [self getNumberOfPosts];
         [self getimFollowing];
     });
 }
 
 -(void)setLabelsOfSegmentedControl
 {
-    [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Followers", [[self followers] count]] forSegment:0];
-    [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Following", [[self following][@"user"] count]] forSegment:1];
-    [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Posts", [[self posts] count]] forSegment:2];
+    if ([self followers]) {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Followers", [[self followers] count]] forSegment:0];
+    }
+    else {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"Followers"] forSegment:0];
+    }
+    if ([self following]) {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%ld Following", [[self following][@"user"] count]] forSegment:1];
+    }
+    else {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"Following"] forSegment:1];
+    }
+    
+    if ([self postCount]) {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"%@ Posts", [self postCount]] forSegment:2];
+    }
+    else {
+        [[self segmentedControl] setLabel:[NSString stringWithFormat:@"Posts"] forSegment:2];
+
+    }
 }
 
 -(NSString *)applicationSupportPath
@@ -141,9 +159,30 @@
     }
 }
 
+-(void)getNumberOfPosts
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/number_of_posts", kSocialURL, [self userDict][@"id"]]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"aceept"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {            
+            [self setPostCount:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil][@"count"]];
+        }
+        else {
+            NSLog(@"Error retrieving posts count");
+        }
+        [self setLabelsOfSegmentedControl];
+    }];
+}
+
 -(void)getPosts
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/show_microposts_for_user.json", kSocialURL, [self userDict][@"id"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/users/%@/show_microposts_for_user", kSocialURL, [self userDict][@"id"]]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
@@ -155,8 +194,13 @@
         if (data) {
             [self setPosts:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
             
-            NSLog(@"inside userinformationwindowcontroller, posts contains %li", [[self posts] count]);
+            [self setPostsWindowController:[[PostsWindowController alloc] initWithWindowNibName:@"PostsWindow"]];
             
+            [[self postsWindowController] setTheFeed:[self posts]];
+            
+            [[[self postsWindowController] window] setTitle:[NSString stringWithFormat:@"%@'s Posts", [self userDict][@"name"]]];
+            
+            [[self postsWindowController] showWindow:self];
         }
         else {
             NSLog(@"Error retrieving posts count");
@@ -178,7 +222,6 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data) {
             [self setFollowing:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
-            NSLog(@"%@", [self following]);
         }
         else {
             NSLog(@"Error retrieving following count");
@@ -376,14 +419,8 @@
         }
     }
     else if ([tempControl selectedSegment] == 2) {
-        if ([[self posts] count] > 0) {
-            [self setPostsWindowController:[[PostsWindowController alloc] initWithWindowNibName:@"PostsWindow"]];
-            
-            [[self postsWindowController] setTheFeed:[self posts]];
-            
-            [[[self postsWindowController] window] setTitle:[NSString stringWithFormat:@"%@'s Posts", [self userDict][@"name"]]];
-            
-            [[self postsWindowController] showWindow:self];
+        if ([[self postCount] intValue] > 0) {
+            [self getPosts];
         }
         else {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"No Posts!", nil];

@@ -969,7 +969,7 @@
         
         [kAppDelegate setSelectedDownloads:@[url]];
         
-        [kAppDelegate setCurrentRowRect:[[kAppDelegate window] frame]];
+        [kAppDelegate setCurrentRowRect:[[self aTableView] rectOfRow:[[self aTableView] clickedRow]]];
         
         if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
             [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];

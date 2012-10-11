@@ -246,6 +246,17 @@
     
     NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
     
-    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];}
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
+-(IBAction)closeWindow:(id)sender
+{    
+    for (NSWindow *tempWindow in [[NSApp windows] reverseObjectEnumerator]) {
+        if ([tempWindow isVisible]) {
+            [tempWindow close];
+            break;
+        }
+    }
+}
 
 @end

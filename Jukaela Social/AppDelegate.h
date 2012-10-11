@@ -36,16 +36,13 @@
 -(IBAction)logout:(id)sender;
 -(IBAction)showPreferences:(id)sender;
 -(IBAction)refreshFeed:(id)sender;
-
 -(IBAction)changeViews:(NSSegmentedControl *)sender;
 -(IBAction)showWindow:(id)sender;
-
 -(IBAction)postOnlyToFacebook:(id)sender;
 -(IBAction)postOnlyToTwitter:(id)sender;
 -(IBAction)postOnlyToJukaela:(id)sender;
-
 -(IBAction)editProfile:(id)sender;
-
 -(IBAction)submitFeedback:(id)sender;
+-(IBAction)closeWindow:(id)sender;
 
 @end

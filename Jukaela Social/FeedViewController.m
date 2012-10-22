@@ -356,7 +356,7 @@
 {
     NSString *contentText = [self theFeed][row][@"content"];
     NSString *nameText = [self theFeed][row][@"name"];
-
+    
     CGSize constraint;
     
     if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
@@ -382,7 +382,7 @@
     else {
         height = MAX(contentSize.height + nameSize.height + 10, 94);
     }
-        
+    
     if (height == 0) {
         return 100;
     }
@@ -398,6 +398,29 @@
     [[self popover] showRelativeToRect:rect ofView:aView preferredEdge:NSMaxYEdge];
 }
 
+- (NSArray *)splitString:(NSString*)str maxCharacters:(NSInteger)maxLength
+{
+    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:1];
+    NSArray *wordArray = [str componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSInteger numberOfWords = [wordArray count];
+    NSInteger index = 0;
+    NSInteger lengthOfNextWord = 0;
+    
+	while (index < numberOfWords) {
+		NSMutableString *line = [NSMutableString stringWithCapacity:1];
+		while ((([line length] + lengthOfNextWord + 1) <= maxLength) && (index < numberOfWords)) {
+	        lengthOfNextWord = [[wordArray objectAtIndex:index] length];
+	        [line appendString:[wordArray objectAtIndex:index]];
+	        index++;
+            if (index < numberOfWords) {
+                [line appendString:@" "];
+            }
+	    }
+		[tempArray addObject:line];
+	}
+    return tempArray;
+}
+
 -(IBAction)sendPost:(id)sender
 {
     [[self sendButton] setHidden:YES];
@@ -409,8 +432,16 @@
         [self setFacebookSuccess:YES];
         [self setJukaelaSuccess:YES];
         
-        [self postToTwitter:[[self aTextView] string]];
-        
+        if ([[[self aTextView] string] length] > 140) {
+            NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:140];
+            
+            for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+                [self postToTwitter:tempString];
+            }
+        }
+        else {
+            [self postToTwitter:[[self aTextView] string]];
+        }
         return;
     }
     else if ([kAppDelegate onlyToFacebook]) {

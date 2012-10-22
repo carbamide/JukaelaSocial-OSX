@@ -22,7 +22,7 @@
 #import "Helpers.h"
 #import "SelfPicCellView.h"
 #import "SelfItemCellView.h"
-
+#import "NS(Attributed)String+Geometrics.h"
 @interface NSAttributedString (HyperLink)
 +(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL;
 @end
@@ -251,6 +251,11 @@
     
     [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
     
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0];
+    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    [NSAnimationContext endGrouping];
+    
     [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
     
     if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
@@ -345,6 +350,47 @@
     }
     
     return cellView;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    NSString *contentText = [self theFeed][row][@"content"];
+    NSString *nameText = [self theFeed][row][@"name"];
+
+    CGSize constraint;
+    
+    if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
+        if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
+            constraint = CGSizeMake(165 - (7.5 * 2), 20000);
+        }
+        else {
+            constraint = CGSizeMake(185 - (7.5 * 2), 20000);
+        }
+    }
+    else {
+        constraint = CGSizeMake(215 - (7.5 * 2), 20000);
+    }
+    
+    NSSize contentSize = [contentText sizeForWidth:constraint.width height:constraint.height font:[NSFont fontWithName:@"Lucida Grande" size:11]];
+    NSSize nameSize = [nameText sizeForWidth:constraint.width height:constraint.height font:[NSFont systemFontOfSize:13]];
+    
+    CGFloat height;
+    
+    if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+    else {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+        
+    if (height == 0) {
+        return 100;
+    }
+    else {
+        NSLog(@"%f", height + 10);
+        
+        return height + 10;
+    }
 }
 
 -(void)showPopover:(NSRect)rect ofView:(NSView *)aView
@@ -657,7 +703,7 @@
 -(IBAction)closePopover:(id)sender
 {
     [[self aTextView] setString:@""];
-    [[self characterCountLabel] setStringValue:@"140"];
+    [[self characterCountLabel] setStringValue:@"256"];
     
     [[self popover] close];
 }
@@ -985,13 +1031,13 @@
     
     int length = [text length] + 1;
     
-    [[self characterCountLabel] setStringValue:[NSString stringWithFormat:@"%d",(140 - length)]];
+    [[self characterCountLabel] setStringValue:[NSString stringWithFormat:@"%d", (256 - length)]];
     
     if([replacementString length] == 0) {
         return YES;
     }
     
-    return length < 140;
+    return length < 256;
 }
 
 - (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id <NSPasteboardWriting>)item

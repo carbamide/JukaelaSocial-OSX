@@ -15,6 +15,7 @@
 #import "GravatarHelper.h"
 #import "AppDelegate.h"
 #import "UserInformationWindowController.h"
+#import "NS(Attributed)String+Geometrics.h"
 
 @interface PostsWindowController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -85,6 +86,11 @@
     [[cellView detailTextField] setStringValue:[self theFeed][row][@"content"]];
     [[cellView usernameTextField] setStringValue:[self theFeed][row][@"username"]];
     
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0];
+    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    [NSAnimationContext endGrouping];
+    
     if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
         [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self theFeed][row][@"repost_name"]]];
     }
@@ -130,6 +136,46 @@
     return cellView;
 }
 
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    NSString *contentText = [self theFeed][row][@"content"];
+    NSString *nameText = [self theFeed][row][@"name"];
+    
+    CGSize constraint;
+    
+    if ([self theFeed][row][@"image_url"] && [self theFeed][row][@"image_url"] != [NSNull null]) {
+        if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
+            constraint = CGSizeMake(165 - (7.5 * 2), 20000);
+        }
+        else {
+            constraint = CGSizeMake(185 - (7.5 * 2), 20000);
+        }
+    }
+    else {
+        constraint = CGSizeMake(215 - (7.5 * 2), 20000);
+    }
+    
+    NSSize contentSize = [contentText sizeForWidth:constraint.width height:constraint.height font:[NSFont fontWithName:@"Lucida Grande" size:11]];
+    NSSize nameSize = [nameText sizeForWidth:constraint.width height:constraint.height font:[NSFont systemFontOfSize:13]];
+    
+    CGFloat height;
+    
+    if ([self theFeed][row][@"repost_user_id"] && [self theFeed][row][@"repost_user_id"] != [NSNull null]) {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+    else {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+    
+    if (height == 0) {
+        return 100;
+    }
+    else {
+        NSLog(@"%f", height + 10);
+        
+        return height + 10;
+    }
+}
 -(IBAction)showUser:(id)sender
 {
     [[self aTableView] deselectRow:[[self aTableView] clickedRow]];

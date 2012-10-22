@@ -14,6 +14,7 @@
 #import "NSDate+RailsDateParser.h"
 #import "GravatarHelper.h"
 #import "Helpers.h"
+#import "NS(Attributed)String+Geometrics.h"
 
 @interface MentionsViewController ()
 @property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
@@ -94,6 +95,11 @@
         [[cellView textField] setStringValue:[self mentions][row][@"sender_name"]];
         [[cellView detailTextField] setStringValue:[self mentions][row][@"content"]];
         [[cellView usernameTextField] setStringValue:[self mentions][row][@"sender_username"]];
+        
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0];
+        [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+        [NSAnimationContext endGrouping];
         
         if ([self mentions][row][@"repost_user_id"] && [self mentions][row][@"repost_user_id"] != [NSNull null]) {
             [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self mentions][row][@"repost_name"]]];
@@ -218,6 +224,11 @@
         [[cellView detailTextField] setStringValue:[self mentions][row][@"content"]];
         [[cellView usernameTextField] setStringValue:[self mentions][row][@"sender_username"]];
         
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0];
+        [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+        [NSAnimationContext endGrouping];
+        
         if ([self mentions][row][@"repost_user_id"] && [self mentions][row][@"repost_user_id"] != [NSNull null]) {
             [[cellView repostedByTextField] setStringValue:[NSString stringWithFormat:@"Reposted by %@", [self mentions][row][@"repost_name"]]];
         }
@@ -249,6 +260,47 @@
         }
     }
     return cellView;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    NSString *contentText = [self mentions][row][@"content"];
+    NSString *nameText = [self mentions][row][@"name"];
+    
+    CGSize constraint;
+    
+    if ([self mentions][row][@"image_url"] && [self mentions][row][@"image_url"] != [NSNull null]) {
+        if ([self mentions][row][@"repost_user_id"] && [self mentions][row][@"repost_user_id"] != [NSNull null]) {
+            constraint = CGSizeMake(165 - (7.5 * 2), 20000);
+        }
+        else {
+            constraint = CGSizeMake(185 - (7.5 * 2), 20000);
+        }
+    }
+    else {
+        constraint = CGSizeMake(215 - (7.5 * 2), 20000);
+    }
+    
+    NSSize contentSize = [contentText sizeForWidth:constraint.width height:constraint.height font:[NSFont fontWithName:@"Lucida Grande" size:11]];
+    NSSize nameSize = [nameText sizeForWidth:constraint.width height:constraint.height font:[NSFont systemFontOfSize:13]];
+    
+    CGFloat height;
+    
+    if ([self mentions][row][@"repost_user_id"] && [self mentions][row][@"repost_user_id"] != [NSNull null]) {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+    else {
+        height = MAX(contentSize.height + nameSize.height + 10, 94);
+    }
+    
+    if (height == 0) {
+        return 100;
+    }
+    else {
+        NSLog(@"%f", height + 10);
+        
+        return height + 10;
+    }
 }
 
 - (void)ptrScrollViewDidTriggerRefresh:(id)sender

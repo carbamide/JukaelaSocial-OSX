@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2917CF9C161389D4003ED634 /* JButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2917CF9B161389D4003ED634 /* JButton.m */; };
 		2959BF4B1611F099007D6148 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2959BF4A1611F099007D6148 /* Helpers.m */; };
+		296EB36E1635AD2400C0163F /* NS(Attributed)String+Geometrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */; };
 		2970DCCC15F78C8F0038C54B /* ItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCCB15F78C8F0038C54B /* ItemCellView.m */; };
 		2970DCD415F78DF80038C54B /* GravatarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD315F78DF80038C54B /* GravatarHelper.m */; };
 		2970DCD715F793C20038C54B /* NSDate+RailsDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970DCD615F793C20038C54B /* NSDate+RailsDateParser.m */; };
@@ -87,6 +88,8 @@
 		2917CF9B161389D4003ED634 /* JButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JButton.m; sourceTree = "<group>"; };
 		2959BF491611F099007D6148 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		2959BF4A1611F099007D6148 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		296EB36C1635AD2400C0163F /* NS(Attributed)String+Geometrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NS(Attributed)String+Geometrics.h"; sourceTree = "<group>"; };
+		296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS(Attributed)String+Geometrics.m"; sourceTree = "<group>"; };
 		2970DCCA15F78C8F0038C54B /* ItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCellView.h; sourceTree = "<group>"; };
 		2970DCCB15F78C8F0038C54B /* ItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCellView.m; sourceTree = "<group>"; };
 		2970DCD215F78DF80038C54B /* GravatarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarHelper.h; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				2959BF4A1611F099007D6148 /* Helpers.m */,
 				29F51A8E15F6A9F4009CE9C8 /* AppDelegate.h */,
 				29F51A8F15F6A9F4009CE9C8 /* AppDelegate.m */,
+				296EB36C1635AD2400C0163F /* NS(Attributed)String+Geometrics.h */,
+				296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */,
 				29F51AA515F6ADAB009CE9C8 /* Constants.h */,
 			);
 			name = Singletons;
@@ -569,6 +574,7 @@
 				29CDE7FB161FC21800353629 /* SelfItemCellView.m in Sources */,
 				29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */,
 				29CDE807161FCCB700353629 /* EditProfileWindowController.m in Sources */,
+				296EB36E1635AD2400C0163F /* NS(Attributed)String+Geometrics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -206,6 +206,8 @@
 		2970DCF215F7A57B0038C54B /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				296EB36C1635AD2400C0163F /* NS(Attributed)String+Geometrics.h */,
+				296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */,
 				2917CF9A161389D4003ED634 /* JButton.h */,
 				2917CF9B161389D4003ED634 /* JButton.m */,
 				2989310A16137DB10022DE7F /* JImageView.h */,
@@ -421,8 +423,6 @@
 				2959BF4A1611F099007D6148 /* Helpers.m */,
 				29F51A8E15F6A9F4009CE9C8 /* AppDelegate.h */,
 				29F51A8F15F6A9F4009CE9C8 /* AppDelegate.m */,
-				296EB36C1635AD2400C0163F /* NS(Attributed)String+Geometrics.h */,
-				296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */,
 				29F51AA515F6ADAB009CE9C8 /* Constants.h */,
 			);
 			name = Singletons;

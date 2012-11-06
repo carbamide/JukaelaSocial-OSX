@@ -71,6 +71,8 @@
 {
     [super awakeFromNib];
     
+    [[self progressIndicator] startAnimation:self];
+    
     [[self ptrScrollView] setDelegate:self];
 }
 
@@ -115,7 +117,6 @@
     NSInteger last = 20;
     
     if ([[self theFeed] count] > 20) {
-        //More finagling around with the NSUserNotifications
         last = [[self theFeed] count];
     }
     
@@ -134,8 +135,8 @@
             
             [self setTheFeed:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
             
-            NSMutableSet * firstSet = [NSMutableSet setWithArray:[self theFeed]];
-            NSMutableSet * secondSet = [NSMutableSet setWithArray:[self theFeed]];
+            NSMutableSet *firstSet = [NSMutableSet setWithArray:[self theFeed]];
+            NSMutableSet *secondSet = [NSMutableSet setWithArray:[self theFeed]];
             
             [firstSet unionSet:[NSSet setWithArray:oldArray]];
             [secondSet intersectSet:[NSSet setWithArray:oldArray]];
@@ -183,10 +184,16 @@
                 }
             }
             
+            [[self progressIndicator] stopAnimation:self];
+
             [self setCurrentChangeType:-1];
         }
         else {
-            NSLog(@"Error loading feed");
+            [[self progressIndicator] stopAnimation:self];
+
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There has been an error loading your feed.  Perhaps the network is down?", nil];
+            
+            [alert runModal];
         }
     }];
 }
@@ -432,8 +439,8 @@
         [self setFacebookSuccess:YES];
         [self setJukaelaSuccess:YES];
         
-        if ([[[self aTextView] string] length] > 140) {
-            NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:140];
+        if ([[[self aTextView] string] length] > 139) {
+            NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:139];
             
             for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
                 [self postToTwitter:tempString];
@@ -475,7 +482,16 @@
                     
                     if (result == NSAlertDefaultReturn) {
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
-                            [self postToTwitter:[[self aTextView] string]];
+                            if ([[[self aTextView] string] length] > 139) {
+                                NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:139];
+                                
+                                for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+                                    [self postToTwitter:tempString];
+                                }
+                            }
+                            else {
+                                [self postToTwitter:[[self aTextView] string]];
+                            }
                         }
                         
                         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
@@ -511,7 +527,16 @@
                     }
                     
                     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
-                        [self postToTwitter:[[self aTextView] string]];
+                        if ([[[self aTextView] string] length] > 139) {
+                            NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:139];
+                            
+                            for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+                                [self postToTwitter:tempString];
+                            }
+                        }
+                        else {
+                            [self postToTwitter:[[self aTextView] string]];
+                        }
                     }
                     
                     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
@@ -531,7 +556,16 @@
             
             if (result == NSAlertDefaultReturn) {
                 if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES) {
-                    [self postToTwitter:[[self aTextView] string]];
+                    if ([[[self aTextView] string] length] > 139) {
+                        NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:139];
+                        
+                        for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+                            [self postToTwitter:tempString];
+                        }
+                    }
+                    else {
+                        [self postToTwitter:[[self aTextView] string]];
+                    }
                 }
                 
                 if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES) {
@@ -567,7 +601,16 @@
             }
             
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"] == YES && ![kAppDelegate onlyToJukaela]) {
-                [self postToTwitter:[[self aTextView] string]];
+                if ([[[self aTextView] string] length] > 139) {
+                    NSArray *tempArray = [self splitString:[[self aTextView] string] maxCharacters:139];
+                    
+                    for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+                        [self postToTwitter:tempString];
+                    }
+                }
+                else {
+                    [self postToTwitter:[[self aTextView] string]];
+                }
             }
             
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"] == YES && ![kAppDelegate onlyToJukaela]) {
@@ -1162,8 +1205,17 @@
 }
 
 -(IBAction)shareToTwitter:(id)sender
-{
-    [self postToTwitter:[self theFeed][[[self aTableView] clickedRow]][@"content"]];
+{    
+    if ([[self theFeed][[[self aTableView] clickedRow]][@"content"] length] > 139) {
+        NSArray *tempArray = [self splitString:[self theFeed][[[self aTableView] clickedRow]][@"content"] maxCharacters:139];
+        
+        for (NSString *tempString in [tempArray reverseObjectEnumerator]) {
+            [self postToTwitter:tempString];
+        }
+    }
+    else {
+        [self postToTwitter:[self theFeed][[[self aTableView] clickedRow]][@"content"]];
+    }
 }
 
 @end

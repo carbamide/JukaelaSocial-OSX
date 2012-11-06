@@ -32,6 +32,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
 @property (weak) IBOutlet PullToRefreshScrollView *ptrScrollView;
+@property (strong, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
 
 -(IBAction)sendPost:(id)sender;
 -(IBAction)deletePost:(id)sender;

@@ -1202,4 +1202,42 @@
     }
 }
 
+-(IBAction)sharingAction:(id)sender
+{
+    if ([sender tag] == 1) {
+        if ([(NSButton *)sender state] == 1) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"post_to_facebook"];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"post_to_facebook"];
+        }
+    }
+    else if ([sender tag] == 2) {
+        if ([(NSButton *)sender state] == 1) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"post_to_twitter"];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"post_to_twitter"];
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)checkSharingPrefernces
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_twitter"]) {
+        [[self twitterCheck] setState:1];
+    }
+    else {
+        [[self twitterCheck] setState:0];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"post_to_facebook"]) {
+        [[self facebookCheck] setState:1];
+    }
+    else {
+        [[self facebookCheck] setState:0];
+    }
+}
 @end

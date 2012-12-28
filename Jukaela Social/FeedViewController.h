@@ -11,7 +11,6 @@
 #import "PullToRefreshScrollView.h"
 #import "PullToRefreshDelegate.h"
 #import "TMImgurUploader.h"
-#import "LNClipView.h"
 
 NS_ENUM(NSInteger, ChangeType) {
     INSERT_POST,
@@ -33,6 +32,8 @@ NS_ENUM(NSInteger, ChangeType) {
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
 @property (strong, nonatomic) IBOutlet PullToRefreshScrollView *aScrollView;
+@property (strong) IBOutlet NSButton *twitterCheck;
+@property (strong) IBOutlet NSButton *facebookCheck;
 
 -(IBAction)sendPost:(id)sender;
 -(IBAction)deletePost:(id)sender;
@@ -42,7 +43,7 @@ NS_ENUM(NSInteger, ChangeType) {
 -(IBAction)showUser:(id)sender;
 -(IBAction)openImage:(id)sender;
 -(IBAction)deselectRow:(id)sender;
-
+-(IBAction)sharingAction:(id)sender;
 -(IBAction)shareToFacebook:(id)sender;
 -(IBAction)shareToTwitter:(id)sender;
 

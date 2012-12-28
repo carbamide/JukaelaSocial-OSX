@@ -33,7 +33,7 @@
         [[self usernameTextField] setStringValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"username"]];
         [[self passwordTextField] setStringValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"password"]];
         
-        [[self autoLoginCheck] setEnabled:YES];
+        [[self autoLoginCheck] setState:1];
         
         [self loginAction:nil];
     }

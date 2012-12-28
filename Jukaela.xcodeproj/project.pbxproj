@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29124B2716655FB500BFBDD8 /* LNClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29124B2616655FB500BFBDD8 /* LNClipView.m */; };
 		29124B2B16655FCD00BFBDD8 /* pattern3.png in Resources */ = {isa = PBXBuildFile; fileRef = 29124B2916655FCD00BFBDD8 /* pattern3.png */; };
 		29124B2C16655FCD00BFBDD8 /* pattern11.png in Resources */ = {isa = PBXBuildFile; fileRef = 29124B2A16655FCD00BFBDD8 /* pattern11.png */; };
 		29124B2E166560A800BFBDD8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29124B2D166560A800BFBDD8 /* WebKit.framework */; };
@@ -592,7 +591,6 @@
 				29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */,
 				29CDE807161FCCB700353629 /* EditProfileWindowController.m in Sources */,
 				296EB36E1635AD2400C0163F /* NS(Attributed)String+Geometrics.m in Sources */,
-				29124B2716655FB500BFBDD8 /* LNClipView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

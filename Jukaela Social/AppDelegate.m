@@ -168,7 +168,6 @@
             
             [self setCurrentViewController:[self feedViewController]];
         }
-        NSLog(@"FeedViewController!");
     }
     else if ([sender selectedSegment] == 1) {
         if (![self mentionsViewController]) {
@@ -182,7 +181,6 @@
             
             [self setCurrentViewController:[self mentionsViewController]];
         }
-        NSLog(@"MentionsViewController!");
     }
     else if ([sender selectedSegment] == 2) {
         if (![self usersViewController]) {
@@ -196,7 +194,6 @@
             
             [self setCurrentViewController:[self usersViewController]];
         }
-        NSLog(@"UsersViewController!");
     }
 }
 

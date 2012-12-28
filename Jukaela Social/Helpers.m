@@ -42,7 +42,6 @@
     
     for (NSTextCheckingResult *match in arrayOfAllMatches) {
         NSString* substringForMatch = [httpLine substringWithRange:match.range];
-        NSLog(@"Extracted URL: %@",substringForMatch);
         
         [arrayOfURLs addObject:substringForMatch];
     }

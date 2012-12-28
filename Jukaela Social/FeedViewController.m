@@ -71,9 +71,7 @@
 {
     [super awakeFromNib];
     
-    [[self progressIndicator] startAnimation:self];
-    
-    [[self ptrScrollView] setDelegate:self];
+    [[self aScrollView] setDelegate:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -100,8 +98,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:@"postToJukaela" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed:) name:@"refresh_tables" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showImage:) name:@"show_image" object:nil];
-    
-    NSLog(@"inside loadView of FeedViewController");
     
     [self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getFeed:) userInfo:nil repeats:YES]];
     
@@ -156,13 +152,15 @@
                 [[self aTableView] endUpdates];
             }
             else {
-                [[self aTableView] reloadData];
-                
                 //the sets are adding one for some reason.  I don't really care, because this works.
                 difference -= 1;
                 
                 if (difference < 0) {
                     difference = 0;
+                }
+                
+                if (difference > 0) {
+                    [[self aTableView] reloadData];
                 }
                 
                 if (difference > 0 && [oldArray count] > 0) {
@@ -184,13 +182,9 @@
                 }
             }
             
-            [[self progressIndicator] stopAnimation:self];
-
             [self setCurrentChangeType:-1];
         }
         else {
-            [[self progressIndicator] stopAnimation:self];
-
             NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There has been an error loading your feed.  Perhaps the network is down?", nil];
             
             [alert runModal];
@@ -347,11 +341,11 @@
                     [[self aTableView] reloadData];
                 }
                 @finally {
-                    NSLog(@"Inside finally");
+                    
                 }
             }
             else {
-                NSLog(@"Error");
+                NSLog(@"Error loading row");
             }
         }];
     }
@@ -394,8 +388,6 @@
         return 100;
     }
     else {
-        NSLog(@"%f", height + 10);
-        
         return height + 10;
     }
 }
@@ -461,8 +453,6 @@
     }
     
     _stringToSend = [[self aTextView] string];
-    
-    NSLog(@"%@", _stringToSend);
     
     if ([self tempImageData]) {
         [[TMImgurUploader sharedInstance] uploadImage:[[NSImage alloc] initWithData:[self tempImageData]] finishedBlock:^(NSDictionary *result, NSError *error){
@@ -762,7 +752,7 @@
             [self getFeed:0];
         }
         else {
-            NSLog(@"Error");
+            NSLog(@"Error reposting");
         }
     }];
 }
@@ -783,7 +773,7 @@
 }
 
 -(void)postToTwitter:(NSString *)stringToSend
-{
+{    
     if (![self accountStore]) {
         [self setAccountStore:[[ACAccountStore alloc] init]];
     }
@@ -798,8 +788,6 @@
             
             NSDictionary *parameters = @{@"status" : stringToSend};
             
-            NSLog(@"The string to send is %@", parameters);
-            
             if ([self tempImageData]) {
                 NSURL *tweetURL = [NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"];
                 
@@ -813,10 +801,8 @@
                     if (responseData) {
                         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONWritingPrettyPrinted error:nil];
                         
-                        NSLog(@"The Twitter response was \n%@", jsonData);
-                        
                         if (!jsonData[@"error"]) {
-                            NSLog(@"Successfully posted to Twitter");
+                            NSLog(@"%@", jsonData);
                             
                             [self setTwitterSuccess:YES];
                             
@@ -856,10 +842,8 @@
                     if (responseData) {
                         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONWritingPrettyPrinted error:nil];
                         
-                        NSLog(@"The Twitter response was \n%@", jsonData);
-                        
                         if (!jsonData[@"error"]) {
-                            NSLog(@"Successfully posted to Twitter");
+                            NSLog(@"%@", jsonData);
                             
                             [self setTwitterSuccess:YES];
                             
@@ -890,8 +874,15 @@
             }
         }
         else {
-            NSLog(@"Twitter access not granted.");
-            NSLog(@"%@", [error localizedDescription]);
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Twitter has denied access.", nil];
+            
+            [self setTwitterSuccess:YES];
+            
+            [self finishUp];
+            
+            [alert runModal];
+            
+            NSLog(@"Twitter Account Permission Not Granted");
         }
     }];
 }
@@ -937,11 +928,7 @@
                     if (responseData) {
                         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONWritingPrettyPrinted error:nil];
                         
-                        NSLog(@"The Facebook response was \n%@", jsonData);
-                        
                         if (!jsonData[@"error"]) {
-                            NSLog(@"Successfully posted to Facebook");
-                            
                             [self setFacebookSuccess:YES];
                             
                             [self finishUp];
@@ -989,12 +976,8 @@
                 [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *errorDOIS) {
                     if (responseData) {
                         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONWritingPrettyPrinted error:nil];
-                        
-                        NSLog(@"The Facebook response was \n%@", jsonData);
-                        
-                        if (!jsonData[@"error"]) {
-                            NSLog(@"Successfully posted to Facebook");
-                            
+                                                
+                        if (!jsonData[@"error"]) {                            
                             [self setFacebookSuccess:YES];
                             
                             [self finishUp];
@@ -1024,7 +1007,6 @@
             }
         }
         else {
-            NSLog(@"Facebook access not granted.");
             NSLog(@"%@", [error localizedDescription]);
         }
     }];
@@ -1177,7 +1159,7 @@
 {
     NSString *extension = [filename pathExtension];
     
-    if (extension == @"" || extension == @"/" || extension == nil || extension == NULL || [extension length] < 1) {
+    if ([extension isEqualToString:@""] || [extension isEqualToString:@"/"] || extension == nil || extension == NULL || [extension length] < 1) {
         return TRUE;
     }
     

@@ -71,9 +71,7 @@
             NSSound *sound = [NSSound soundNamed:@"loggedIn"];
 
             [sound play];
-            
-            NSLog(@"logged in");
-            
+                        
             [kAppDelegate setUserID:[NSString stringWithFormat:@"%@", _loginDict[@"id"]]];
             
             [[self feedViewController] setCurrentChangeType:-1];

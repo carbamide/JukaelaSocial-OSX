@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29124B2716655FB500BFBDD8 /* LNClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29124B2616655FB500BFBDD8 /* LNClipView.m */; };
+		29124B2B16655FCD00BFBDD8 /* pattern3.png in Resources */ = {isa = PBXBuildFile; fileRef = 29124B2916655FCD00BFBDD8 /* pattern3.png */; };
+		29124B2C16655FCD00BFBDD8 /* pattern11.png in Resources */ = {isa = PBXBuildFile; fileRef = 29124B2A16655FCD00BFBDD8 /* pattern11.png */; };
+		29124B2E166560A800BFBDD8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29124B2D166560A800BFBDD8 /* WebKit.framework */; };
 		2917CF9C161389D4003ED634 /* JButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2917CF9B161389D4003ED634 /* JButton.m */; };
 		2959BF4B1611F099007D6148 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2959BF4A1611F099007D6148 /* Helpers.m */; };
 		296EB36E1635AD2400C0163F /* NS(Attributed)String+Geometrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */; };
@@ -84,6 +88,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		29124B2516655FB500BFBDD8 /* LNClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNClipView.h; path = ../LNClipView.h; sourceTree = "<group>"; };
+		29124B2616655FB500BFBDD8 /* LNClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNClipView.m; path = ../LNClipView.m; sourceTree = "<group>"; };
+		29124B2916655FCD00BFBDD8 /* pattern3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern3.png; sourceTree = "<group>"; };
+		29124B2A16655FCD00BFBDD8 /* pattern11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern11.png; sourceTree = "<group>"; };
+		29124B2D166560A800BFBDD8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		2917CF9A161389D4003ED634 /* JButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JButton.h; sourceTree = "<group>"; };
 		2917CF9B161389D4003ED634 /* JButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JButton.m; sourceTree = "<group>"; };
 		2959BF491611F099007D6148 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29124B2E166560A800BFBDD8 /* WebKit.framework in Frameworks */,
 				29D715AF160E58FF00E71C00 /* Quartz.framework in Frameworks */,
 				29D715AD160E55A400E71C00 /* QuickLook.framework in Frameworks */,
 				297B3B4D15F94A340093B5EC /* QuartzCore.framework in Frameworks */,
@@ -206,6 +216,8 @@
 		2970DCF215F7A57B0038C54B /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				29124B2516655FB500BFBDD8 /* LNClipView.h */,
+				29124B2616655FB500BFBDD8 /* LNClipView.m */,
 				296EB36C1635AD2400C0163F /* NS(Attributed)String+Geometrics.h */,
 				296EB36D1635AD2400C0163F /* NS(Attributed)String+Geometrics.m */,
 				2917CF9A161389D4003ED634 /* JButton.h */,
@@ -274,6 +286,8 @@
 		29A0D1EA1613C1830082C9F8 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				29124B2916655FCD00BFBDD8 /* pattern3.png */,
+				29124B2A16655FCD00BFBDD8 /* pattern11.png */,
 				29FDDE011614DCBA0013BEC6 /* underPageBackground.png */,
 				29D67AB5160F3DCC00EE503D /* FilterNone.png */,
 				29D67AB6160F3DCC00EE503D /* FilterStarred.png */,
@@ -339,6 +353,7 @@
 		29F51A7B15F6A9F4009CE9C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29124B2D166560A800BFBDD8 /* WebKit.framework */,
 				29A0D75516132C0B0006A88C /* Sparkle.framework */,
 				29E9B42F160E970500CDACDA /* ImageCaptureCore.framework */,
 				29D715AE160E58FF00E71C00 /* Quartz.framework */,
@@ -535,6 +550,8 @@
 				29C8B7AF161A0CAB00D941AF /* UsersListWindow.xib in Resources */,
 				29C8B7B4161A1E7100D941AF /* PostsWindow.xib in Resources */,
 				29CDE808161FCCB700353629 /* EditProfileWindowController.xib in Resources */,
+				29124B2B16655FCD00BFBDD8 /* pattern3.png in Resources */,
+				29124B2C16655FCD00BFBDD8 /* pattern11.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +592,7 @@
 				29CDE7FF161FC22A00353629 /* SelfPicCellView.m in Sources */,
 				29CDE807161FCCB700353629 /* EditProfileWindowController.m in Sources */,
 				296EB36E1635AD2400C0163F /* NS(Attributed)String+Geometrics.m in Sources */,
+				29124B2716655FB500BFBDD8 /* LNClipView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

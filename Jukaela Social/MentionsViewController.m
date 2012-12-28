@@ -68,8 +68,6 @@
         if (data) {
             [self setMentions:[NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil]];
             
-            NSLog(@"%@", [self mentions]);
-            
             [[self aTableView] reloadData];
         }
         else {
@@ -207,7 +205,7 @@
                         [[self aTableView] reloadData];
                     }
                     @finally {
-                        NSLog(@"Inside finally");
+                        
                     }
                 }
                 else {
@@ -297,8 +295,6 @@
         return 100;
     }
     else {
-        NSLog(@"%f", height + 10);
-        
         return height + 10;
     }
 }

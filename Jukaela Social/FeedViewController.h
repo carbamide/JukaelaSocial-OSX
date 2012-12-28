@@ -11,12 +11,13 @@
 #import "PullToRefreshScrollView.h"
 #import "PullToRefreshDelegate.h"
 #import "TMImgurUploader.h"
+#import "LNClipView.h"
 
-typedef enum {
-    INSERT_POST = 0,
+NS_ENUM(NSInteger, ChangeType) {
+    INSERT_POST,
     DELETE_POST,
     OTHER_CHANGE_TYPE
-} ChangeType;
+};
 
 @interface FeedViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSSharingServiceDelegate, PullToRefreshDelegate, NSOpenSavePanelDelegate>
 
@@ -28,11 +29,10 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet NSButton *picButton;
 @property (strong, nonatomic) IBOutlet NSPopover *popover;
 @property (strong, nonatomic) IBOutlet NSTextField *characterCountLabel;
-@property (nonatomic) ChangeType currentChangeType;
+@property (nonatomic) enum ChangeType currentChangeType;
 @property (strong, nonatomic) IBOutlet NSProgressIndicator *postProgressIndicator;
 @property (strong, nonatomic) UserInformationWindowController *userInfoWindowController;
-@property (weak) IBOutlet PullToRefreshScrollView *ptrScrollView;
-@property (strong, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+@property (strong, nonatomic) IBOutlet PullToRefreshScrollView *aScrollView;
 
 -(IBAction)sendPost:(id)sender;
 -(IBAction)deletePost:(id)sender;

@@ -170,9 +170,7 @@
     if (height == 0) {
         return 100;
     }
-    else {
-        NSLog(@"%f", height + 10);
-        
+    else {        
         return height + 10;
     }
 }

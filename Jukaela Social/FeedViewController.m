@@ -778,6 +778,8 @@
         [self setAccountStore:[[ACAccountStore alloc] init]];
     }
     
+    NSLog(@"Fish!");
+    
     ACAccountType *accountTypeTwitter = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     [_accountStore requestAccessToAccountsWithType:accountTypeTwitter options:nil completion:^(BOOL granted, NSError *error) {

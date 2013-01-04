@@ -769,6 +769,11 @@
     [[self aTextView] setString:@""];
     [[self characterCountLabel] setStringValue:@"256"];
     
+    [[self sendButton] setHidden:NO];
+    
+    [[self postProgressIndicator] setHidden:YES];
+    [[self postProgressIndicator] stopAnimation:self];
+    
     [[self popover] close];
 }
 
